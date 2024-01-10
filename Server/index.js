@@ -22,12 +22,22 @@ const startServer = async () => {
             res.status(200).json({msg: 'success'})
         });
 
-        app.post("/signup", async (req, res) => {
-            const { name, email } = req.body;
-            const newUser = new User({ name, email, points: 0 });
-            await newUser.save();
-            res.status(200).json({ msg: "success" });
+        app.post("/login", async (req, res) => {
+            try {
+                const { name, password } = req.body;
+                const existingUser = await User.findOne({ name, password });
+        
+                if (existingUser) {
+                    res.status(200).json({ msg: "Login success", user: existingUser });
+                } else {
+                    res.status(404).json({ error: "User not found" });
+                }
+            } catch (error) {
+                console.error('Error during login:', error);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
         });
+        
 
         app.get("/leaderboard", async (req, res) => {
             try {
