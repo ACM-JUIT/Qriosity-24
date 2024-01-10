@@ -1,0 +1,61 @@
+$button-bg-color: #9f6633;
+$button-text-color: #ffffff;
+$button-padding: 10px 20px;
+$button-border-radius: 100px;
+
+.main {
+  height: 100vh;
+
+  .body, .mask {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #afa18f;
+    font-size: 64px;
+    line-height: 66px;
+    cursor: default;
+
+    span {
+      color: #ec4e;
+    }
+    p{
+        font-weight: 600;
+    }
+
+    .buttons {
+      display: inline-block;
+      padding: $button-padding;
+      background-color: $button-bg-color;
+      color: $button-text-color;
+      border: none;
+      border-radius: $button-border-radius;
+      text-align: center;
+      text-decoration: none;
+      font-size: 32px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+      margin-top: 3rem;
+
+      &:hover {
+        background-color: darken($button-bg-color, 10%);
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .mask{
+    position: absolute;
+    mask-image: url("../assets/mask.svg");
+    background-color: #3498db;
+    mask-repeat: no-repeat;
+    mask-position: 0%;
+    mask-size: 40px;
+
+  }
+}
