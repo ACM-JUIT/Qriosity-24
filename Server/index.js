@@ -3,10 +3,13 @@ const mongoose = require("mongoose");
 const { connectToMongoDB } = require("./connect");
 const config = require('./config');
 const app = express();
+const cors = require("cors");
 const User = require('./models/user');
 
 const port = config.port;
 const mongoURI = config.mongoURI;
+
+app.use(cors());
 
 const startServer = async () => {
     try {
