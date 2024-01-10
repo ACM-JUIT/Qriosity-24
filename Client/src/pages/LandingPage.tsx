@@ -10,7 +10,7 @@ const LandingPage: React.FC = () => {
     const navigate = useNavigate();
 
     const handleGetStarted = () => {
-        navigate('/home');
+        navigate('/login');
     };
 
     const { x, y } = useMousePosition();
