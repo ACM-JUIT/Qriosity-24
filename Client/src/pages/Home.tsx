@@ -1,12 +1,12 @@
-import Navbar from "../common/components/Navbar"
+import Navbar from '../common/components/Navbar';
+import '../Styles/Home.css';
 
 function LandingPage() {
-    return (
-        <div>
-            <Navbar />
-            <h1>Home</h1>
-      </div>
-    )
-  }
-  
-  export default LandingPage
+  return (
+    <div className="landing-container">
+      <Navbar />
+    </div>
+  );
+}
+
+export default LandingPage;
