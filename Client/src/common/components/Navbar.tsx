@@ -1,8 +1,10 @@
 
 function Navbar() {
   return (
-      <div>
-    <h1>Navbar</h1>
+    <div className="font-montserrat">
+          <nav>
+              <h1>nav</h1>
+    </nav>
       </div>
   )
 }
