@@ -1,7 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 //import { BrowserRouter as Router, Routes } from "react-router-dom";
-//import { App } from "./App";
+import App from "./App";
 
 //Redux
 //import { Provider } from "react-redux";
@@ -12,6 +12,6 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <StrictMode>
-    {/* <App/> */}
+     <App/>
   </StrictMode>
 );
