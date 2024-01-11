@@ -1,7 +1,32 @@
 import { useState } from 'react';
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const succesfulLogin = () => toast.success('Login successful!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+});
+
+const wrongPassword = () => toast.error('Wrong password!', {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+});
+
 const Login = () => {
-    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const handleLogin = async () => {
@@ -11,13 +36,17 @@ const Login = () => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ name, password }),
+                body: JSON.stringify({ email, password }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
+                succesfulLogin();
                 console.log('User logged in successfully:', data);
+            } else if(response.status === 401 && data.error === "Incorrect password") {
+                wrongPassword();
+                console.error('Error logging in:', data.error);
             } else {
                 console.error('Error logging in:', data.error);
             }
@@ -32,12 +61,12 @@ const Login = () => {
                 <h2 className="text-3xl font-semibold mb-4">Log in</h2>
                 <form>
                     <div className="mb-4">
-                        <label htmlFor="name" className="block text-gray-300">Name:</label>
+                        <label htmlFor="email" className="block text-gray-300">Email:</label>
                         <input
-                            type="text"
-                            id="name"
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
@@ -48,7 +77,7 @@ const Login = () => {
                             id="password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none focus:border-blue-500 transition-all duration-300"
+                            className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
                     <button
@@ -58,6 +87,7 @@ const Login = () => {
                     >
                         Login
                     </button>
+                    <ToastContainer />
                 </form>
             </div>
         </div>
