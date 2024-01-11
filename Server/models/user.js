@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
         requried: true,
         unique: true,
     },
+    password: {
+        type: String,
+        requried: true,
+    },
     points: {
         type: Number
     },
