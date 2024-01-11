@@ -43,25 +43,37 @@ const questionsData = [
     }
 ];
   let [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  let [currentAnswerIndex, setCurrentAnswerIndex] = useState(0);
   let [questionTimerSeconds, setQuestionTimerSeconds] = useState(0);
   let [cooldownTimerSeconds, setCooldownTimerSeconds] = useState(30);
   let [cooldownFlag, setCooldownFlag] = useState(false);
-  let [quizTimerSeconds, setQuizTimerSeconds] = useState(300); // 5 minutes for the entire quiz
-  let [questionTimerInterval, setQuestionTimerInterval] = useState<number | null>(null);
+  // let hint = document.getElementById('HintButton') as HTMLInputElement;
 
+
+  // Quiz Timer
+  const [countdownSeconds, setCountdownSeconds] = useState(calculateRemainingTimeInSeconds());
+  function calculateRemainingTimeInSeconds() {
+    const targetDate = new Date('2024-01-15T12:00:00'); // Replace with your target date and time
+    const currentTime = new Date();
+    const timeDifference = targetDate.getTime() - currentTime.getTime();
+    return Math.max(Math.floor(timeDifference / 1000), 0);
+  }
   useEffect(() => {
-    const quizTimerInterval = setInterval(() => {
-      if (quizTimerSeconds > 0) {
-        setQuizTimerSeconds((prevSeconds) => prevSeconds - 1);
-      } else {
-        clearInterval(quizTimerInterval);
-        alert('Quiz time is up!');
-      }
+    const countdownInterval = setInterval(() => {
+      setCountdownSeconds((prevSeconds) => {
+        if (prevSeconds > 0) {
+          return prevSeconds - 1;
+        } else {
+          clearInterval(countdownInterval);
+          alert('Countdown is over!');
+          return 0;
+        }
+      });
     }, 1000);
+    return () => clearInterval(countdownInterval);
+  }, []);
 
-    return () => clearInterval(quizTimerInterval);
-  }, [quizTimerSeconds]);
-
+  // Display Questions
   const displayQuestionNumbers = (nextQuestionNumber: number) => {
     const questionNumbersContainer = document.querySelector('.displayQuestionNumbers');
     const firstQuestionNumber = 1;
@@ -74,25 +86,31 @@ const questionsData = [
         secondLiElement.textContent = nextQuestionNumber.toString();
         questionNumbersContainer.appendChild(firstLiElement);
         questionNumbersContainer.appendChild(secondLiElement);
-      } else {
+      } else if (nextQuestionNumber <= questionsData.length) {
         const liElement = document.createElement('li');
         liElement.textContent = nextQuestionNumber.toString();
         questionNumbersContainer.appendChild(liElement);
+      } else if (nextQuestionNumber == questionsData.length) {
+        const theLiElement = document.createElement('li');
+        theLiElement.textContent = 'The'
+        const endLiElement = document.createElement('li');
+        endLiElement.textContent = 'End'
+        questionNumbersContainer.appendChild(theLiElement);
+        questionNumbersContainer.appendChild(endLiElement);
       }
     }
   };
 
+  // Display Questions
   const displayQuestion = (question: any) => {
     setQuestionTimerSeconds(0);
     setCooldownTimerSeconds(3);
 
-    // Display question logic
     const questionHTML = `
       <div>
         <p>${question.QuestionNumber}. ${question.QuestionStatement}</p>
       </div>
     `;
-    // Update the UI with the question
     const questionsContainer = document.querySelector('.questions');
     if (questionsContainer) {
       questionsContainer.innerHTML = questionHTML;
@@ -101,13 +119,19 @@ const questionsData = [
     displayQuestionNumbers(question.QuestionNumber + 1);
   };
 
+  const displayHint = () => {
+    const hintData = questionsData[currentAnswerIndex].Hints.toString();
+    alert(hintData);
+  }
+
   const checkAnswer = () => {
     const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
     if (userAnswerInput) {
       const userAnswer = userAnswerInput.value.toLowerCase();
-      if (userAnswer === questionsData[currentQuestionIndex].Answer.toLowerCase()) {
+      if (userAnswer === questionsData[currentAnswerIndex].Answer.toLowerCase()) {
+        setCurrentAnswerIndex((prevIndex) => (prevIndex + 1));
         setCooldownFlag(true);
-        alert('Correct answer.'); //////
+        alert('Correct answer.'); 
         const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
         if (nextButton) {
           nextButton.disabled = true;
@@ -117,7 +141,7 @@ const questionsData = [
               nextButton.disabled = false;
               cooldownFlag = true;
             }
-          }, 3000);             // // Cooldown Period
+          }, 3000);         
 
         }
       } else {
@@ -128,13 +152,11 @@ const questionsData = [
 
   const showNextQuestion = () => {
     setQuestionTimerSeconds(0);
-    // if (questionTimerInterval) {
-    //   clearInterval(questionTimerInterval);
-    // }
+
     cooldownFlag = true;
     if (cooldownFlag) {
       cooldownFlag = false;
-      setCurrentQuestionIndex((prevIndex) => (prevIndex + 1) % questionsData.length);
+      setCurrentQuestionIndex((prevIndex) => (prevIndex + 1));
       displayQuestion(questionsData[currentQuestionIndex]);
       const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
       if (userAnswerInput) {
@@ -157,7 +179,7 @@ const questionsData = [
 
   useEffect(() => {
     const intervalId = setInterval(updateQuestionTimer, 1000);
-    setQuestionTimerInterval(intervalId);
+    // setQuestionTimerInterval(intervalId);
     questionTimerSeconds = intervalId;
 
     return () => {
@@ -172,7 +194,11 @@ const questionsData = [
       <Navbar />
       <div className="quizContainer p-4">
         <div id="quizTimer" className="text-lg mb-4">
-          Time left for quiz: {Math.floor(quizTimerSeconds / 60)}:{quizTimerSeconds % 60}
+          {countdownSeconds > 0 ? (
+            `Time remaining ::  ${Math.floor(countdownSeconds / 3600)} hours : ${Math.floor((countdownSeconds % 3600) / 60)} minutes : ${countdownSeconds % 60} seconds`
+          ) : (
+            'Qriosity-24 is over!!!'
+          )}
         </div>
         <div className="flex">
           <div className="questionNumber pr-4">
@@ -186,23 +212,41 @@ const questionsData = [
               placeholder="Enter your answer"
               className="border p-2 mb-4 text-black"
             />
-            <div className="hintBlock mb-4"></div>
-            <button
-              id="submitButton"
-              onClick={checkAnswer}
-              className="bg-blue-500 text-white px-4 py-2 mr-2 rounded"
-            >
-              Submit
-            </button>
-            <button
-              id="nextButton"
-              onClick={showNextQuestion}
-              className="bg-green-500 text-white px-4 py-2 rounded"
-            >
-              Next
-            </button>
+            <div className='submitHintBlock p-2 mb-4'>
+              <button
+                id="submitButton"
+                onClick={checkAnswer}
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded"
+              >
+                Submit
+              </button>
+              <button
+                id="HintButton"
+                onClick={displayHint}
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded"
+              >
+                Hint
+              </button>
+            </div>
+            <div className='submitHintBlock p-2 mb-4'>
+              <button
+                id="nextButton"
+                onClick={showNextQuestion}
+                className="bg-green-500 text-white px-4 py-2 rounded"
+              >
+                Next
+              </button>
+            </div>
             <div id="questionTimer" className="mt-4">
-              Time spent on current question: {questionTimerSeconds} seconds
+              {cooldownFlag ? (
+                cooldownTimerSeconds > 0 ? (
+                  `Please wait for the cooldown period (${cooldownTimerSeconds} seconds remaining)`
+                ) : (
+                  `You solved this question in: ${questionTimerSeconds} seconds`
+                )
+              ) : (
+                `Time spent on current question: ${questionTimerSeconds} seconds`
+              )}
             </div>
             <div id="commentBox" className='mt-4 px-4 py-2 text-white'></div>
           </div>
