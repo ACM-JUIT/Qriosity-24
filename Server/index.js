@@ -5,6 +5,7 @@ const config = require('./config');
 const app = express();
 const cors = require("cors");
 const User = require('./models/user');
+const Question = require('./models/question');
 
 const port = config.port;
 const mongoURI = config.mongoURI;
