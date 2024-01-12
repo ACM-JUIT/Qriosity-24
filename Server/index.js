@@ -5,10 +5,15 @@ const config = require('./config');
 const app = express();
 const cors = require("cors");
 const User = require('./models/user');
+
 const Question = require('./models/question');
+
+const bcrypt = require('bcrypt');
 
 const port = config.port;
 const mongoURI = config.mongoURI;
+
+const saltRounds = 10;
 
 app.use(cors());
 
@@ -23,13 +28,56 @@ const startServer = async () => {
             res.status(200).json({msg: 'success'})
         });
 
+        app.post("/signup", async (req, res) => {
+            const { name, email, password, confirmPassword } = req.body;
+
+            if (password !== confirmPassword) {
+                res.status(400).json({ error: "Passwords do not match" });
+                return;
+            }
+
+            let user = await User.findOne({email});
+            if(user){
+                res.status(400).json({ error: "User already exists" });
+                return;
+            }
+            
+            try {
+                bcrypt.genSalt(saltRounds, function (saltError, salt) {
+                    if (saltError) {
+                        throw saltError
+                        } else {
+                        bcrypt.hash(password, salt, function(hashError, hash) {
+                            if (hashError) {
+                            throw hashError
+                            } else {
+                                const newUser = new User({ name, email, password: hash, points: 0 });
+                                newUser.save();
+                            }
+                        })
+                        }
+                    })
+
+                res.status(200).json({ msg: "success" });
+            } catch (error) {
+                console.error('Error during signup:', error);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
         app.post("/login", async (req, res) => {
             try {
-                const { name, password } = req.body;
-                const existingUser = await User.findOne({ name, password });
+                const { email, password } = req.body;
+                const existingUser = await User.findOne({ email });
         
                 if (existingUser) {
-                    res.status(200).json({ msg: "Login success", user: existingUser });
+                    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
+        
+                    if (isPasswordValid) {
+                        res.status(200).json({ msg: "Login success", user: existingUser });
+                    } else {
+                        res.status(401).json({ error: "Incorrect password" });
+                    }
                 } else {
                     res.status(404).json({ error: "User not found" });
                 }
