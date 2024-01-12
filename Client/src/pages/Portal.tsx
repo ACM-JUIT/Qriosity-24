@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
+import '../Styles/portal.css';
 
 const Portal = () => {
 //   const [questionsData, setQuestionsData] = useState([]);
@@ -51,7 +52,7 @@ const questionsData = [
   const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
   const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
   const hintButton = document.getElementById('hintButton') as HTMLButtonElement;
-  // let hint = document.getElementById('HintButton') as HTMLInputElement;
+  const commentBox = document.getElementById('commentBox');
 
 
   // Quiz Timer
@@ -69,7 +70,9 @@ const questionsData = [
           return prevSeconds - 1;
         } else {
           clearInterval(countdownInterval);
-          alert('Countdown is over!');
+          if (commentBox) {
+            commentBox.textContent = 'Countdown is over!';
+          }
           return 0;
         }
       });
@@ -77,7 +80,8 @@ const questionsData = [
     return () => clearInterval(countdownInterval);
   }, []);
 
-  // Display Questions
+
+  // Display Questions Numbers
   const displayQuestionNumbers = (nextQuestionNumber: number) => {
     const questionNumbersContainer = document.querySelector('.displayQuestionNumbers');
     const firstQuestionNumber = 1;
@@ -94,7 +98,7 @@ const questionsData = [
         const liElement = document.createElement('li');
         liElement.textContent = nextQuestionNumber.toString();
         questionNumbersContainer.appendChild(liElement);
-      } else if (nextQuestionNumber == questionsData.length) {
+      } else if (nextQuestionNumber == questionsData.length+1) {
         const theLiElement = document.createElement('li');
         theLiElement.textContent = 'The'
         const endLiElement = document.createElement('li');
@@ -120,12 +124,18 @@ const questionsData = [
     if (questionsContainer) {
       questionsContainer.innerHTML = questionHTML;
     }
+    const commentContainer = document.querySelector('#commentBox');
+    if (commentContainer) {
+      commentContainer.innerHTML = ``;
+    }
     displayQuestionNumbers(question.QuestionNumber + 1);
   };
 
   const displayHint = () => {
     const hintData = questionsData[currentAnswerIndex].Hints.toString();
-    alert(hintData);
+    if (commentBox) {
+      commentBox.textContent = hintData;
+    }
   }
 
   const checkAnswer = () => {
@@ -139,19 +149,22 @@ const questionsData = [
         setSubmitFlag(true);
         submitButton.disabled = true;
         hintButton.disabled = true;
-        alert('Correct answer.'); 
+        if (commentBox) {
+          commentBox.textContent = 'Correct answer.';
+        } 
         if (nextButton) {
           nextButton.disabled = true;
           setTimeout(() => {
             if (nextButton) {
               nextButton.disabled = false;
-              // setCooldownFlag(false);
             }
           }, 3000);         
 
         }
       }else {
-        alert('Incorrect answer. Please try again.');
+        if (commentBox) {
+          commentBox.textContent = 'Incorrect answer. Please try again.';
+        }
       }
     }
   };
@@ -170,9 +183,13 @@ const questionsData = [
         userAnswerInput.value = '';
       }
     }else if (submitFlag && currentQuestionIndex==questionsData.length){
-      alert('Completed all the questions.')
+      if (commentBox) {
+        commentBox.textContent = 'Completed all the questions.';
+      }
     } else {
-      alert('First attempt the question correctly then you are allowed to move further.');
+      if (commentBox) {
+        commentBox.textContent = 'First attempt the question correctly then you are allowed to move further.';
+      }
     }
   };
 
@@ -200,19 +217,35 @@ const questionsData = [
     <div className="portalContainer">
       <Navbar />
       <div className="quizContainer p-4">
+
+        {/* Quiz Timer */}
         <div id="quizTimer" className="text-lg mb-4">
           {countdownSeconds > 0 ? (
-            `Time remaining ::  ${Math.floor(countdownSeconds / 3600)} hours : ${Math.floor((countdownSeconds % 3600) / 60)} minutes : ${countdownSeconds % 60} seconds`
+            <>
+              <p className="time">
+                {Math.floor(countdownSeconds / 3600)}h : {Math.floor((countdownSeconds % 3600) / 60)}m : {countdownSeconds % 60}s
+              </p>
+              <p className="info"> Time remaining </p>
+            </>
           ) : (
-            'Qriosity-2024 is over!!!'
+            <>
+            <p className="time"> 00h : 00m : 00s </p>
+            <p className="info"> Qriosity-2024 is over!!! </p>
+            </>
           )}
         </div>
-        <div className="flex">
-          <div className="questionNumber pr-4">
-            <ul className="displayQuestionNumbers flex space-x-2"></ul>
+
+        {/* Question Div */}
+        {/* <img src="../assets/bg.png" alt="Image" id="overlayImage" className="overlay-image"></img> */}
+        <div className="flex h-[1/2] flex-col sm:flex-row">
+          <div className="questionNumber pr-4 w-[300px] border border-gray-300 p-4 m-4">
+            <h1> Question Numbers </h1>
+            <ul className="displayQuestionNumbers grid grid-cols-3 gap-2"></ul>
           </div>
-          <div className="questions-container flex-1">
-            <div className="questions mb-4"></div>
+          <div className="questions-container flex-1 p-10 m-auto">
+            <div className="questions mb-4 h-[5rem] p-4 m-4 text-white">
+              Backend almost complete ho chuka hy bus frontend baka hy thora...
+            </div>
             <input
               type="text"
               id="userAnswer"
@@ -235,15 +268,6 @@ const questionsData = [
                 Submit
               </button>
             </div>
-            <div className='nextBlock p-2 mb-4'>
-              <button
-                id="nextButton"
-                onClick={showNextQuestion}
-                className="bg-green-500 text-white px-4 py-2 rounded"
-              >
-                Next
-              </button>
-            </div>
             <div id="questionTimer" className="mt-4">
               {cooldownFlag ? (
                 cooldownTimerSeconds > 0 ? (
@@ -255,9 +279,23 @@ const questionsData = [
                 `Time spent on current question: ${questionTimerSeconds} seconds`
               )}
             </div>
-            <div id="commentBox" className='mt-4 px-4 py-2 text-white'></div>
+            <div id="commentBox" className='mt-4 px-4 py-2 text-white'>
+              Just click on "Next" and move further.
+            </div>
           </div>
         </div>
+
+        {/* Next Button */}
+        <div className='nextBlock p-2 mb-4 flex justify-center'>
+          <button
+            id="nextButton"
+            onClick={showNextQuestion}
+            className="bg-green-500 text-white px-4 py-2 rounded"
+          >
+            Next
+          </button>
+        </div>
+
       </div>
     </div>
   );

@@ -1,0 +1,47 @@
+/* Quiz Timer */
+#quizTimer {
+    font-family: 'Share Tech Mono', monospace;
+    text-align: center;
+    color: #daf6ff;
+    text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+}
+.time {
+    letter-spacing: 0.05em;
+    font-size: 2rem;
+    padding: 1rem 0;
+    margin: 0;
+}
+.info {
+    letter-spacing: 0.1em;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+/* Display Question numbers */
+.displayQuestionNumbers li {
+    background-color: #4CAF50;
+    border-radius: 50%;
+    padding:0.5rem;
+    margin:0.5rem;
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.displayQuestionNumbers li:nth-last-child(2) {
+    background-color: yellow; 
+}
+.displayQuestionNumbers li:last-child {
+    background-color: red; 
+}
+
+.overlay-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
