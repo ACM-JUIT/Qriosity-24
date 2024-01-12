@@ -47,6 +47,10 @@ const questionsData = [
   let [questionTimerSeconds, setQuestionTimerSeconds] = useState(0);
   let [cooldownTimerSeconds, setCooldownTimerSeconds] = useState(30);
   let [cooldownFlag, setCooldownFlag] = useState(false);
+  let [submitFlag, setSubmitFlag] = useState(true);
+  const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
+  const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
+  const hintButton = document.getElementById('hintButton') as HTMLButtonElement;
   // let hint = document.getElementById('HintButton') as HTMLInputElement;
 
 
@@ -105,7 +109,8 @@ const questionsData = [
   const displayQuestion = (question: any) => {
     setQuestionTimerSeconds(0);
     setCooldownTimerSeconds(3);
-
+    setCooldownFlag(false);
+    setSubmitFlag(false);
     const questionHTML = `
       <div>
         <p>${question.QuestionNumber}. ${question.QuestionStatement}</p>
@@ -115,7 +120,6 @@ const questionsData = [
     if (questionsContainer) {
       questionsContainer.innerHTML = questionHTML;
     }
-
     displayQuestionNumbers(question.QuestionNumber + 1);
   };
 
@@ -128,23 +132,25 @@ const questionsData = [
     const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
     if (userAnswerInput) {
       const userAnswer = userAnswerInput.value.toLowerCase();
-      if (userAnswer === questionsData[currentAnswerIndex].Answer.toLowerCase()) {
+      const correctAnswer = questionsData[currentAnswerIndex].Answer.toLowerCase();
+      if ( (userAnswer === correctAnswer) && (!submitFlag) ) {        
         setCurrentAnswerIndex((prevIndex) => (prevIndex + 1));
         setCooldownFlag(true);
+        setSubmitFlag(true);
+        submitButton.disabled = true;
+        hintButton.disabled = true;
         alert('Correct answer.'); 
-        const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
         if (nextButton) {
           nextButton.disabled = true;
           setTimeout(() => {
-            setCooldownFlag(false);
             if (nextButton) {
               nextButton.disabled = false;
-              cooldownFlag = true;
+              // setCooldownFlag(false);
             }
           }, 3000);         
 
         }
-      } else {
+      }else {
         alert('Incorrect answer. Please try again.');
       }
     }
@@ -152,9 +158,10 @@ const questionsData = [
 
   const showNextQuestion = () => {
     setQuestionTimerSeconds(0);
-
-    cooldownFlag = true;
-    if (cooldownFlag) {
+    setSubmitFlag(false);
+    submitButton.disabled = false;
+    hintButton.disabled = false;
+    if (submitFlag && currentQuestionIndex<questionsData.length) {
       cooldownFlag = false;
       setCurrentQuestionIndex((prevIndex) => (prevIndex + 1));
       displayQuestion(questionsData[currentQuestionIndex]);
@@ -162,24 +169,24 @@ const questionsData = [
       if (userAnswerInput) {
         userAnswerInput.value = '';
       }
+    }else if (submitFlag && currentQuestionIndex==questionsData.length){
+      alert('Completed all the questions.')
     } else {
       alert('First attempt the question correctly then you are allowed to move further.');
     }
   };
 
   const updateQuestionTimer = () => {
-    setQuestionTimerSeconds((prevSeconds) => prevSeconds + 1);
-    if (cooldownFlag) {
-      setCooldownTimerSeconds((prevCooldownSeconds) => prevCooldownSeconds - 1);
+    if (!cooldownFlag){
+      setQuestionTimerSeconds((prevSeconds) => prevSeconds + 1);
     }
-    if (cooldownFlag && cooldownTimerSeconds === 0) {
-      setCooldownFlag(false);
+    else if (cooldownFlag && cooldownTimerSeconds !== 0) {
+      setCooldownTimerSeconds((prevCooldownSeconds) => prevCooldownSeconds - 1);
     }
   };
 
   useEffect(() => {
     const intervalId = setInterval(updateQuestionTimer, 1000);
-    // setQuestionTimerInterval(intervalId);
     questionTimerSeconds = intervalId;
 
     return () => {
@@ -197,7 +204,7 @@ const questionsData = [
           {countdownSeconds > 0 ? (
             `Time remaining ::  ${Math.floor(countdownSeconds / 3600)} hours : ${Math.floor((countdownSeconds % 3600) / 60)} minutes : ${countdownSeconds % 60} seconds`
           ) : (
-            'Qriosity-24 is over!!!'
+            'Qriosity-2024 is over!!!'
           )}
         </div>
         <div className="flex">
@@ -212,7 +219,14 @@ const questionsData = [
               placeholder="Enter your answer"
               className="border p-2 mb-4 text-black"
             />
-            <div className='submitHintBlock p-2 mb-4'>
+            <div className='hintSubmitBlock p-2 mb-4'>
+              <button
+                id="hintButton"
+                onClick={displayHint}
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded"
+              >
+                Hint
+              </button>
               <button
                 id="submitButton"
                 onClick={checkAnswer}
@@ -220,15 +234,8 @@ const questionsData = [
               >
                 Submit
               </button>
-              <button
-                id="HintButton"
-                onClick={displayHint}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded"
-              >
-                Hint
-              </button>
             </div>
-            <div className='submitHintBlock p-2 mb-4'>
+            <div className='nextBlock p-2 mb-4'>
               <button
                 id="nextButton"
                 onClick={showNextQuestion}
