@@ -5,6 +5,9 @@ const config = require('./config');
 const app = express();
 const cors = require("cors");
 const User = require('./models/user');
+
+const Question = require('./models/question');
+
 const bcrypt = require('bcrypt');
 
 const port = config.port;
