@@ -16,13 +16,7 @@ const questionSchema = new mongoose.Schema({
     },    
     hint: {
         type: String,
-        requried: true,
     },
-    hintVisible: {
-        type: Boolean,
-        default: false,
-        requried: true,
-    }, 
 });
 
 const Questions = mongoose.model('Questions', questionSchema);

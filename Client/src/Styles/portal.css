@@ -1,9 +1,21 @@
+:root{
+    --light: #ffffff;
+    --lg-blue: #daf6ff;;
+    --blue: rgb(0, 191, 255);
+    --dk-blue:  rgb(0, 147, 196);
+    --bg-dk-blue: rgb(0, 44, 59);
+    --black: rgb(0, 15, 18);
+    --lg-bluevt: blueviolet;
+    --bluevt: rgb(93, 0, 181);
+    --dk-bluevt: rgb(9, 0, 17);
+}
+
 /* Quiz Timer */
 #quizTimer {
     font-family: 'Share Tech Mono', monospace;
     text-align: center;
-    color: #daf6ff;
-    text-shadow: 0 0 20px rgba(10, 175, 230, 1), 0 0 20px rgba(10, 175, 230, 0);
+    color: var(--lg-blue);
+    text-shadow: 0 0 20px var(--blue), 0 0 20px var(--black);
 }
 .time {
     letter-spacing: 0.05em;
@@ -17,31 +29,57 @@
     margin: 0;
 }
 
+
 /* Display Question numbers */
+.questionNumber {
+    background-color: var(--dk-bluevt);
+}
 .displayQuestionNumbers li {
-    background-color: #4CAF50;
+    background-color: var(--lg-blue);
     border-radius: 50%;
+    height: 2.5rem;
+    width: 2.5rem;
     padding:0.5rem;
-    margin:0.5rem;
-    color: white;
+    margin:1rem;
+    color: var(--black);
+    font-weight: 900;
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 .displayQuestionNumbers li:nth-last-child(2) {
-    background-color: yellow; 
+    background-color: var(--blue);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.508); 
+    cursor: pointer;
+    outline: none;
+    animation: rotate 3s linear infinite; 
 }
 .displayQuestionNumbers li:last-child {
-    background-color: red; 
+    background-color: var(--dk-blue);
+    color: transparent;
+    text-shadow: 0 0 8px #000;
 }
-
-.overlay-image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-30deg);
+    }
+    50%{
+        transform: rotate(0deg);
+    }
+    75%{
+        transform: rotate(30deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
-  
+
+
+/* Question div  */
+.questions-container{
+    background-color: var(--bg-dk-blue);
+}
