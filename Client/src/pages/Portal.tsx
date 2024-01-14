@@ -99,12 +99,14 @@ const questionsData = [
         liElement.textContent = nextQuestionNumber.toString();
         questionNumbersContainer.appendChild(liElement);
       } else if (nextQuestionNumber == questionsData.length+1) {
-        const theLiElement = document.createElement('li');
-        theLiElement.textContent = 'The'
         const endLiElement = document.createElement('li');
-        endLiElement.textContent = 'End'
-        questionNumbersContainer.appendChild(theLiElement);
+        endLiElement.textContent = 'End';
         questionNumbersContainer.appendChild(endLiElement);
+      } else if (nextQuestionNumber == questionsData.length+2) {
+        const wellDoneLiElement = document.createElement('li');
+        wellDoneLiElement.textContent = 'End';
+        wellDoneLiElement.id = 'wellDone';
+        questionNumbersContainer.appendChild(wellDoneLiElement);  
       }
     }
   };
@@ -162,7 +164,7 @@ const questionsData = [
             if (nextButton) {
               nextButton.disabled = false;
             }
-          }, 3000);         
+          }, 30000);         
 
         }
       }else {
@@ -175,10 +177,11 @@ const questionsData = [
 
   const showNextQuestion = () => {
     setQuestionTimerSeconds(0);
+    setCooldownTimerSeconds(30);
     setSubmitFlag(false);
     submitButton.disabled = false;
     hintButton.disabled = false;
-    if (submitFlag && currentQuestionIndex<questionsData.length) {
+    if (submitFlag && cooldownFlag && currentQuestionIndex<questionsData.length) {
       cooldownFlag = false;
       setCurrentQuestionIndex((prevIndex) => (prevIndex + 1));
       displayQuestion(questionsData[currentQuestionIndex]);
@@ -223,7 +226,7 @@ const questionsData = [
       <div className="quizContainer p-4">
 
         {/* Quiz Timer */}
-        <div id="quizTimer" className="text-lg mb-4">
+        <div id="quizTimer" className="mx-auto mb-8 ">
           {countdownSeconds > 0 ? (
             <>
               <p className="time">
@@ -241,24 +244,26 @@ const questionsData = [
 
         {/* Question Div */}
         <div className="flex h-[1/2] flex-col sm:flex-row">
-          <div className="questionNumber w-[350px] border border-gray-300 p-4 mb-4 rounded-xl">
+          <div className="questionNumber w-[350px] border border-gray-300 p-4 mb-4 mx-auto rounded-xl">
             <h1 className='tracking-wider max-w-max mx-auto mb-4'> Question Numbers </h1>
             <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
               <li> 1 </li>
               <li> 2 </li>
             </ul>
           </div>
-          <div className="questions-container flex-col mx-auto sm:w-[375px]">
-            <div className='questionAnswer'>
+          <div className="questions-container flex-col mx-auto  p-4 rounded-xl w-[400px]">
+            <div className='questionAnswer ml-4'>
             <div className="questions mb-4 h-[5rem] p-4 m-4 text-white">
               <p>{questionsData[0].QuestionNumber}. {questionsData[0].QuestionStatement}</p>
             </div>
-            <input
-              type="text"
-              id="userAnswer"
-              placeholder="Enter your answer"
-              className="border p-2 mb-4 text-black mx-auto px-auto max-w-max-content"
-            />
+            <div className="inputBox flex justify-center mb-4 p-1 border border-solid border-white w-fit mx-auto">
+              <input
+                type="text"
+                id="userAnswer"
+                placeholder="Enter your answer"
+                className="border p-1 mx-auto text-black"
+              />
+            </div>
             </div>
             <div className='hintSubmitBlock p-2 mb-4 flex justify-between'>
               <button
@@ -276,7 +281,7 @@ const questionsData = [
                 Submit
               </button>
             </div>
-            <div id="questionTimer" className="mt-4 h-[3rem] text-nowrap ">
+            <div id="questionTimer" className="mt-4 h-[3rem] text-wrap ">
               {cooldownFlag ? (
                 cooldownTimerSeconds > 0 ? (
                   `Please wait for the cooldown period (${cooldownTimerSeconds} seconds remaining)`
@@ -287,12 +292,12 @@ const questionsData = [
                 `Time spent on current question: ${questionTimerSeconds} seconds`
               )}
             </div>
-            <div id="commentBox" className='mt-4 px-4 h-[3rem] py-2 text-white text-nowrap'></div>
+            <div id="commentBox" className='mt-4 px-4 h-[4.5rem] py-2 text-white'></div>
           </div>
         </div>
 
         {/* Next Button */}
-        <div className='nextBlock p-2 mb-4 flex justify-center'>
+        <div className='nextBlock p-2 mt-4 flex justify-center'>
           <button
             id="nextButton"
             onClick={showNextQuestion}

@@ -3,7 +3,7 @@
     --lg-blue: #daf6ff;;
     --blue: rgb(0, 191, 255);
     --dk-blue:  rgb(0, 147, 196);
-    --bg-dk-blue: rgb(0, 44, 59);
+    --bg-dk-blue: rgb(0, 38, 50);
     --black: rgb(0, 15, 18);
     --lg-bluevt: blueviolet;
     --bluevt: rgb(93, 0, 181);
@@ -18,10 +18,9 @@
     text-shadow: 0 0 20px var(--blue), 0 0 20px var(--black);
 }
 .time {
-    letter-spacing: 0.05em;
+    letter-spacing: 0.01em;
     font-size: 2rem;
     padding: 1rem 0;
-    margin: 0;
 }
 .info {
     letter-spacing: 0.1em;
@@ -60,6 +59,11 @@
     color: transparent;
     text-shadow: 0 0 8px #000;
 }
+.displayQuestionNumbers .wellDone {
+    width: 4rem;
+    text-shadow:none;
+    background-color: var(--lg-bluevt);
+}
 @keyframes rotate {
     0% {
       transform: rotate(0deg);
@@ -82,4 +86,16 @@
 /* Question div  */
 .questions-container{
     background-color: var(--bg-dk-blue);
+}
+
+#commentBox{
+    box-shadow: 
+    rgba(166, 166, 255, 0.25) 0px 30px 60px -12px inset, 
+    rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+}
+
+button:disabled{
+    cursor: not-allowed;
+    opacity: 0.8;
+    border-radius: 0;
 }
