@@ -3,22 +3,22 @@ const mongoose = require("mongoose");
 const questionSchema = new mongoose.Schema({
     questionNumber: {
         type: String,
-        requried: true,
+        require: true,
         unique: true,
     },
     questionStatement: {
         type: String,
-        requried: true,
+        require: true,
     },
     answer: {
         type: String,
-        requried: true,
+        require: true,
     },    
     hint: {
         type: String,
     },
 });
 
-const Questions = mongoose.model('Questions', questionSchema);
+const Questions = new mongoose.model('Question', questionSchema);
 
 module.exports = Questions;

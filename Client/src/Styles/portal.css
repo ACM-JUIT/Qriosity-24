@@ -95,7 +95,7 @@
 }
 
 button:disabled{
-    cursor: not-allowed;
-    opacity: 0.8;
+    cursor:none;
+    opacity: 0.7;
     border-radius: 0;
 }
