@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
 import '../Styles/portal.css';
@@ -58,7 +58,7 @@ const questionsData = [
   // Quiz Timer
   const [countdownSeconds, setCountdownSeconds] = useState(calculateRemainingTimeInSeconds());
   function calculateRemainingTimeInSeconds() {
-    const targetDate = new Date('2024-01-15T12:00:00'); // Replace with your target date and time
+    const targetDate = new Date('2024-01-20T12:00:00'); // Replace with your target date and time
     const currentTime = new Date();
     const timeDifference = targetDate.getTime() - currentTime.getTime();
     return Math.max(Math.floor(timeDifference / 1000), 0);
@@ -99,10 +99,6 @@ const questionsData = [
         liElement.textContent = nextQuestionNumber.toString();
         questionNumbersContainer.appendChild(liElement);
       } else if (nextQuestionNumber == questionsData.length+1) {
-        const endLiElement = document.createElement('li');
-        endLiElement.textContent = 'End';
-        questionNumbersContainer.appendChild(endLiElement);
-      } else if (nextQuestionNumber == questionsData.length+2) {
         const wellDoneLiElement = document.createElement('li');
         wellDoneLiElement.textContent = 'End';
         wellDoneLiElement.id = 'wellDone';
@@ -148,8 +144,7 @@ const questionsData = [
     if (userAnswerInput) {
       const userAnswer = userAnswerInput.value.toLowerCase();
       const correctAnswer = questionsData[currentAnswerIndex].Answer.toLowerCase();
-      console.log(correctAnswer);
-      if ( (userAnswer === correctAnswer) && (!submitFlag) ) {        
+      if ( (userAnswer === correctAnswer) && (!submitFlag) ) {       
         setCurrentAnswerIndex((prevIndex) => (prevIndex + 1));
         setCooldownFlag(true);
         setSubmitFlag(true);
@@ -164,8 +159,7 @@ const questionsData = [
             if (nextButton) {
               nextButton.disabled = false;
             }
-          }, 30000);         
-
+          }, 3000);         
         }
       }else {
         if (commentBox) {
@@ -191,7 +185,10 @@ const questionsData = [
       }
     }else if (submitFlag && currentQuestionIndex==questionsData.length){
       if (commentBox) {
-        commentBox.textContent = 'Completed all the questions.';
+        commentBox.textContent = 'Completed all the questions.'; 
+        nextButton.disabled = true;
+        submitButton.disabled = true;
+        hintButton.disabled = true;     
       }
     } else {
       if (commentBox) {
