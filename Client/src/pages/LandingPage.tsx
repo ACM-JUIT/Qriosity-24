@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../Styles/Landing.module.scss';
+import Footer from '../common/components/Footer';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
 
@@ -19,6 +20,7 @@ const LandingPage: React.FC = () => {
     const size = isHovered ? 400 : 40;
 
     return (
+        <>
         <div className={styles.main}>
             <motion.div
                 className={styles.mask}
@@ -35,8 +37,7 @@ const LandingPage: React.FC = () => {
                     onMouseEnter={() => setisHovered(true)}
                     onMouseLeave={() => setisHovered(false)}
                 >
-                    Lorem ipsum <span>dolor sit amet consectetur adipisicing elit</span>.
-                    Doloribus ipsam ratione nemo soluta,
+                    Embark on an intellectual journey where <span>every click is a clue</span> and every search takes you closer to victory. Think you've got what it takes? Dive into the cerebral adventure now!
                 </p>
                 <motion.button
                 onMouseEnter={() => setisHovered(true)}
@@ -48,16 +49,17 @@ const LandingPage: React.FC = () => {
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
             >
-                Get Started!
+                Hop In!
             </motion.button>
             </motion.div>
             <div className={styles.body}>
                 <p>
-                    Kuch toh likha hai. <br />
-                    Or bhot kuch bhi likhna hai
+                Unlock the Power of Your Mind: Join the <span>Qriosity</span> A mind-bending event where Google is your secret weapon and intelligence is your key to success. Are you ready to outsmart the challenge?
                 </p>
             </div>
-        </div>
+            </div>
+            <Footer/>
+            </>
     );
 };
 

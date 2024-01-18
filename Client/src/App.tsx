@@ -2,13 +2,14 @@ import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import LandingPage from './pages/LandingPage';
+import Leaderboard from './pages/Leaderboard';
 import Login from './pages/LoginPage';
 import Portal from './pages/Portal';
 import SignUp from './pages/Signup';
-import Leaderboard from './pages/Leaderboard';
 
 const App: React.FC = () => {
   return (
+    <>
     <Router>
       <Routes>
         <Route path="/" element={<LandingPage/>} />
@@ -20,7 +21,8 @@ const App: React.FC = () => {
         <Route path='/leaderboard' element={<Leaderboard />} />
 
       </Routes>
-    </Router>
+      </Router>
+      </>
   );
 };
 

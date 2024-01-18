@@ -14,7 +14,7 @@ $button-border-radius: 100px;
     justify-content: center;
     align-items: center;
     color: #afa18f;
-    font-size: 64px;
+    font-size: 54px;
     line-height: 66px;
     cursor: default;
 
@@ -52,7 +52,7 @@ $button-border-radius: 100px;
   .mask{
     position: absolute;
     mask-image: url("../assets/mask.svg");
-    background-color: #3498db;
+    background-color: #9aeadd;
     mask-repeat: no-repeat;
     mask-position: 0%;
     mask-size: 40px;
