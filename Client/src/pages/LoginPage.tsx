@@ -81,7 +81,7 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none focus:border-green-500 transition-all duration-300"
+            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300"
           />
         </div>
         <div className="mb-4">
@@ -91,7 +91,7 @@ const Login = () => {
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-green-500 transition-all duration-300"
+            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none text-black focus:border-green-500 transition-all duration-300"
           />
         </div>
         <motion.button
