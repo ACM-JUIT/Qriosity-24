@@ -1,10 +1,31 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
 import '../Styles/portal.css';
 
-const Portal = () => {
-//   const [questionsData, setQuestionsData] = useState([]);
+
+const Portal: React.FC = () => {
+
+  // ------ QuestionsData ------
+  // const [questionsData, setQuestionsData] = useState<{
+  //   QuestionNumber: number;
+  //   QuestionStatement: string;
+  //   Answer: string;
+  //   Hints: string;
+  // }[]>([]);
+  // useEffect(() => {
+  //   const fetchQuestions = async () => {
+  //     try {
+  //       const response = await axios.get('/api/questions');
+  //       setQuestionsData(response.data);
+  //     } catch (error) {
+  //       console.error('Error fetching questions:', error);
+  //     }
+  //   };
+  //   fetchQuestions();
+  // }, []);
+
 const questionsData = [
     {
         "QuestionNumber": 1,
@@ -43,6 +64,7 @@ const questionsData = [
         "Hints": "It is one of the most populous cities in the world",
     }
 ];
+
   let [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
   let [currentAnswerIndex, setCurrentAnswerIndex] = useState(0);
   let [questionTimerSeconds, setQuestionTimerSeconds] = useState(0);
