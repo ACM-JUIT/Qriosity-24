@@ -1,4 +1,6 @@
+import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import Navbar from '../common/components/Navbar';
 
 interface User {
     name: string;
@@ -17,7 +19,10 @@ function Leaderboard() {
     }, []);
 
     return (
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md mx-auto mt-8">
+        <div className='leaderboard-container'>
+            <Navbar />
+            <AnimatePresence mode='wait'>
+        <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md mx-auto mt-4 p-4">
             <h2 className="text-3xl font-semibold text-white mb-4">Leaderboard</h2>
             <table className="w-full border-collapse">
                 <thead>
@@ -39,8 +44,11 @@ function Leaderboard() {
                     ))}
                 </tbody>
             </table>
-        </div>
-    );
+                </div>
+                </AnimatePresence>
+            </div>
+            );
+            
 }
 
 export default Leaderboard;

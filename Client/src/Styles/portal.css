@@ -49,7 +49,6 @@
 }
 .displayQuestionNumbers li:nth-last-child(2) {
     background-color: var(--blue);
-    box-shadow: 0 0 10px rgba(255, 255, 255, 0.508); 
     cursor: pointer;
     outline: none;
     animation: rotate 3s linear infinite; 
@@ -84,9 +83,14 @@
 
 
 /* Question div  */
-.questions-container{
-    background-color: var(--bg-dk-blue);
+.questions-container {
+    backdrop-filter: blur(5px) saturate(180%);
+    -webkit-backdrop-filter: blur(5px) saturate(180%);
+    background-color: rgba(95, 118, 152, 0);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.125);
 }
+
 
 #commentBox{
     box-shadow: 
