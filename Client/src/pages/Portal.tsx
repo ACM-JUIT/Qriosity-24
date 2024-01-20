@@ -248,7 +248,7 @@ const questionsData = [
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=" bg-cover bg-center h-screen" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")' }}>
+    <div className=" bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")' }}>
       <Navbar />  
       <div className="quizContainer p-4 ">
 
@@ -317,25 +317,22 @@ const questionsData = [
             </motion.div>
             </div>
             
-            <div id="questionTimer" className="mt-4 h-[3rem] text-wrap text-white ">
+            <div id="questionTimer" className="mt-4 h-[3rem] text-wrap text-white flex items-center justify-center">
               {cooldownFlag ? (
                 cooldownTimerSeconds > 0 ? (
                   `Please wait for the cooldown period (${cooldownTimerSeconds} seconds remaining)`
                 ) : (
-                  `You solved this question in: ${questionTimerSeconds} seconds`
+                  `You solved this question in: <span> ${questionTimerSeconds} </span>  seconds`
                 )
               ) : (
                 `Time spent on current question: ${questionTimerSeconds} seconds`
               )}
             </div>
-            <div id="commentBox" className='mt-4 px-4 h-[4.5rem] py-2 text-white'></div>
-          </div>
-        </div>
-        <div className='flex items-center justify-center p-2 mb-4 mx-auto '>
+            <div className='flex items-center justify-center p-2 mb-4 mx-auto '>
               <motion.button
                 id="hintButton"
             onClick={displayHint}
-            whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+            whileHover={{ scale: 1.1, backgroundColor: 'yellow', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
             whileTap={{ scale: 0.9 }}
                 className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-full"
               >
@@ -350,18 +347,20 @@ const questionsData = [
               >
                 Submit
               </motion.button>
-            </div>
-
-        {/* Next Button */}
-        <div className='nextBlock p-2 mt-4 flex justify-center'>
-          <button
-            id="nextButton"
+              <motion.button
+                id="nextButton"
             onClick={showNextQuestion}
-            className="bg-green-500 text-white px-4 py-2 rounded-full"
-          >
-            Next 🚀
-          </button>
+            whileHover={{ scale: 1.1, backgroundColor: 'lightgreen', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+            whileTap={{ scale: 0.9 }}
+                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-full"
+              >
+               Next 🚀
+              </motion.button>
+            </div>
+          </div>
         </div>
+        
+        <div id="commentBox" className='mt-4 px-4 h-[4.5rem] py-2 text-white rounded-full'></div>
 
       </div>
     </div>

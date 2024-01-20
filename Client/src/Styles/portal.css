@@ -93,9 +93,12 @@
 
 
 #commentBox{
-    box-shadow: 
-    rgba(166, 166, 255, 0.25) 0px 30px 60px -12px inset, 
-    rgba(255, 255, 255, 0.3) 0px 18px 36px -18px inset;
+    background: rgba( 184, 233, 134, 0.25 );
+box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+backdrop-filter: blur( 1px );
+-webkit-backdrop-filter: blur( 1px );
+border-radius: 10px;
+border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 button:disabled{

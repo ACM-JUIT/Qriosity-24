@@ -19,17 +19,18 @@ function Leaderboard() {
     }, []);
 
     return (
-        <div className='leaderboard-container'>
+        <div className='leaderboard-container bg-cover bg-center h-screen p-4' style={{backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
             <Navbar />
             <AnimatePresence mode='wait'>
-        <div className="bg-gray-800 p-8 rounded-lg shadow-lg max-w-md mx-auto mt-4 p-4">
-            <h2 className="text-3xl font-semibold text-white mb-4">Leaderboard</h2>
+            <h2 className="text-3xl font-semibold text-white mb-4 mt-8">Chart</h2>
+        <div className="h-full w-full bg-white-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100 p-4">
+            
             <table className="w-full border-collapse">
                 <thead>
                     <tr>
-                        <th className="text-left text-gray-300 py-2 px-4 border-b">Rank</th>
-                        <th className="text-left text-gray-300 py-2 px-4 border-b">Username</th>
-                        <th className="text-left text-gray-300 py-2 px-4 border-b">Points</th>
+                        <th className="text-center text-gray-300 py-2 px-4 border-b">Rank</th>
+                        <th className="text-center text-gray-300 py-2 px-4 border-b">Username</th>
+                        <th className="text-center text-gray-300 py-2 px-4 border-b">Points</th>
                     </tr>
                 </thead>
                 <tbody>
