@@ -7,6 +7,7 @@ const cors = require("cors");
 const User = require('./models/user');
 
 const Question = require('./models/question');
+const router = express.Router();
 
 const bcrypt = require('bcrypt');
 
@@ -21,6 +22,9 @@ const startServer = async () => {
     try {
         await connectToMongoDB(mongoURI);
         console.log('MongoDB Connected...');
+
+        const insertQuestion = require('./config/insertQuestion');
+        // insertQuestion();
 
         app.use(express.json());
 
@@ -97,6 +101,18 @@ const startServer = async () => {
                 res.status(500).json({ error: "Internal Server Error" });
             }
         });
+
+
+        router.get('/questions', async (req,res) => {
+            try {
+                const questions = await Question.find();
+                res.json(questions);
+              } catch (error) {
+                console.error(error);
+                res.status(500).send('Server Error');
+            }
+        });
+
 
         app.listen(port, () => console.log(`Server started at ${port}...`));
     } catch (error) {
