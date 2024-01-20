@@ -139,6 +139,7 @@ const questionsData = [
     setCooldownTimerSeconds(30);    
     setCooldownFlag(false);
     setSubmitFlag(false);
+    //TODO:TO BE CHECKED
     const questionHTML = `
     <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
             <div className='questionAnswer ml-4'>
