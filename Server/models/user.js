@@ -17,6 +17,10 @@ const userSchema = new mongoose.Schema({
         type: Number
     },
     visitHistory: [{ timestamp: { type: Number } }],
+    refreshToken:
+    {
+        type: [String],
+    },
 });
 
 const Users = mongoose.model('Users', userSchema);
