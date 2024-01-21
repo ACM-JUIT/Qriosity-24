@@ -6,8 +6,15 @@ const app = express();
 const cors = require("cors");
 const User = require('./models/user');
 
+const cookieParser = require('cookie-parser');
+
+app.use(cookieParser());
+
 const Question = require('./models/question');
-const router = express.Router();
+
+const verify = require('./middleware/verifyToken')
+
+require('dotenv').config();
 
 const bcrypt = require('bcrypt');
 
@@ -16,6 +23,10 @@ const mongoURI = config.mongoURI;
 
 const saltRounds = 10;
 
+const loginRoute = require('./routes/login')
+const leaderboardRoute = require('./routes/leaderboard')
+const refreshRoute = require('./routes/refresh')
+
 app.use(cors());
 
 const startServer = async () => {
@@ -23,14 +34,13 @@ const startServer = async () => {
         await connectToMongoDB(mongoURI);
         console.log('MongoDB Connected...');
 
-        const insertQuestion = require('./config/insertQuestion');
-        // insertQuestion();
-
         app.use(express.json());
 
         app.get('/',(req, res) => {
             res.status(200).json({msg: 'success'})
         });
+
+        app.use(loginRoute);
 
         app.post("/signup", async (req, res) => {
             const { name, email, password, confirmPassword } = req.body;
@@ -69,50 +79,10 @@ const startServer = async () => {
             }
         });
 
-        app.post("/login", async (req, res) => {
-            try {
-                const { email, password } = req.body;
-                const existingUser = await User.findOne({ email });
-        
-                if (existingUser) {
-                    const isPasswordValid = await bcrypt.compare(password, existingUser.password);
-        
-                    if (isPasswordValid) {
-                        res.status(200).json({ msg: "Login success", user: existingUser });
-                    } else {
-                        res.status(401).json({ error: "Incorrect password" });
-                    }
-                } else {
-                    res.status(404).json({ error: "User not found" });
-                }
-            } catch (error) {
-                console.error('Error during login:', error);
-                res.status(500).json({ error: "Internal Server Error" });
-            }
-        });
-        
+        app.use(refreshRoute);
 
-        app.get("/leaderboard", async (req, res) => {
-            try {
-                const leaderboard = await User.find().sort({ points: -1 });
-                res.status(200).json(leaderboard);
-            } catch (error) {
-                console.error(error);
-                res.status(500).json({ error: "Internal Server Error" });
-            }
-        });
-
-
-        router.get('/questions', async (req,res) => {
-            try {
-                const questions = await Question.find();
-                res.json(questions);
-              } catch (error) {
-                console.error(error);
-                res.status(500).send('Server Error');
-            }
-        });
-
+        app.use(verify)
+        app.use(leaderboardRoute);
 
         app.listen(port, () => console.log(`Server started at ${port}...`));
     } catch (error) {
