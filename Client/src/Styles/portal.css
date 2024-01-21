@@ -35,7 +35,7 @@
 }
 .displayQuestionNumbers li {
     background-color: var(--lg-blue);
-    border-radius: 50%;
+    border-radius: 25%;
     height: 2.5rem;
     width: 2.5rem;
     padding:0.5rem;
@@ -68,13 +68,13 @@
       transform: rotate(0deg);
     }
     25%{
-        transform: rotate(-30deg);
+        transform: rotate(-15deg);
     }
     50%{
         transform: rotate(0deg);
     }
     75%{
-        transform: rotate(30deg);
+        transform: rotate(15deg);
     }
     100% {
       transform: rotate(0deg);
@@ -91,14 +91,26 @@
     border: 1px solid rgba(255, 255, 255, 0.125);
 }
 
-
-#commentBox{
+/* #commentBox{
     background: rgba( 184, 233, 134, 0.25 );
 box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
 backdrop-filter: blur( 1px );
 -webkit-backdrop-filter: blur( 1px );
 border-radius: 10px;
 border: 1px solid rgba( 255, 255, 255, 0.18 );
+} */
+
+.Timer {
+    cursor: pointer;
+    padding: 1rem;
+    width: max-content;
+    height: fit-content;
+    background: rgba(224, 255, 194, 0.25);
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 1px );
+    -webkit-backdrop-filter: blur( 1px );
+    border-radius: 10px;
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
 }
 
 button:disabled{

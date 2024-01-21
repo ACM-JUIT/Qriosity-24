@@ -72,13 +72,18 @@ const questionsData = [
   let [currentQuestionIndex, setCurrentQuestionIndex] = useState(1);
   let [currentAnswerIndex, setCurrentAnswerIndex] = useState(0);
   let [questionTimerSeconds, setQuestionTimerSeconds] = useState(0);
-  let [cooldownTimerSeconds, setCooldownTimerSeconds] = useState(30);
-  let [cooldownFlag, setCooldownFlag] = useState(false);
-  let [submitFlag, setSubmitFlag] = useState(false);
-  const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
+  let [lastSubmissionTimestamp, setLastSubmissionTimestamp] = useState(Date.now());
+  // let [cooldownTimerSeconds, setCooldownTimerSeconds] = useState(30);
+  // let [cooldownFlag, setCooldownFlag] = useState(false);
+  // let [submitFlag, setSubmitFlag] = useState(false);
+  // const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
   const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
   const hintButton = document.getElementById('hintButton') as HTMLButtonElement;
-  const commentBox = document.getElementById('commentBox');
+  // const commentBox = document.getElementById('commentBox');
+  const questionStatementBox = document.getElementById('questionStatement');
+  const questionTimerBox = document.getElementById('questionTimer');
+  const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
+  const [isTimer, setIsTimer] = useState(false);
 
 
   // Quiz Timer
@@ -96,9 +101,9 @@ const questionsData = [
           return prevSeconds - 1;
         } else {
           clearInterval(countdownInterval);
-          if (commentBox) {
-            commentBox.textContent = 'Countdown is over!';
-          }
+          // if (commentBox) {
+          //   commentBox.textContent = 'Countdown is over!';
+          // }
           return 0;
         }
       });
@@ -108,54 +113,54 @@ const questionsData = [
 
 
   // Display Questions Numbers
-  const displayQuestionNumbers = (nextQuestionNumber: number) => {
-    const questionNumbersContainer = document.querySelector('.displayQuestionNumbers');
-    const firstQuestionNumber = 1;
+  // const displayQuestionNumbers = (nextQuestionNumber: number) => {
+  //   const questionNumbersContainer = document.querySelector('.displayQuestionNumbers');
+  //   const firstQuestionNumber = 1;
   
-    if (questionNumbersContainer) {
-      if (nextQuestionNumber === 2) {
-        const firstLiElement = document.createElement('li');
-        firstLiElement.textContent = firstQuestionNumber.toString();
-        const secondLiElement = document.createElement('li');
-        secondLiElement.textContent = nextQuestionNumber.toString();
-        questionNumbersContainer.appendChild(firstLiElement);
-        questionNumbersContainer.appendChild(secondLiElement);
-      } else if (nextQuestionNumber <= questionsData.length) {
-        const liElement = document.createElement('li');
-        liElement.textContent = nextQuestionNumber.toString();
-        questionNumbersContainer.appendChild(liElement);
-      } else if (nextQuestionNumber == questionsData.length+1) {
-        const wellDoneLiElement = document.createElement('li');
-        wellDoneLiElement.textContent = 'End';
-        wellDoneLiElement.id = 'wellDone';
-        questionNumbersContainer.appendChild(wellDoneLiElement);  
-      }
-    }
-  };
+  //   if (questionNumbersContainer) {
+  //     if (nextQuestionNumber === 2) {
+  //       const firstLiElement = document.createElement('li');
+  //       firstLiElement.textContent = firstQuestionNumber.toString();
+  //       const secondLiElement = document.createElement('li');
+  //       secondLiElement.textContent = nextQuestionNumber.toString();
+  //       questionNumbersContainer.appendChild(firstLiElement);
+  //       questionNumbersContainer.appendChild(secondLiElement);
+  //     } else if (nextQuestionNumber <= questionsData.length) {
+  //       const liElement = document.createElement('li');
+  //       liElement.textContent = nextQuestionNumber.toString();
+  //       questionNumbersContainer.appendChild(liElement);
+  //     } else if (nextQuestionNumber == questionsData.length+1) {
+  //       const wellDoneLiElement = document.createElement('li');
+  //       wellDoneLiElement.textContent = 'End';
+  //       wellDoneLiElement.id = 'wellDone';
+  //       questionNumbersContainer.appendChild(wellDoneLiElement);  
+  //     }
+  //   }
+  // };
 
   // Display Questions
-  const displayQuestion = (question: any) => {
+  const displayQuestion = () => {
     setQuestionTimerSeconds(0);
-    setCooldownTimerSeconds(30);    
-    setCooldownFlag(false);
-    setSubmitFlag(false);
+    // setCooldownTimerSeconds(30);    
+    // setCooldownFlag(false);
+    // setSubmitFlag(false);
+
     //TODO:TO BE CHECKED
-    const questionHTML = `
-    <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
-            <div className='questionAnswer ml-4'>
-            <div className="questions mb-4 h-[5rem] p-4 m-4 text-white">
-              <p className='text-2xl font-bold'>${questionsData[currentQuestionIndex].QuestionStatement}</p>
-            </div>
-    `;
-    const questionsContainer = document.querySelector('.questions');
-    if (questionsContainer) {
-      questionsContainer.innerHTML = questionHTML;
+    // const questionHTML = `
+    // <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
+    //         <div className='questionAnswer ml-4'>
+    //         <div className="questions mb-4 h-[5rem] p-4 m-4 text-white">
+    //           <p className='text-2xl font-bold'>${questionsData[currentQuestionIndex].QuestionStatement}</p>
+    //         </div>
+    // `;
+    if (questionStatementBox) {
+      questionStatementBox.textContent = `${questionsData[currentQuestionIndex].QuestionStatement}`
     }
-    const commentContainer = document.querySelector('#commentBox');
-    if (commentContainer) {
-      commentContainer.innerHTML = ``;
-    }
-    displayQuestionNumbers(question.QuestionNumber + 1);
+    // const commentContainer = document.querySelector('#commentBox');
+    // if (commentContainer) {
+    //   commentContainer.innerHTML = ``;
+    // }
+    // displayQuestionNumbers(question.QuestionNumber + 1);
   };
 
   const displayHint = () => {
@@ -163,9 +168,9 @@ const questionsData = [
     if ( questionsData[currentAnswerIndex].Hints ){
       hintData = questionsData[currentAnswerIndex].Hints.toString();
     } 
-    if (commentBox) {
-      commentBox.textContent = hintData;
-    }
+    // if (commentBox) {
+    //   commentBox.textContent = hintData;
+    // }
   }
 
   const checkAnswer = () => {
@@ -173,78 +178,83 @@ const questionsData = [
     if (userAnswerInput) {
       const userAnswer = userAnswerInput.value.toLowerCase();
       const correctAnswer = questionsData[currentAnswerIndex].Answer.toLowerCase();
-      if ( (userAnswer === correctAnswer) && (!submitFlag) ) {       
+      if ( userAnswer === correctAnswer ) {      
+        showNextQuestion(); 
+        setLastSubmissionTimestamp(Date.now());
         setCurrentAnswerIndex((prevIndex) => (prevIndex + 1));
-        setCooldownFlag(true);
-        setSubmitFlag(true);
-        submitButton.disabled = true;
-        hintButton.disabled = true;
-        if (commentBox) {
-          commentBox.textContent = 'Correct answer.';
-        } 
-        if (nextButton) {
-          nextButton.disabled = true;
-          setTimeout(() => {
-            if (nextButton) {
-              nextButton.disabled = false;
-            }
-          }, 3000);         
-        }
+        // setCooldownFlag(true);
+        // setSubmitFlag(true);
+        // submitButton.disabled = true;
+        // hintButton.disabled = true;
+        // if (commentBox) {
+        //   commentBox.textContent = 'Correct answer.';
+        // } 
+        // if (nextButton) {
+        //   nextButton.disabled = true;
+        //   setTimeout(() => {
+        //     if (nextButton) {
+        //       nextButton.disabled = false;
+        //     }
+        //   }, 30000);         
+        // }
       }else {
-        if (commentBox) {
-          commentBox.textContent = 'Incorrect answer. Please try again.';
-        }
+        // if (commentBox) {
+        //   commentBox.textContent = 'Incorrect answer. Please try again.';
+        // }
       }
     }
   };
 
   const showNextQuestion = () => {
-    setQuestionTimerSeconds(0);
-    setCooldownTimerSeconds(15);
-    setSubmitFlag(false);
-    submitButton.disabled = false;
-    hintButton.disabled = false;
-    if (submitFlag && cooldownFlag && currentQuestionIndex<questionsData.length) {
-      setCooldownFlag(false);
+    // setCooldownTimerSeconds(30);
+    // setSubmitFlag(false);
+    // submitButton.disabled = false;
+    // hintButton.disabled = false;
+
+    if ( currentQuestionIndex<questionsData.length) {
+      setQuestionTimerSeconds(0);
+      // setCooldownFlag(false);
       setCurrentQuestionIndex((prevIndex) => (prevIndex + 1));
-      displayQuestion(questionsData[currentQuestionIndex]);
-      const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
+      displayQuestion();
       if (userAnswerInput) {
         userAnswerInput.value = '';
       }
-    }else if (submitFlag && currentQuestionIndex==questionsData.length){
-      if (commentBox) {
-        commentBox.textContent = 'Completed all the questions.';
-        nextButton.disabled = true;
+    } else if (currentQuestionIndex==questionsData.length){
         submitButton.disabled = true;
         hintButton.disabled = true;
-      }
+        if (questionTimerBox){
+          questionTimerBox.textContent=``
+        }
+      // if (commentBox) {
+      //   commentBox.textContent = 'Completed all the questions.';
+      //   // nextButton.disabled = true;
+      // }
     } else {
-      if (commentBox) {
-        commentBox.textContent = 'First attempt the question correctly then you are allowed to move further.';
-      }
+      // if (commentBox) {
+      //   commentBox.textContent = 'First attempt the question correctly then you are allowed to move further.';
+      // }
     }
   };
 
   const updateQuestionTimer = () => {
-    if (!cooldownFlag){
-      setQuestionTimerSeconds((prevSeconds) => prevSeconds + 1);
-    }
-    else if (cooldownFlag && cooldownTimerSeconds !== 0) {
-      setCooldownTimerSeconds((prevCooldownSeconds) => prevCooldownSeconds - 1);
-    }
+    const currentTime = Date.now();
+    const timeDifference = Math.floor((currentTime - lastSubmissionTimestamp) / 1000); // in seconds
+    setQuestionTimerSeconds(timeDifference);
+  };
+
+  const handleToggle = () => {
+    setIsTimer((prevIsTimer) => !prevIsTimer);
   };
 
   useEffect(() => {
     const intervalId = setInterval(updateQuestionTimer, 1000);
-    questionTimerSeconds = intervalId;
 
     return () => {
       if (intervalId) {
         clearInterval(intervalId);
       }
     };
-  }, [questionTimerSeconds, cooldownTimerSeconds, cooldownFlag]);
+  }, [lastSubmissionTimestamp]);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -291,8 +301,9 @@ const questionsData = [
       >
         <h1 className='tracking-wider max-w-max mx-auto mb-4 text-white'> Question Numbers </h1>
         <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
-          <li> 1 </li>
-          <li> 2 </li>
+          {Array.from({ length: currentQuestionIndex+1 }, (_, index) => (
+            <li key={index+1 }>{index+1 }</li>
+          ))}
         </ul>
       </motion.div>
     ) : null}
@@ -303,66 +314,63 @@ const questionsData = [
           
           <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
             <div className='questionAnswer ml-4'>
-            <div className="questions mb-4 h-[5rem] p-4 m-4 text-white">
-              <p className='text-2xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
+            <div className="questions p-4 m-4 text-white">
+              <p id="questionStatement" className='text-2xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
             </div>
               <motion.div
                 layout
                 className="flex justify-center mb-4 p-1  w-fit mx-auto">
-              <input
-                type="text"
-                id="userAnswer"
-                placeholder="Enter your answer"
-                className="border p-2 mx-auto text-black rounded-lg"
-              />
-            </motion.div>
+                <input
+                  type="text"
+                  id="userAnswer"
+                  placeholder="Enter your answer"
+                  className="border p-2 mt-4 mx-auto text-black rounded-lg"
+                />
+              </motion.div>
             </div>
             
-            <div id="questionTimer" className="mt-4 h-[3rem] text-wrap text-white flex items-center justify-center">
-              {cooldownFlag ? (
-                cooldownTimerSeconds > 0 ? (
-                  `Please wait for the cooldown period (${cooldownTimerSeconds} seconds remaining)`
-                ) : (
-                  `You solved this question in: <span> ${questionTimerSeconds} </span>  seconds`
-                )
-              ) : (
-                `Time spent on current question: ${questionTimerSeconds} seconds`
-              )}
+      <div 
+        onClick={handleToggle}
+        className='Timer flex items-center justify-center p-2 mb-4 mx-auto '
+        >
+        {isTimer ? (
+          <motion.div>
+            <div id="questionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
+              {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' minutes ' : ''}${questionTimerSeconds % 60} seconds`}
             </div>
+          </motion.div>
+        ) : (
+          <motion.div>
+            <div id="showQuestionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
+              Show Timer 
+            </div>
+          </motion.div>
+        )}  
+      </div>
             <div className='flex items-center justify-center p-2 mb-4 mx-auto '>
               <motion.button
                 id="hintButton"
-            onClick={displayHint}
-            whileHover={{ scale: 1.1, backgroundColor: 'yellow', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-            whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-full"
+                onClick={displayHint}
+                whileHover={{ scale: 1.1, backgroundColor: 'yellow', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md"
               >
-                💡
+                Hint
               </motion.button>
               <motion.button
                 id="submitButton"
-            onClick={checkAnswer}
-            whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-            whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-full"
+                onClick={checkAnswer}
+                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                whileTap={{ scale: 0.9 }}
+                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md"
               >
                 Submit
               </motion.button>
-              <motion.button
-                id="nextButton"
-            onClick={showNextQuestion}
-            whileHover={{ scale: 1.1, backgroundColor: 'lightgreen', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-            whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-full"
-              >
-               Next 🚀
-              </motion.button>
             </div>
-          </div>
-        </div>
-        
-        <div id="commentBox" className='mt-4 px-4 h-[4.5rem] py-2 text-white rounded-full'></div>
 
+          </div>
+
+        </div>
       </div>
     </div>
   );
