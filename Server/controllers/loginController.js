@@ -5,9 +5,7 @@ const User = require('../models/user');
 
 const loginController = async (req, res) => {
     try {
-        // const { email, password } = req.body;
-        const email = '221030360@juitsolan.in';
-        const password = 'animesh$123';
+        const { email, password } = req.body;
 
         const existingUser = await User.findOne({ email });
 

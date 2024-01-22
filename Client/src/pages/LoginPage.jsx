@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
 import astro from '../../public/nick-brunner-LXspKUjsgH0-unsplash.jpg';
+import { useNavigate } from 'react-router-dom';
 
 const succesfulLogin = () => toast.success('Login successful!', {
     position: "top-right",
@@ -31,6 +32,8 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const navigate = useNavigate();
+
     const handleLogin = async () => {
         try {
             const response = await fetch('http://localhost:3500/login', {
@@ -46,6 +49,7 @@ const Login = () => {
             if (response.ok) {
                 succesfulLogin();
                 console.log('User logged in successfully:', data);
+                navigate('/portal')
             } else if(response.status === 401 && data.error === "Incorrect password") {
                 wrongPassword();
                 console.error('Error logging in:', data.error);
@@ -81,7 +85,7 @@ const Login = () => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300"
+            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300 text-black"
           />
         </div>
         <div className="mb-4">
