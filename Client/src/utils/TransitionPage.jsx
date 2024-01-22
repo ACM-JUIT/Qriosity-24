@@ -4,11 +4,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { ReactNode, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-interface TransitionPageProps {
-  children: ReactNode;
-}
 
-const TransitionPage: React.FC<TransitionPageProps> = ({ children }) => {
+const TransitionPage = ({ children }) => {
   const location = useLocation();
   const [key, setKey] = useState(location.pathname);
 
