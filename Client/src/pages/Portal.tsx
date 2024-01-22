@@ -264,7 +264,6 @@ const questionsData = [
       <div className="quizContainer p-4 ">
 
         {/* Quiz Timer */}
-        <div id="quizTimer" className=" m-4 ">
           {countdownSeconds > 0 ? (
             <>
               <p className="info"> Time remaining </p>
@@ -283,14 +282,6 @@ const questionsData = [
         {/* Question Div */}
         <div className="flex h-[1/2] flex-col sm:flex-row">
 
-          <div className='questionNumber m-4 p-4 rounded-xl '> 
-            <h1 className='tracking-wider max-w-max mx-auto mb-4 text-white'> Question Numbers </h1>
-            <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
-              {Array.from({ length: currentQuestionIndex+1 }, (_, index) => (
-                <li key={index+1 }>{index+1 }</li>
-              ))}
-            </ul>
-          </div>
           
           <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
             <div className='questionAnswer ml-4'>
@@ -318,8 +309,6 @@ const questionsData = [
               <motion.button
                 id="hintButton"
                 onClick={displayHint}
-                whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white btn rounded-md w-22 hover:bg-blue-700 hover:darken-2"
               >
                 Hint
               </motion.button>
@@ -327,14 +316,20 @@ const questionsData = [
                 id="submitButton"
                 onClick={checkAnswer}
                 whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white btn rounded-md w-22 hover:bg-green-700 hover:darken-2"
               >
                 Submit
               </motion.button>
             </div>
-
           </div>
-
+          {/* <div className=''>
+          <iframe
+            style={{ width: '50%', height: '200px', overflow: 'hidden' }}
+            title="Chess Embed"
+            src="https://playpager.com/embed/chess/index.html">
+            
+            </iframe>
+          </div> */}
+          
         </div>
       </div>
     </div>
