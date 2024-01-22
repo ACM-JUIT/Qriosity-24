@@ -1,6 +1,3 @@
-//TODO: HINT WILL BE IN TOAST
-//TODO: PROBLEM IN INNERHTML
-//TODO: PROBLEM IN DISPLAY QUESTIONS 
 /* eslint-disable prefer-const */
 import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
@@ -264,7 +261,8 @@ const questionsData = [
       <div className="quizContainer p-4 ">
 
         {/* Quiz Timer */}
-        <div id="quizTimer" className="fixed top-30 right-0 m-4 mb-8 ">
+        <div id="quizTimer" className="fixed top-0 left-1/2 transform -translate-x-1/2 m-4 mb-8 z-[999]">
+          
           {countdownSeconds > 0 ? (
             <>
               <p className="info"> Time remaining </p>
@@ -279,7 +277,7 @@ const questionsData = [
             </>
           )}
         </div>
-
+<div className=''>
         {/* Question Div */}
         <div className="flex h-[1/2] flex-col sm:flex-row">
 
@@ -368,14 +366,21 @@ const questionsData = [
               </motion.button>
             </div>
           </div>
-          {/* <div className=''>
-          <iframe
-            style={{ width: '50%', height: '200px', overflow: 'hidden' }}
-            title="Chess Embed"
-            src="https://playpager.com/embed/chess/index.html">
-            
-            </iframe>
-          </div> */}
+</div>
+          <div className='flex flex-row justify-center mb-4 ml-8'>
+            <div className='bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-4 mt-3'>
+              <p className='text-white text-xs flex justify-center'>Feeling Bored? Why not play this mini game</p>
+            <iframe
+              style={{ width: '100%', height: '100%', overflow: 'hidden' }}
+              className='rounded-lg p-4'
+              title="Game Embed"
+              src="https://cdn.htmlgames.com/EmojiMatch3/"
+            ></iframe>
+          </div>
+          </div>
+          
+          
+
           
         </div>
       </div>
