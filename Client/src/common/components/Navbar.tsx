@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import bgimg from '../../../public/logo.png';
+import NavItemImg from './NavItem';
 
 function Navbar() {
   const location = useLocation();
@@ -17,19 +18,22 @@ function Navbar() {
 
   return (
     <div className="font-montserrat">
-      <nav className="flex flex-row items-center">
-        <img src={bgimg} alt="" className="h-20 pt-6 pl-3" />
-        <div className="mx-auto flex flex-row text-white text-3xl font-semibold">
+      <nav className="flex flex-row justify-between items-center">
+        <div className='acmLogo'>
+          <NavItemImg to="" isActive={isTabActive('/')} img={bgimg} onClick={toggleMenu} />
+        </div>
+        <div className="flex flex-row text-white text-3xl font-semibold">
           <div className="lg:hidden cursor-pointer" onClick={toggleMenu}>
             <div className={`bar ${isMenuOpen ? 'bar-open' : ''}`}></div>
             <div className={`bar ${isMenuOpen ? 'bar-open' : ''}`}></div>
             <div className={`bar ${isMenuOpen ? 'bar-open' : ''}`}></div>
           </div>
-          <div className={`lg:flex ${isMenuOpen ? 'flex' : 'hidden'} flex-row mt-4 lg:mt-0`}>
+          <div className={`lg:flex ${isMenuOpen ? 'flex' : 'hidden'} flex-row mt-4 lg:mt-0 mb-2 space-x-4 text-base`}>
             <NavItem to="/portal" isActive={isTabActive('/portal')} text="Questions" onClick={toggleMenu} />
-            <div className="mx-4"></div>
             <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" onClick={toggleMenu} />
-          </div>
+            <NavItem to="/profile" isActive={isTabActive('/profile')} text="Profile" onClick={toggleMenu} />
+            <NavItem to="/logout" isActive={isTabActive('/logout')} text="Logout" onClick={toggleMenu} />
+</div>
         </div>
       </nav>
     </div>
