@@ -7,7 +7,7 @@ import Footer from '../common/components/Footer';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
 
-const LandingPage: React.FC = () => {
+const LandingPage = () => {
     const navigate = useNavigate();
 
     const handleGetStarted = () => {

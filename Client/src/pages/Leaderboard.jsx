@@ -1,14 +1,10 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Navbar from '../common/components/Navbar';
-
-interface User {
-    name: string;
-    points: number;
-}
+import '../Styles/Home.css'
 
 function Leaderboard() {
-    const [leaderboard, setLeaderboard] = useState<User[]>([]);
+    const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
         // Fetch leaderboard data from the server
@@ -35,7 +31,7 @@ function Leaderboard() {
                 </thead>
                 <tbody>
                     {leaderboard.map((user, index) => (
-                        <tr key={index}>
+                        <tr key={index} className='names'>
                             <td className="text-white py-2 px-4 border-b">
                                 {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
                             </td>

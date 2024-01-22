@@ -6,7 +6,7 @@ import bgimg from '../../../public/logo.png';
 function Navbar() {
   const location = useLocation();
 
-  const isTabActive = (path: string) => {
+  const isTabActive = (path) => {
     return location.pathname === path;
   };
   return (
@@ -27,13 +27,7 @@ function Navbar() {
   );
 }
 
-interface NavItemProps {
-  to: string;
-  isActive: boolean;
-  text: string;
-}
-
-const NavItem: React.FC<NavItemProps> = ({ to, isActive, text }) => {
+const NavItem = ({ to, isActive, text }) => {
   return (
     <motion.div
       layout

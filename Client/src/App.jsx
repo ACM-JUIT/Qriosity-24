@@ -8,7 +8,7 @@ import Portal from './pages/Portal';
 import Profile from './pages/Profile';
 import SignUp from './pages/Signup';
 
-const App: React.FC = () => {
+const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
   const [hasCheckedScreenSize, setHasCheckedScreenSize] = useState(false);
 
@@ -55,7 +55,8 @@ const App: React.FC = () => {
             <Route path="/portal" element={<Portal />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/leaderboard" element={<Leaderboard />} />
+              <Route path="/profile" element={<Profile />} />
           </Routes>
         </Router>
       )}

@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
@@ -27,13 +29,17 @@ const wrongPassword = () => toast.error('Wrong password!', {
     theme: "colored",
 });
 
-interface LoginProps {
-  onLogin: (email: string) => void;
-}
+const Login = () => {
 
-const Login: React.FC<LoginProps> = ({ onLogin }) => {
+  const { isLoggedIn } = useSelector((state) => state.user);
+    useEffect(() => {
+      if (isLoggedIn) router.push("/portal");
+    });
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const navigate = useNavigate();
 
     const handleLogin = async () => {
         try {
@@ -50,7 +56,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             if (response.ok) {
                 succesfulLogin();
                 console.log('User logged in successfully:', data);
-                onLogin(email);
+                navigate('/portal')
             } else if(response.status === 401 && data.error === "Incorrect password") {
                 wrongPassword();
                 console.error('Error logging in:', data.error);
@@ -86,7 +92,7 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
             id="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300"
+            className="w-full mt-2 p-3 border border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300 text-black"
           />
         </div>
         <div className="mb-4">
