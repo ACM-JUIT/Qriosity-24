@@ -10,3 +10,20 @@ body {
 h1, h2, h3 {
     font-family: 'Raleway', sans-serif;
 }
+
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border: none;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
