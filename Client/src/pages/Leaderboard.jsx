@@ -2,13 +2,8 @@ import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Navbar from '../common/components/Navbar';
 
-interface User {
-    name: string;
-    points: number;
-}
-
 function Leaderboard() {
-    const [leaderboard, setLeaderboard] = useState<User[]>([]);
+    const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
         // Fetch leaderboard data from the server

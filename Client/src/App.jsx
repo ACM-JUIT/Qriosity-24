@@ -7,7 +7,7 @@ import Login from './pages/LoginPage';
 import Portal from './pages/Portal';
 import SignUp from './pages/Signup';
 
-const App: React.FC = () => {
+const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
   const [hasCheckedScreenSize, setHasCheckedScreenSize] = useState(false);
 

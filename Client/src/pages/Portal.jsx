@@ -6,7 +6,7 @@ import '../Styles/portal.css';
 import Navbar from '../common/components/Navbar';
 
 
-const Portal: React.FC = () => {
+const Portal = () => {
 
   // ------ QuestionsData ------
   // const [questionsData, setQuestionsData] = useState<{
@@ -73,13 +73,13 @@ const questionsData = [
   // let [cooldownTimerSeconds, setCooldownTimerSeconds] = useState(30);
   // let [cooldownFlag, setCooldownFlag] = useState(false);
   // let [submitFlag, setSubmitFlag] = useState(false);
-  // const nextButton = document.getElementById('nextButton') as HTMLButtonElement;
-  const submitButton = document.getElementById('submitButton') as HTMLButtonElement;
-  const hintButton = document.getElementById('hintButton') as HTMLButtonElement;
+  // const nextButton = document.getElementById('nextButton')
+  const submitButton = document.getElementById('submitButton')
+  const hintButton = document.getElementById('hintButton')
   // const commentBox = document.getElementById('commentBox');
   const questionStatementBox = document.getElementById('questionStatement');
   const questionTimerBox = document.getElementById('questionTimer');
-  const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
+  const userAnswerInput = document.getElementById('userAnswer');
   const [isTimer, setIsTimer] = useState(false);
 
 
@@ -171,7 +171,7 @@ const questionsData = [
   }
 
   const checkAnswer = () => {
-    const userAnswerInput = document.getElementById('userAnswer') as HTMLInputElement;
+    const userAnswerInput = document.getElementById('userAnswer');
     if (userAnswerInput) {
       const userAnswer = userAnswerInput.value.toLowerCase();
       const correctAnswer = questionsData[currentAnswerIndex].Answer.toLowerCase();
@@ -293,7 +293,7 @@ const questionsData = [
               <p id="questionStatement" className='text-2xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
             </div>
             <div className='Timer flex items-center justify-center ml-auto '>
-             <div id="questionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
+              <div id="questionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
                 {`${Math.floor(questionTimerSeconds / 60)} : ${questionTimerSeconds % 60}`}
               </div> 
             </div>

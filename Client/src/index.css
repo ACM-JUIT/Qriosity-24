@@ -2,28 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'neoris-regular';
+  src: url('./fonts/TTNeorisRegular.ttf');
+}
+
+@font-face {
+  font-family: 'neoris-semibold';
+  src: url('./fonts/TTNeorisDemiBold.ttf');
+}
+
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'neoris-regular';
     background-color: black;
 }
 
 h1, h2, h3 {
-    font-family: 'Raleway', sans-serif;
+    font-family: 'neoris-semibold';
 }
 
 ::-webkit-scrollbar {
-    width: 0.5em;
-  }
-  
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  
-  ::-webkit-scrollbar-thumb {
-    background-color: transparent;
-    border: none;
-  }
-  
-  ::-webkit-scrollbar-corner {
-    background: transparent;
-  }
+  width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border: none;
+}
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
