@@ -5,6 +5,7 @@ import LandingPage from './pages/LandingPage';
 import Leaderboard from './pages/Leaderboard';
 import Login from './pages/LoginPage';
 import Portal from './pages/Portal';
+import Profile from './pages/Profile';
 import SignUp from './pages/Signup';
 
 const App: React.FC = () => {
@@ -52,6 +53,7 @@ const App: React.FC = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/portal" element={<Portal />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
           </Routes>
