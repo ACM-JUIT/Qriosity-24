@@ -27,7 +27,11 @@ const wrongPassword = () => toast.error('Wrong password!', {
     theme: "colored",
 });
 
-const Login = () => {
+interface LoginProps {
+  onLogin: (email: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ onLogin }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -46,6 +50,7 @@ const Login = () => {
             if (response.ok) {
                 succesfulLogin();
                 console.log('User logged in successfully:', data);
+                onLogin(email);
             } else if(response.status === 401 && data.error === "Incorrect password") {
                 wrongPassword();
                 console.error('Error logging in:', data.error);

@@ -341,9 +341,6 @@ const questionsData = [
           </div>
           </div>
           
-          
-
-          
         </div>
       </div>
     </div>
