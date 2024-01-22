@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { useSelector } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
 import astro from '../../public/nick-brunner-LXspKUjsgH0-unsplash.jpg';
@@ -29,6 +30,12 @@ const wrongPassword = () => toast.error('Wrong password!', {
 });
 
 const Login = () => {
+
+  const { isLoggedIn } = useSelector((state) => state.user);
+    useEffect(() => {
+      if (isLoggedIn) router.push("/portal");
+    });
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
