@@ -10,8 +10,6 @@ const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
-const Question = require('./models/question');
-
 const verify = require('./middleware/verifyToken')
 
 require('dotenv').config();
@@ -26,6 +24,7 @@ const saltRounds = 10;
 const loginRoute = require('./routes/login')
 const leaderboardRoute = require('./routes/leaderboard')
 const refreshRoute = require('./routes/refresh')
+const answerRoute = require('./routes/questionVerify');
 
 app.use(cors());
 
@@ -80,6 +79,8 @@ const startServer = async () => {
         });
 
         app.use(refreshRoute);
+
+        app.use(answerRoute);
 
         app.use(verify)
         app.use(leaderboardRoute);
