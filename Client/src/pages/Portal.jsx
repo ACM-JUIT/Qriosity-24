@@ -323,6 +323,7 @@ const questionsData = [
                   id="userAnswer"
                   placeholder="Enter your answer"
                   className="border p-2 mt-4 mx-auto text-black rounded-lg"
+                  autoComplete='off'
                 />
               </motion.div>
             </div>
@@ -369,7 +370,7 @@ const questionsData = [
             </div>
           </div>
 </div>
-          <div className='flex flex-row justify-center mb-4 ml-8'>
+          {/* <div className='flex flex-row justify-center mb-4 ml-8'>
             <div className='bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-4 mt-3'>
               <p className='text-white text-xs flex justify-center'>Feeling Bored? Why not play this mini game</p>
             <iframe
@@ -380,7 +381,7 @@ const questionsData = [
             ></iframe>
           </div>
           </div>
-          
+           */}
           
 
           
