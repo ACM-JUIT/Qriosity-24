@@ -239,10 +239,6 @@ const questionsData = [
     setQuestionTimerSeconds(timeDifference);
   };
 
-  const handleToggle = () => {
-    setIsTimer((prevIsTimer) => !prevIsTimer);
-  };
-
   useEffect(() => {
     const intervalId = setInterval(updateQuestionTimer, 1000);
 
@@ -261,7 +257,7 @@ const questionsData = [
       <div className="quizContainer p-4 ">
 
         {/* Quiz Timer */}
-        <div id="quizTimer" className="fixed top-0 left-1/2 transform -translate-x-1/2 m-4 mb-8 z-[999]">
+        <div id="quizTimer" className=" mb-4 z-[999]">
           
           {countdownSeconds > 0 ? (
             <>
@@ -281,39 +277,25 @@ const questionsData = [
         {/* Question Div */}
         <div className="flex h-[1/2] flex-col sm:flex-row">
 
-        <motion.div
-  layout
-  initial={{ borderRadius: 10 }}
-  animate={{ width: isOpen ? 350 : 20, height: isOpen ? 'auto' : 20 }}
-  onClick={() => setIsOpen(!isOpen)}
-  className={`parent questionNumber border border-gray-300 p-4 m-4 rounded-lg cursor-pointer relative overflow-hidden`}
->
-  <AnimatePresence>
-    {isOpen ? (
-      <motion.div
-        layout
-        className='child'
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        <h1 className='tracking-wider max-w-max mx-auto mb-4 text-white'> Question Numbers </h1>
+
+      <div className = "questionNumber p-4 rounded-xl">
+        <h1 className='tracking-wider max-w-max mx-auto mb-4 text-white text-base'> Question Numbers </h1>
         <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
           {Array.from({ length: currentQuestionIndex+1 }, (_, index) => (
             <li key={index+1 }>{index+1 }</li>
           ))}
         </ul>
-      </motion.div>
-    ) : null}
-  </AnimatePresence>
-  {!isOpen && <div className="dot bg-green-500 w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>}
-</motion.div>
-
+      </div>
           
           <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
             <div className='questionAnswer ml-4'>
-            <div className="questions p-4 m-4 text-white">
+            <div className="questions p-4 mx-auto text-white">
               <p id="questionStatement" className='text-2xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
+            </div>
+            <div className='Timer flex items-center justify-center ml-auto '>
+             <div id="questionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
+                {`${Math.floor(questionTimerSeconds / 60)} : ${questionTimerSeconds % 60}`}
+              </div> 
             </div>
               <motion.div
                 layout
@@ -326,47 +308,27 @@ const questionsData = [
                 />
               </motion.div>
             </div>
-            
-      <div 
-        onClick={handleToggle}
-        className='Timer flex items-center justify-center p-2 mb-4 mx-auto '
-        >
-        {isTimer ? (
-          <motion.div>
-            <div id="questionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
-              {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' minutes ' : ''}${questionTimerSeconds % 60} seconds`}
-            </div>
-          </motion.div>
-        ) : (
-          <motion.div>
-            <div id="showQuestionTimer" className="text-wrap text-sm text-white flex items-center justify-center">
-              Show Timer 
-            </div>
-          </motion.div>
-        )}  
-      </div>
-            <div className='flex items-center justify-center p-2 mb-4 mx-auto '>
+          
+            <div className='flex items-center justify-center p-2 mb-4 mx-auto  '>
               <motion.button
                 id="hintButton"
                 onClick={displayHint}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20"
+                className="bg-blue-500 text-white rounded-md btn hover:bg-blue-700 hover:darken-2"
               >
                 Hint
               </motion.button>
               <motion.button
                 id="submitButton"
                 onClick={checkAnswer}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md "
+                className="bg-green-500 text-white rounded-md btn hover:bg-green-700 hover:darken-2 "
               >
                 Submit
               </motion.button>
             </div>
           </div>
-</div>
+        </div>
           <div className='flex flex-row justify-center mb-4 ml-8'>
             <div className='bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-4 mt-3'>
               <p className='text-white text-xs flex justify-center'>Feeling Bored? Why not play this mini game</p>

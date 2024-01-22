@@ -19,7 +19,7 @@ function Navbar() {
           <div className='mr-6'></div>
           <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" />
           <div className='mr-6'></div>
-            <NavItem to="#" isActive={isTabActive('')} text="Profile" />
+          <NavItem to="/profile" isActive={isTabActive('/profile')} text="Profile" />
 
         </div>
       </nav>
