@@ -264,7 +264,7 @@ const questionsData = [
       <div className="quizContainer p-4 ">
 
         {/* Quiz Timer */}
-        <div id="quizTimer" className="fixed top-0 right-0 m-4 mb-8 ">
+        <div id="quizTimer" className="fixed top-30 right-0 m-4 mb-8 ">
           {countdownSeconds > 0 ? (
             <>
               <p className="info"> Time remaining </p>
@@ -285,10 +285,10 @@ const questionsData = [
 
         <motion.div
   layout
-  initial={{ borderRadius: 50 }}
-  animate={{ width: isOpen ? 350 : 30, height: isOpen ? 'auto' : 30 }}
+  initial={{ borderRadius: 10 }}
+  animate={{ width: isOpen ? 350 : 20, height: isOpen ? 'auto' : 20 }}
   onClick={() => setIsOpen(!isOpen)}
-  className={`parent questionNumber border border-gray-300 p-4 mb-4 rounded-lg cursor-pointer relative overflow-hidden`}
+  className={`parent questionNumber border border-gray-300 p-4 m-4 rounded-lg cursor-pointer relative overflow-hidden`}
 >
   <AnimatePresence>
     {isOpen ? (
@@ -351,9 +351,9 @@ const questionsData = [
               <motion.button
                 id="hintButton"
                 onClick={displayHint}
-                whileHover={{ scale: 1.1, backgroundColor: 'yellow', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md"
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20"
               >
                 Hint
               </motion.button>
@@ -362,14 +362,21 @@ const questionsData = [
                 onClick={checkAnswer}
                 whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md"
+                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md "
               >
                 Submit
               </motion.button>
             </div>
-
           </div>
-
+          {/* <div className=''>
+          <iframe
+            style={{ width: '50%', height: '200px', overflow: 'hidden' }}
+            title="Chess Embed"
+            src="https://playpager.com/embed/chess/index.html">
+            
+            </iframe>
+          </div> */}
+          
         </div>
       </div>
     </div>
