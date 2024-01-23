@@ -313,11 +313,11 @@ const questionsData = [
           <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
             <div className='questionAnswer ml-4'>
             <div className="questions p-4 m-4 text-white">
-              <p id="questionStatement" className='text-2xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
+              <p id="questionStatement" className='text-3xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
             </div>
               <motion.div
                 layout
-                className="flex justify-center mb-4 p-1  w-fit mx-auto">
+                className="flex text-2xl justify-center mb-4 p-1  w-fit mx-auto">
                 <input
                   type="text"
                   id="userAnswer"
@@ -335,9 +335,9 @@ const questionsData = [
         {isTimer ? (
                   <motion.div
                     id="questionTimer"
-                    className="m-4 text-sm text-white flex flex-auto items-center justify-center">
+                    className="m-4 text-sm text-white text-xl flex flex-auto items-center justify-center">
                     <div >
-                    {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' M ' : ''}${questionTimerSeconds % 60} S`}
+                    {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' M ' : ''} : ${questionTimerSeconds % 60} S`}
                     </div>
           </motion.div>
         ) : (

@@ -32,9 +32,9 @@ const wrongPassword = () => toast.error('Wrong password!', {
 const Login = ({ onLogin }) => {
 
   const { isLoggedIn } = useSelector((state) => state.user);
-    useEffect(() => {
+  useEffect(() => {
       if (isLoggedIn) router.push("/portal");
-    });
+  }, [isLoggedIn]);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -55,8 +55,8 @@ const Login = ({ onLogin }) => {
 
             if (response.ok) {
                 succesfulLogin();
-                console.log('User logged in successfully:', data);
-                onLogin(email);
+                // console.log('User logged in successfully:', data);
+                // onLogin(email);
                 navigate('/portal')
             } else if(response.status === 401 && data.error === "Incorrect password") {
                 wrongPassword();
