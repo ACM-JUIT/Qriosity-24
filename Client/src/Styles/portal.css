@@ -55,6 +55,8 @@
     background-color: var(--blue);
     cursor: pointer;
     outline: none;
+}
+.displayQuestionNumbers li:nth-last-child(2) :hover{
     animation: rotate 3s linear infinite; 
 }
 .displayQuestionNumbers li:last-child {
