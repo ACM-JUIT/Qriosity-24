@@ -11,6 +11,9 @@ function Leaderboard() {
             try {                
                 const response = await fetch('http://localhost:3500/leaderboard', {
                     method: 'GET',
+                    headers: {
+                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWE4ZThkMTkxOTg3NDJiMWIxOWY0NjciLCJlbWFpbCI6IjIyMTAzMDM2MEBqdWl0c29sYW4uaW4iLCJpYXQiOjE3MDYwMTUzMTQsImV4cCI6MTcwNjAxNjIxNH0.qI4h0sDU9vPJSpmZ4HgnblNtF5YDRw0RUjsRoWQ-aGQ'
+                    },
                 });
 
                 console.log(response)

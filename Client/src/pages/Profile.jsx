@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import Login from './LoginPage';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
   const [userData, setUserData] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const userResponse = await fetch(`/api/user?email=${Login.email}`);
         const userData = await userResponse.json();
+        console.log(userResponse);
+        console.log(userData);
         setUserData(userData);
       } catch (error) {
         console.error('Error fetching user data:', error);
@@ -29,7 +34,7 @@ const Profile = () => {
   };
 
   const login = () => {
-    // Redirect to login page
+    navigate('/login')
     console.log('');
   };
 
