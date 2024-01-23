@@ -28,13 +28,18 @@ const Profile = () => {
     console.log('User logged out');
   };
 
+  const login = () => {
+    // Redirect to login page
+    console.log('');
+  };
+
   return (
     <div className="profile Container bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
       <Navbar />
-      <div className='userData'>
-      {userData ? (
-        <>
-          <h1>Welcome, {userData.username}!!</h1>
+      <div className='userData bg-white rounded-md m-10 p-4 flex flex-col items-center'>
+        {userData ? (
+          <>
+            <h1 className="text-2xl font-bold mb-2">Welcome, {userData.username}!!</h1>
             <p>
               <span className="font-bold">Name:</span> {userData.name}
             </p>
@@ -44,12 +49,23 @@ const Profile = () => {
             <p>
               <span className="font-bold">Points:</span> {userData.points}
             </p>
+            <button
+              className='mt-4 p-2 bg-red-500 text-white rounded-md' 
+              onClick={logout}>
+                Logout
+            </button>
           </>
         ) : (
-          <p>User data not found.</p>
+          <>
+            <p className="font-bold" >User data not found!!</p>
+            <button
+              className='mt-4 p-2 bg-green-500 text-white rounded-md' 
+              onClick={login}>
+                Login
+            </button>
+          </> 
         )}
-    </div>
-    <button onClick={logout}>Logout</button>
+      </div>
   </div>
   );
 }
