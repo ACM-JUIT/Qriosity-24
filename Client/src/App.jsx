@@ -7,6 +7,8 @@ import Login from './pages/LoginPage';
 import Portal from './pages/Portal';
 import Profile from './pages/Profile';
 import SignUp from './pages/Signup';
+import AboutUs from "./pages/AboutUs";
+import Rules from "./pages/Rules";
 
 const App = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 500);
@@ -55,8 +57,10 @@ const App = () => {
             <Route path="/portal" element={<Portal />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/signup" element={<SignUp />} />
-              <Route path="/leaderboard" element={<Leaderboard />} />
-              <Route path="/profile" element={<Profile />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path='/rules' element={<Rules/>} />
+            <Route path='/aboutus' element={<AboutUs/>} />
           </Routes>
         </Router>
       )}

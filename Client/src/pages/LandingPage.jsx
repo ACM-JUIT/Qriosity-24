@@ -6,6 +6,7 @@ import styles from '../Styles/Landing.module.scss';
 import Footer from '../common/components/Footer';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
+import LandingNavbar from '../common/components/LandingNavbar';
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -22,6 +23,7 @@ const LandingPage = () => {
     return (
         <>
         <div className={styles.main}>
+            <LandingNavbar />
             <motion.div
                 className={styles.mask}
                 animate={{
