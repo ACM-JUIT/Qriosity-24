@@ -7,11 +7,31 @@ function Leaderboard() {
     const [leaderboard, setLeaderboard] = useState([]);
 
     useEffect(() => {
-        // Fetch leaderboard data from the server
-        fetch('http://localhost:3500/leaderboard')
-            .then(response => response.json())
-            .then(data => setLeaderboard(data))
-            .catch(error => console.error('Error fetching leaderboard:', error));
+        const fetchData = async () => {
+            try {                
+                const response = await fetch('http://localhost:3500/leaderboard', {
+                    method: 'GET',
+                });
+
+                console.log(response)
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch leaderboard. Status: ${response.status}`);
+                }
+
+                const data = await response.json();
+
+                if (Array.isArray(data)) {
+                    setLeaderboard(data);
+                } else {
+                    console.error('Invalid data format:', data);
+                }
+            } catch (error) {
+                console.error('Error fetching leaderboard:', error);
+            }
+        };
+
+        fetchData();
     }, []);
 
     return (

@@ -107,7 +107,7 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );
 .Timer {
     cursor: pointer;
     /* padding: 0.5rem; */
-    width: 6.5rem;
+    width: 8.5rem;
     height: 2rem;
     background: rgba(224, 255, 194, 0.25);
     box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );

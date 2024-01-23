@@ -21,6 +21,10 @@ const userSchema = new mongoose.Schema({
     {
         type: [String],
     },
+    accessToken:
+    {
+        type: [String],
+    },
 });
 
 const Users = mongoose.model('Users', userSchema);
