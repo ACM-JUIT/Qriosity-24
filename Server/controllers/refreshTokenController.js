@@ -3,11 +3,11 @@ const User = require('../models/user');
 
 const refreshTokenController = async (req, res) => {
     try {
-        const cookies = req.cookies;
-        console.log('Received refresh token request:', cookies.refresh_token);
-        if (!cookies?.refresh_token) return res.sendStatus(401);
+        const cookie = req.cookies.refresh_token;
         
-        const refreshToken = cookies.refresh_token;
+        console.log('Received refresh token request:', cookie);
+        
+        const refreshToken = cookie;
         console.log(refreshToken);
 
         const foundUser = await User.findOne({ refreshToken }).exec();

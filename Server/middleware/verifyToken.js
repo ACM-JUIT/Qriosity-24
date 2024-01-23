@@ -2,9 +2,11 @@ const jwt = require('jsonwebtoken');
 
 const verifyToken = async (req, res, next) => {
     const authHeader = req.headers.authorization || req.headers.Authorization;
-    if (!authHeader?.startsWith('Bearer ')) return res.sendStatus(401);
+    console.log("Auth header:", authHeader)
+    if (!authHeader?.startsWith('Bearer ')) return res.status(500).json({ error: "Internal Server Error" });
 
     const token = authHeader.split(' ')[1];
+    console.log(token)
 
     jwt.verify(
         token,

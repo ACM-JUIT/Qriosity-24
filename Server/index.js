@@ -26,7 +26,10 @@ const leaderboardRoute = require('./routes/leaderboard')
 const refreshRoute = require('./routes/refresh')
 const answerRoute = require('./routes/questionVerify');
 
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}));
 
 const startServer = async () => {
     try {
@@ -81,11 +84,10 @@ const startServer = async () => {
         app.use(refreshRoute);
 
         app.use(answerRoute);
-        
         app.use(leaderboardRoute);
 
         app.use(verify)
-
+        
         app.listen(port, () => console.log(`Server started at ${port}...`));
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
