@@ -40,7 +40,7 @@ function Leaderboard() {
     });
 
     return (
-        <div className='leaderboard-container bg-cover bg-center min-h-screen p-4' style={{backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
+        <div className='leaderboard-container bg-cover bg-center min-h-screen p-4' style={{backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")'}}>
             <Navbar />
             <AnimatePresence mode='wait'>
             <h2 className="text-3xl font-semibold text-white mb-4 mt-8">Chart</h2>

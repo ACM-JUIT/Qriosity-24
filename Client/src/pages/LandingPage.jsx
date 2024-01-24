@@ -1,12 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from '../Styles/Landing.module.scss';
-import Footer from '../common/components/Footer';
+import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
-import LandingNavbar from '../common/components/LandingNavbar';
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -40,7 +39,7 @@ const LandingPage = () => {
                     onMouseLeave={() => setisHovered(false)}
                     className='p-4'
                 >
-                    Embark on an intellectual journey where <span className='text-green-700'>every click is a clue</span> and every search takes you closer to victory. Think you've got what it takes? Dive into the cerebral adventure now!
+                    Embark on an intellectual journey where <span className='text-green-700'>every click is a clue</span> and every search takes you closer to victory. Think you have got what it takes? Dive into the cerebral adventure now!
                 </p>
                 <motion.button
                 onMouseEnter={() => setisHovered(true)}
@@ -61,7 +60,6 @@ const LandingPage = () => {
                 </p>
             </div>
             </div>
-            <Footer/>
             </>
     );
 };
