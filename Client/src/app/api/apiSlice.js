@@ -7,7 +7,7 @@ const baseQuery = fetchBaseQuery({
     prepareHeaders: (headers, { getState }) => {
         const token = getState().userSlice.access_token;
         if (token) {
-            headers.set('authorization', `Bearer ${token}`);
+            headers.set('Authorization', `Bearer ${token}`);
         }
         return headers;
     }
@@ -33,5 +33,15 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 
 export const apiSlice = createApi({
     baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({})
+    endpoints: builder => ({
+        login: builder.mutation({
+            query: credentials => ({
+                url: "/login",
+                method: "POST",
+                body: { ...credentials }
+            })
+        }),
+    })
 })
+
+export const { useLoginMutation } = apiSlice;

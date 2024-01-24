@@ -19,12 +19,8 @@ const Profile = () => {
 
   const logout = () => {
     dispatch(signOut)
-    console.log('User logged out');
-  };
-
-  const login = () => {
     navigate('/login')
-    console.log('');
+    console.log('User logged out');
   };
 
   return (
