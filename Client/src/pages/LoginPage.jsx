@@ -71,9 +71,9 @@ const Login = ({ onLogin }) => {
     };
 
     return (
-        
+        <div className='' style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
+        < LandingNavbar/>
         <div className="flex items-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
-          < LandingNavbar/>
             <div className=" bg-gradient-to-r from-rose-100 to-teal-100 rounded-lg h-screen w-screen m-8 flex opacity-100">
             <img src={astro} className='h-100 rounded-lg m-1 align-items opacity-100' alt="Astronaut"  />
     <motion.div
@@ -123,6 +123,7 @@ const Login = ({ onLogin }) => {
     </div>
     </motion.div>
   </div>
+</div>
 </div>
 
         
