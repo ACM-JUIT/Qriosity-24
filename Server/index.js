@@ -86,10 +86,9 @@ const startServer = async () => {
 
         app.use(answerRoute);
 
-        
         app.use(profileRoute);
 
-        app.use(verify)
+        // app.use(verify)
         app.use(leaderboardRoute);
         
         app.listen(port, () => console.log(`Server started at ${port}...`));

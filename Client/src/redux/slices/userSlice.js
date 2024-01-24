@@ -20,7 +20,13 @@ const userSlice = createSlice({
     refreshUser: (state, action) => {
       state.access_token = action.payload.access_token;
     },
-    signOut: () => initialState
+    signOut: () => 
+    {
+      state.user = {};
+      state.refresh_token = null;
+      state.access_token = null;
+      state.isLoggedIn = false;
+    }
   }
 });
 
