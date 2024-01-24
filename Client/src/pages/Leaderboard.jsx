@@ -2,21 +2,23 @@ import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css'
+import { useSelector } from 'react-redux';
+import { selectCurrentToken } from '../redux/slices/userSlice';
 
 function Leaderboard() {
     const [leaderboard, setLeaderboard] = useState([]);
 
+    const accessToken = useSelector(selectCurrentToken);
+
     useEffect(() => {
         const fetchData = async () => {
-            try {                
+            try {
                 const response = await fetch('http://localhost:3500/leaderboard', {
                     method: 'GET',
                     headers: {
-                        'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2NWE4ZThkMTkxOTg3NDJiMWIxOWY0NjciLCJlbWFpbCI6IjIyMTAzMDM2MEBqdWl0c29sYW4uaW4iLCJpYXQiOjE3MDYwMTUzMTQsImV4cCI6MTcwNjAxNjIxNH0.qI4h0sDU9vPJSpmZ4HgnblNtF5YDRw0RUjsRoWQ-aGQ'
+                        'Authorization': `Bearer ${accessToken}`
                     },
                 });
-
-                console.log(response)
                 
                 if (!response.ok) {
                     throw new Error(`Failed to fetch leaderboard. Status: ${response.status}`);

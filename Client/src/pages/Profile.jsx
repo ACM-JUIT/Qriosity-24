@@ -1,58 +1,43 @@
-import React, { useState, useEffect } from 'react';
-import Login from './LoginPage';
+import React, { useEffect } from 'react';
 import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
 import { useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectCurrentUser, signOut } from '../redux/slices/userSlice';
+import { fetchProfile } from '../thunks/profileThunk';
 
 const Profile = () => {
-  const [userData, setUserData] = useState(null);
-
   const navigate = useNavigate();
 
+  const dispatch = useDispatch();
+
+  const currentUser = useSelector(selectCurrentUser);
+
   useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const userResponse = await fetch(`/api/user?email=${Login.email}`);
-        const userData = await userResponse.json();
-        console.log(userResponse);
-        console.log(userData);
-        setUserData(userData);
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    if (Login.email) {
-      fetchUserData();
-    }
-  }, [Login.email]);
-
+    dispatch(fetchProfile());
+  }, [dispatch]);
 
   const logout = () => {
-    // logic 
-    console.log('User logged out');
-  };
-
-  const login = () => {
+    dispatch(signOut)
     navigate('/login')
-    console.log('');
+    console.log('User logged out');
   };
 
   return (
     <div className="profile Container bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
       <Navbar />
       <div className='userData bg-white rounded-md m-10 p-4 flex flex-col items-center'>
-        {userData ? (
+        {currentUser ? (
           <>
-            <h1 className="text-2xl font-bold mb-2">Welcome, {userData.username}!!</h1>
+            <h1 className="text-2xl font-bold mb-2">Welcome {currentUser.user.name}!!</h1>
             <p>
-              <span className="font-bold">Name:</span> {userData.name}
+              <span className="font-bold">Name:</span> {currentUser.user.name}
             </p>
             <p>
-              <span className="font-bold">Email:</span> {userData.email}
+              <span className="font-bold">Email:</span> {currentUser.user.email}
             </p>
             <p>
-              <span className="font-bold">Points:</span> {userData.points}
+              <span className="font-bold">Points:</span> {currentUser.user.points}
             </p>
             <button
               className='mt-4 p-2 bg-red-500 text-white rounded-md' 

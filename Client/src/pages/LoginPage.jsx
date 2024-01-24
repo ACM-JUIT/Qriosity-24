@@ -6,7 +6,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
 import astro from '../../public/nick-brunner-LXspKUjsgH0-unsplash.jpg';
-import LandingNavbar from '../common/components/LandingNavbar';
 
 const succesfulLogin = () => toast.success('Login successful!', {
     position: "top-right",
@@ -30,40 +29,41 @@ const wrongPassword = () => toast.error('Wrong password!', {
     theme: "colored",
 });
 
-const Login = ({ onLogin }) => {
+const Login = () => {
 
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const [login] = useLoginMutation();
+
+  const { isLoggedIn } = useSelector((state) => state.userSlice);
   useEffect(() => {
-      if (isLoggedIn) router.push("/portal");
+      if(isLoggedIn) {
+        navigate("/leaderboard");
+      }
   }, [isLoggedIn]);
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const navigate = useNavigate();
-
     const handleLogin = async () => {
         try {
-            const response = await fetch('http://localhost:3500/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
-            });
+          const response = await login({ email, password }).unwrap();
 
-            const data = await response.json();
+            if (response) {
 
-            if (response.ok) {
-                succesfulLogin();
-                // console.log('User logged in successfully:', data);
-                // onLogin(email);
+                succesfulLogin(); //toast
+                dispatch(signIn(response))
+                console.log('Checking for response', response)
                 navigate('/portal')
-            } else if(response.status === 401 && data.error === "Incorrect password") {
-                wrongPassword();
-                console.error('Error logging in:', data.error);
+
+            } else if(response.status === 401 && response.error === "Incorrect password") {
+                wrongPassword(); //toast
+                console.error('Error logging in:', response.status, response.error);
+                console.log(response)
             } else {
-                console.error('Error logging in:', data.error);
+                console.error('Error logging in:', response.status, response.error);
+                console.log(response)
             }
         } catch (error) {
             console.error('Error during login:', error);
@@ -71,8 +71,6 @@ const Login = ({ onLogin }) => {
     };
 
     return (
-        <div className='' style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
-        < LandingNavbar/>
         <div className="flex items-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
             <div className=" bg-gradient-to-r from-rose-100 to-teal-100 rounded-lg h-screen w-screen m-8 flex opacity-100">
             <img src={astro} className='h-100 rounded-lg m-1 align-items opacity-100' alt="Astronaut"  />
@@ -123,7 +121,6 @@ const Login = ({ onLogin }) => {
     </div>
     </motion.div>
   </div>
-</div>
 </div>
 
         

@@ -3,9 +3,14 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, REGISTER, PURGE, PERSIS
 import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
 import userReducer from './slices/userSlice';
+import profileReducer from './slices/profileSlice'
+
+import { apiSlice } from '../app/api/apiSlice'
 
 const rootReducer = combineReducers({
-  user: userReducer
+  userSlice: userReducer,
+  profile: profileReducer,
+  [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
 const persistConfig = {
@@ -21,7 +26,7 @@ export const store = configureStore({
     serializableCheck: {
       ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
     }
-  }).concat(thunk)
+  }).concat(thunk, apiSlice.middleware)
 });
 
 export const persistor = persistStore(store);
