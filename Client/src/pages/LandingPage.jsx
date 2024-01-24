@@ -38,8 +38,9 @@ const LandingPage = () => {
                 <p
                     onMouseEnter={() => setisHovered(true)}
                     onMouseLeave={() => setisHovered(false)}
+                    className='p-4'
                 >
-                    Embark on an intellectual journey where <span>every click is a clue</span> and every search takes you closer to victory. Think you've got what it takes? Dive into the cerebral adventure now!
+                    Embark on an intellectual journey where <span className='text-green-700'>every click is a clue</span> and every search takes you closer to victory. Think you've got what it takes? Dive into the cerebral adventure now!
                 </p>
                 <motion.button
                 onMouseEnter={() => setisHovered(true)}
@@ -55,8 +56,8 @@ const LandingPage = () => {
             </motion.button>
             </motion.div>
             <div className={styles.body}>
-                <p>
-                Unlock the Power of Your Mind: Join the <span>Qriosity</span> A mind-bending event where Google is your secret weapon and intelligence is your key to success. Are you ready to outsmart the challenge?
+                <p className='p-4'>
+                Unlock the Power of Your Mind: Join the <span><b>Qriosity</b></span> A mind-bending event where Google is your secret weapon and intelligence is your key to success. Are you ready to outsmart the challenge?
                 </p>
             </div>
             </div>

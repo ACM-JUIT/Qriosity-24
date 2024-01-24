@@ -15,7 +15,7 @@ function LandingNavbar() {
         <a href="/"><img src={bgimg} alt="" className="h-20 pt-6 pl-3 h-20 pt-6 pl-3 flex-shrink-0" /></a>
         <div className="flex flex-row text-white text-3xl font-semibold mr-4 space-x-4">
           <NavItem to="/rules" isActive={isTabActive('/rules')} text="Rules" />
-          <NavItem to="/aboutus" isActive={isTabActive('/aboutus')} text="AboutUs" />
+          <NavItem to="/aboutus" isActive={isTabActive('/aboutus')} text="About Us" />
         </div>
       </nav>
     </div>
