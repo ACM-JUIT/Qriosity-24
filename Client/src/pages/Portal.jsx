@@ -256,7 +256,7 @@ const questionsData = [
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")' }}>
+    <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")' }}>
       <Navbar />  
       <div className="quizContainer p-4 ">
 
@@ -277,7 +277,6 @@ const questionsData = [
             </>
           )}
         </div>
-<div className=''>
         {/* Question Div */}
         <div className="flex h-100 flex-col sm:flex-row">
 
@@ -310,7 +309,7 @@ const questionsData = [
 </motion.div>
 
           
-<div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-1/2 w-1/2">
+<div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-full w-1/2 flex justify-center ">
   <div className='questionAnswer ml-4 flex flex-col items-center'>
     <div className="questions p-4 m-4 text-white">
       <p id="questionStatement" className='text-3xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
@@ -383,10 +382,6 @@ const questionsData = [
           </div>
           </div>
            */}
-          
-
-          
-        </div>
       </div>
     </div>
   );
