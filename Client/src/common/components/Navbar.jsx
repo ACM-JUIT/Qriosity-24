@@ -13,14 +13,10 @@ function Navbar() {
     <div className="font-montserrat">
       <nav className="flex flex-row items-center justify-between">
         <img src={bgimg} alt="" className="h-20 pt-6 pl-3 h-20 pt-6 pl-3 flex-shrink-0" />
-        <div className="flex flex-row text-white text-xl font-semibold mr-4">
-          
+        <div className="flex flex-row text-white text-xl font-semibold mr-4 space-x-4">
           <NavItem to="/portal" isActive={isTabActive('/portal')} text="Questions" />
-          <div className='mr-6'></div>
           <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" />
-          <div className='mr-6'></div>
           <NavItem to="/profile" isActive={isTabActive('/profile')} text="Profile" />
-
         </div>
       </nav>
     </div>

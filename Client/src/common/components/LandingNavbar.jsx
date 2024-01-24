@@ -16,6 +16,8 @@ function LandingNavbar() {
         <div className="flex flex-row text-white text-3xl font-semibold mr-4 space-x-4">
           <NavItem to="/rules" isActive={isTabActive('/rules')} text="Rules" />
           <NavItem to="/aboutus" isActive={isTabActive('/aboutus')} text="AboutUs" />
+          <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" />
+          <NavItem to="/login" isActive={isTabActive('/login')} text="Login" />
         </div>
       </nav>
     </div>
