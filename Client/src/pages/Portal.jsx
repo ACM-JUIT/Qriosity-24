@@ -256,7 +256,7 @@ const questionsData = [
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className=" bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")' }}>
+    <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")' }}>
       <Navbar />  
       <div className="quizContainer p-4 ">
 
@@ -279,7 +279,7 @@ const questionsData = [
         </div>
 <div className=''>
         {/* Question Div */}
-        <div className="flex h-[1/2] flex-col sm:flex-row">
+        <div className="flex h-100 flex-col sm:flex-row">
 
         <motion.div
   layout
@@ -310,65 +310,66 @@ const questionsData = [
 </motion.div>
 
           
-          <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl ">
-            <div className='questionAnswer ml-4'>
-            <div className="questions p-4 m-4 text-white">
-              <p id="questionStatement" className='text-3xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
-            </div>
-              <motion.div
-                layout
-                className="flex text-2xl justify-center mb-4 p-1  w-fit mx-auto">
-                <input
-                  type="text"
-                  id="userAnswer"
-                  placeholder="Enter your answer"
-                  className="border p-2 mt-4 mx-auto text-black rounded-lg"
-                  autoComplete='off'
-                />
-              </motion.div>
-            </div>
-            
-      <div 
-        onClick={handleToggle}
-        className='Timer flex items-center justify-center p-2 mb-4 mx-auto '
-        >
-        {isTimer ? (
-                  <motion.div
-                    id="questionTimer"
-                    className="m-4 text-sm text-white text-xl flex flex-auto items-center justify-center">
-                    <div >
-                    {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' M ' : ''} : ${questionTimerSeconds % 60} S`}
-                    </div>
-          </motion.div>
-        ) : (
-                    <motion.div
-                      id="showQuestionTimer"
-                      className="m-4 text-sm text-white flex items-center justify-center">
-              ⏳
-          </motion.div>
-        )}  
-      </div>
-            <div className='flex items-center justify-center p-2 mb-4 mx-auto '>
-              <motion.button
-                id="hintButton"
-                onClick={displayHint}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-                whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20"
-              >
-                Hint
-              </motion.button>
-              <motion.button
-                id="submitButton"
-                onClick={checkAnswer}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-                whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md "
-              >
-                Submit
-              </motion.button>
-            </div>
-          </div>
+<div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-1/2 w-1/2">
+  <div className='questionAnswer ml-4 flex flex-col items-center'>
+    <div className="questions p-4 m-4 text-white">
+      <p id="questionStatement" className='text-3xl font-bold'>{questionsData[currentQuestionIndex-1].QuestionStatement}</p>
+    </div>
+    <motion.div
+      layout
+      className="flex text-lg text-center justify-center mb-4 p-1 w-fit mx-auto">
+      <input
+        type="text"
+        id="userAnswer"
+        placeholder="Enter your answer"
+        className=" p-2 mt-4 mx-auto text-black rounded-lg"
+        autoComplete='off'
+      />
+    </motion.div>
+  </div>
+
+  <div 
+    onClick={handleToggle}
+    className='Timer flex items-center justify-center p-2 mb-4 mx-auto'>
+    {isTimer ? (
+      <motion.div
+        id="questionTimer"
+        className="m-4 text-sm text-white text-xl flex flex-auto items-center justify-center">
+        <div>
+          {`${Math.floor(questionTimerSeconds / 60) > 0 ? Math.floor(questionTimerSeconds / 60) + ' M ' : ''} : ${questionTimerSeconds % 60} S`}
+        </div>
+      </motion.div>
+    ) : (
+      <motion.div
+        id="showQuestionTimer"
+        className="m-4 text-sm text-white flex items-center justify-center">
+        ⏳
+      </motion.div>
+    )}
+  </div>
+  
+  <div className='flex items-center justify-center p-2 mb-4 mx-auto'>
+    <motion.button
+      id="hintButton"
+      onClick={displayHint}
+      whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+      whileTap={{ scale: 0.9 }}
+      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20"
+    >
+      Hint
+    </motion.button>
+    <motion.button
+      id="submitButton"
+      onClick={checkAnswer}
+      whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+      whileTap={{ scale: 0.9 }}
+      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md"
+    >
+      Submit
+    </motion.button>
+  </div>
+</div>
+
 </div>
           {/* <div className='flex flex-row justify-center mb-4 ml-8'>
             <div className='bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-10 border border-gray-100 p-4 mt-3'>
