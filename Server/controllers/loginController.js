@@ -5,9 +5,9 @@ const User = require('../models/user');
 
 const loginController = async (req, res) => {
     try {
-        // const { email, password } = req.body;
-        const email = '221030360@juitsolan.in';
-        const password = 'animesh$123';
+        const { email, password } = req.body;
+        // const email = '221030360@juitsolan.in';
+        // const password = 'animesh$123';
 
         const existingUser = await User.findOne({ email });
 
@@ -48,8 +48,6 @@ const loginController = async (req, res) => {
 
                 res.cookie('access_token', accessToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 15 * 60 * 1000 });
                 res.cookie('refresh_token', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-
-
 
                 res.status(200).json({ msg: 'Login success', user: existingUser, access_token: accessToken, refresh_token: refreshToken });
             } else {

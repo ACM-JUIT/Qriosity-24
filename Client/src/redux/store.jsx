@@ -3,9 +3,11 @@ import { persistReducer, persistStore, FLUSH, REHYDRATE, REGISTER, PURGE, PERSIS
 import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
 import userReducer from './slices/userSlice';
+import profileReducer from './slices/profileSlice'
 
 const rootReducer = combineReducers({
-  user: userReducer
+  userSlice: userReducer,
+  profile: profileReducer
 });
 
 const persistConfig = {

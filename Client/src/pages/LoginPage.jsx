@@ -6,6 +6,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
 import astro from '../../public/nick-brunner-LXspKUjsgH0-unsplash.jpg';
+import { useDispatch } from 'react-redux';
+import { signIn } from '../redux/slices/userSlice'
 
 const succesfulLogin = () => toast.success('Login successful!', {
     position: "top-right",
@@ -29,9 +31,11 @@ const wrongPassword = () => toast.error('Wrong password!', {
     theme: "colored",
 });
 
-const Login = ({ onLogin }) => {
+const Login = () => {
 
-  const { isLoggedIn } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const { isLoggedIn } = useSelector((state) => state.userSlice);
   useEffect(() => {
       if (isLoggedIn) router.push("/portal");
   }, [isLoggedIn]);
@@ -55,7 +59,8 @@ const Login = ({ onLogin }) => {
 
             if (response.ok) {
                 succesfulLogin();
-                // console.log('User logged in successfully:', data);
+                dispatch(signIn(data))
+                console.log('User logged in successfully:', data);
                 // onLogin(email);
                 navigate('/portal')
             } else if(response.status === 401 && data.error === "Incorrect password") {

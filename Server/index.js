@@ -25,6 +25,7 @@ const loginRoute = require('./routes/login')
 const leaderboardRoute = require('./routes/leaderboard')
 const refreshRoute = require('./routes/refresh')
 const answerRoute = require('./routes/questionVerify');
+const profileRoute = require('./routes/profile')
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -84,6 +85,9 @@ const startServer = async () => {
         app.use(refreshRoute);
 
         app.use(answerRoute);
+
+        
+        app.use(profileRoute);
 
         app.use(verify)
         app.use(leaderboardRoute);
