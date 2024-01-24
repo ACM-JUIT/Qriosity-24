@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
 import astro from '../../public/nick-brunner-LXspKUjsgH0-unsplash.jpg';
+import LandingNavbar from '../common/components/LandingNavbar';
 
 const succesfulLogin = () => toast.success('Login successful!', {
     position: "top-right",
@@ -71,6 +72,8 @@ const Login = () => {
     };
 
     return (
+      <div className='' style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
+      <LandingNavbar/>
         <div className="flex items-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)' }}>
             <div className=" bg-gradient-to-r from-rose-100 to-teal-100 rounded-lg h-screen w-screen m-8 flex opacity-100">
             <img src={astro} className='h-100 rounded-lg m-1 align-items opacity-100' alt="Astronaut"  />
@@ -121,6 +124,7 @@ const Login = () => {
     </div>
     </motion.div>
   </div>
+</div>
 </div>
 
         
