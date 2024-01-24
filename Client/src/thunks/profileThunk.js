@@ -5,11 +5,11 @@ export const fetchProfile = () => async (dispatch) => {
         dispatch(fetchProfileStart());
 
         const response = await fetch('/api/profile', {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            //Authorization
-        },
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // Authorization
+            },
         });
 
         const data = await response.json();

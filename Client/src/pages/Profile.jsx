@@ -3,7 +3,7 @@ import Navbar from '../common/components/Navbar';
 import '../Styles/Home.css';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectCurrentUser, signOut } from '../redux/slices/userSlice';
+import { signOut, selectCurrentUser } from '../redux/slices/userSlice';
 import { fetchProfile } from '../thunks/profileThunk';
 
 const Profile = () => {
@@ -13,12 +13,14 @@ const Profile = () => {
 
   const currentUser = useSelector(selectCurrentUser);
 
+  console.log(currentUser.user)
+
   useEffect(() => {
     dispatch(fetchProfile());
   }, [dispatch]);
 
   const logout = () => {
-    dispatch(signOut)
+    dispatch(signOut())
     navigate('/login')
     console.log('User logged out');
   };
