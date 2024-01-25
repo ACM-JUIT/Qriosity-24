@@ -10,7 +10,7 @@ function Rules() {
         <ul className='rulesData leading-9 tracking-wide text-2xl list-decimal m-12'>
             <li>Register yourself on the QRIOSITY 4.0 website to access the questions using JUIT Solan Email ID only.</li>
             <li>Each question is a list of hints directing to a certain term or company or software, everything is related to the technical world. Internet is your comrade, go crazy.</li>
-            <li>6 hours will be allotted (starting at 4 PM, 04/02/2023) to complete the whole quiz.</li>
+            <li>6 hours will be allotted (starting at 4 PM, 04/02/2024) to complete the whole quiz.</li>
             <li>Answers are <b>NOT</b> case sensitive.</li>
             <li>Write your answer in the given box. If the answer is correct, you'll be allowed to move to the next question. If not correct, keep trying, infinite tries are there.</li>
             <li>If answer contain multiple words remove white space. For example, if the answer is “United Airlines”, it is to be submitted as “unitedairlines” only.</li>
