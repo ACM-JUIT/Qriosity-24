@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import pngimg from '../../public/logo-black.png';
+import LandingNavbar from '../common/components/LandingNavbar';
 import astro4 from '../../public/sam-williams-EHFXVkVe0gM-unsplash.jpg';
 import { useLoginMutation } from '../app/api/apiSlice';
 import { signIn } from '../redux/slices/userSlice';
@@ -73,7 +74,7 @@ const Login = () => {
     };
 
     return (
-        
+
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 font-sans shadow-lg bg-no-repeat bg-cover"
      style={{ backgroundImage: 'url("../../public/195750.jpg")' }}>
         <div className="bg-gradient-to-r from-rose-100 to-teal-100 rounded-lg h-3/4 w-3/4 flex justify-center items-center">
@@ -82,8 +83,6 @@ const Login = () => {
           <img src={astro4} className='object-cover h-full w-full rounded-lg m-1 align-items justify-end' alt="Astronaut" />
 
           </div>
-       
-          
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
@@ -131,6 +130,7 @@ const Login = () => {
     </div>
     </motion.div>
   </div>
+</div>
 </div>
 
         
