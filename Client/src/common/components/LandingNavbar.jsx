@@ -4,6 +4,7 @@ import { Link, useLocation } from 'react-router-dom';
 import bgimg from '../../../public/logo.png';
 
 function LandingNavbar() {
+
   const location = useLocation();
 
   const isTabActive = (path) => {
@@ -16,8 +17,8 @@ function LandingNavbar() {
         <div className="flex flex-row text-white text-3xl font-semibold mr-4 space-x-4">
           <NavItem to="/rules" isActive={isTabActive('/rules')} text="Rules" />
           <NavItem to="/aboutus" isActive={isTabActive('/aboutus')} text="About Us" />
-          <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" />
-          <NavItem to="/login" isActive={isTabActive('/login')} text="Login" />
+          {/* <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" /> */}
+          <NavItem to="/signup" isActive={isTabActive('/signup')} text="Signup" />
         </div>
       </nav>
     </div>
