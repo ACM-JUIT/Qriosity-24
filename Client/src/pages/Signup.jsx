@@ -82,13 +82,13 @@ const SignUp = () => {
                 setEmail('');
                 setPassword('');
                 setConfirmPassword('');
+                navigate('/login');
             } else {
                 if (response.status === 400 && data.error === "Passwords do not match") {
                     passwordNotMatching();
                     console.error('Error signing up:', data.error);
                     setPassword('');
                     setConfirmPassword('');
-                    navigate('/login');
                 } else if (response.status === 400 && data.error === "User already exists") {
                     userExistsError();
                     console.error('Error signing up:', data.error);
