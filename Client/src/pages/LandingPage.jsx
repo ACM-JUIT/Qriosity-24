@@ -10,6 +10,14 @@ import useMousePosition from '../utils/useMousePosition';
 const LandingPage = () => {
     const navigate = useNavigate();
 
+    const [loading, setLoading] = useState(true);
+    const spinner = document.getElementById("spinner");
+    if (spinner) {
+      setTimeout ( () => {
+        setLoading(false);
+      }, 2000);
+    }
+
     const handleGetStarted = () => {
         navigate('/login');
     };
@@ -21,6 +29,12 @@ const LandingPage = () => {
 
     return (
         <>
+        { 
+        loading ? (
+            <div className={styles.main}>
+                <div id="spinner"></div>
+            </div>
+        ) : (
         <div className={styles.main}>
             <LandingNavbar />
             <motion.div
@@ -60,7 +74,8 @@ const LandingPage = () => {
                 </p>
             </div>
             </div>
-            </>
+        )}
+        </>
     );
 };
 
