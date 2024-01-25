@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-    user: null,
+    user: {},
     loading: false,
     error: null,
 };
@@ -11,19 +11,20 @@ const profileSlice = createSlice({
     initialState,
     reducers: {
         fetchProfileStart: (state) => {
-        state.loading = true;
-        state.error = null;
+            state.loading = true;
+            state.error = null;
         },
         fetchProfileSuccess: (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
+            state.loading = false;
+            state.user = action.payload;
         },
         fetchProfileFailure: (state, action) => {
-        state.loading = false;
-        state.error = action.payload;
+            state.loading = false;
+            state.error = action.payload;
         },
     },
 });
 
+export const selectCurrentUser = (state) => state.profileSlice.user;
 export const { fetchProfileStart, fetchProfileSuccess, fetchProfileFailure } = profileSlice.actions;
 export default profileSlice.reducer;

@@ -9,7 +9,7 @@ import { apiSlice } from '../app/api/apiSlice'
 
 const rootReducer = combineReducers({
   userSlice: userReducer,
-  profile: profileReducer,
+  profileSlice: profileReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

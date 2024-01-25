@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import Navbar from '../common/components/Navbar';
-import '../Styles/Home.css'
 import { useSelector } from 'react-redux';
+import '../Styles/Home.css';
+import Navbar from '../common/components/Navbar';
 import { selectCurrentToken } from '../redux/slices/userSlice';
 
 function Leaderboard() {
@@ -37,10 +37,10 @@ function Leaderboard() {
         };
 
         fetchData();
-    }, []);
+    });
 
     return (
-        <div className='leaderboard-container bg-cover bg-center h-screen p-4' style={{backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
+        <div className='leaderboard-container bg-cover bg-center min-h-screen p-4' style={{backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")'}}>
             <Navbar />
             <AnimatePresence mode='wait'>
             <h2 className="text-3xl font-semibold text-white mb-4 mt-8">Chart</h2>
