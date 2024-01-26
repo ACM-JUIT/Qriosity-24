@@ -1,8 +1,31 @@
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
+import React, { useState, useEffect, useRef } from 'react';
 
 function Rules() {
+
+  const [loading, setLoading] = useState(true);
+  const spinnerRef = useRef(null);
+  useEffect(() => {
+    const spinner = spinnerRef.current;
+    if (spinner) {
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, []);
+
   return (
+    <>
+    {
+    loading ? (
+      <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
+      <div ref={spinnerRef} id="spinner" className="relative">
+          <l-quantum size="100" speed="2" color="white"></l-quantum>
+      </div>
+  </div>
+    ) : (
     <div className="rules bg-cover bg-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)', backgroundRepeat: 'repeat' }}>
       <LandingNavbar />
       <div className='rulesInfo bg-gray-100 bg-opacity-80 rounded-md m-10 p-4 flex flex-col'>
@@ -24,7 +47,9 @@ function Rules() {
         <h1 className='text-3xl font-bold m-4 mx-auto'> Happy Hunting!! </h1>
       </div>
     </div>
-  );
-}
+    )}
+    </>
+    );
+};
 
 export default Rules;
