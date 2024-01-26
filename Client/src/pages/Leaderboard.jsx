@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import '../Styles/Home.css';
 import Navbar from '../common/components/Navbar';
@@ -7,6 +7,18 @@ import { selectCurrentToken } from '../redux/slices/userSlice';
 
 function Leaderboard() {
     const [leaderboard, setLeaderboard] = useState([]);
+
+    const [loading, setLoading] = useState(true);
+    const spinnerRef = useRef(null);
+    useEffect(() => {
+      const spinner = spinnerRef.current;
+      if (spinner) {
+        const timeoutId = setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      }
+    }, []);
 
     const accessToken = useSelector(selectCurrentToken);
 
@@ -40,6 +52,17 @@ function Leaderboard() {
     });
 
     return (
+
+        <>
+        {
+        loading ? (
+            <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
+                <div ref={spinnerRef} id="spinner" className="relative">
+                    <l-quantum size="100" speed="2" color="white"></l-quantum>
+                </div>
+            </div>
+        ) : (
+
         <div className='leaderboard-container bg-cover bg-center min-h-screen p-4' style={{backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")'}}>
             <Navbar />
             <AnimatePresence mode='wait'>
@@ -69,8 +92,9 @@ function Leaderboard() {
                 </div>
                 </AnimatePresence>
             </div>
-            );
-            
-}
+    )}
+    </>
+    );
+};
 
 export default Leaderboard;
