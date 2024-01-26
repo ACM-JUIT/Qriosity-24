@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import backgroundVideo from '../../public/ezgif-3-def7973926.mp4';
 import styles from '../Styles/Landing.module.scss';
@@ -8,6 +8,10 @@ import Countdown from '../common/components/Countdown';
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
+
+// spiral
+import 'ldrs/quantum'
+
 
 const LandingPage = () => {
     const navigate = useNavigate();
@@ -19,12 +23,16 @@ const LandingPage = () => {
     };
 
     const [loading, setLoading] = useState(true);
-    const spinner = document.getElementById("spinner");
-    if (spinner) {
-      setTimeout ( () => {
-        setLoading(false);
-      }, 2000);
-    }
+    const spinnerRef = useRef(null);
+    useEffect(() => {
+      const spinner = spinnerRef.current;
+      if (spinner) {
+        const timeoutId = setTimeout(() => {
+          setLoading(false);
+        }, 1000);
+        return () => clearTimeout(timeoutId);
+      }
+    }, []);
 
     const handleGetStarted = () => {
         navigate('/login');
@@ -39,8 +47,10 @@ const LandingPage = () => {
         <>
         { 
         loading ? (
-            <div className={styles.main}>
-                <div id="spinner"></div>
+            <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
+                <div ref={spinnerRef} id="spinner" className="relative">
+                    <l-quantum size="100" speed="2" color="white"></l-quantum>
+                </div>
             </div>
         ) : (
         <div className={styles.main}>

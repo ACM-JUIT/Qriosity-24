@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 import { AnimatePresence, motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import '../Styles/Home.css';
 import '../Styles/portal.css';
 import Navbar from '../common/components/Navbar';
@@ -14,6 +14,18 @@ const Portal = () => {
   const [lastSubmissionTimestamp, setLastSubmissionTimestamp] = useState(Date.now());
   const [countdownSeconds, setCountdownSeconds] = useState(calculateRemainingTimeInSeconds());
   const [isTimer, setIsTimer] = useState(false);
+
+  const [loading, setLoading] = useState(true);
+  const spinnerRef = useRef(null);
+  useEffect(() => {
+    const spinner = spinnerRef.current;
+    if (spinner) {
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -131,6 +143,15 @@ const Portal = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
+    <>
+    {
+    loading ? (
+      <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
+      <div ref={spinnerRef} id="spinner" className="relative">
+          <l-quantum size="100" speed="2" color="white"></l-quantum>
+      </div>
+  </div>
+    ) : (
     <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")' }}>
       <Navbar />
       <div className="quizContainer p-4 ">
@@ -245,7 +266,9 @@ const Portal = () => {
         </div>
       </div>
     </div>
-  );
+    )}
+    </>
+    );
 };
 
 export default Portal;

@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
@@ -35,6 +35,18 @@ const wrongPassword = () => toast.error('Wrong password!', {
 const Login = () => {
 
   const dispatch = useDispatch();
+
+  const [loading, setLoading] = useState(true);
+  const spinnerRef = useRef(null);
+  useEffect(() => {
+    const spinner = spinnerRef.current;
+    if (spinner) {
+      const timeoutId = setTimeout(() => {
+        setLoading(false);
+      }, 1000);
+      return () => clearTimeout(timeoutId);
+    }
+  }, []);
 
   const navigate = useNavigate();
   const [login] = useLoginMutation();
@@ -78,6 +90,16 @@ const Login = () => {
     };
 
     return (
+
+      <>
+      {
+      loading ? (
+        <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
+        <div ref={spinnerRef} id="spinner" className="relative">
+            <l-quantum size="100" speed="2" color="white"></l-quantum>
+        </div>
+    </div>
+      ) : (
 
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-950 to-gray-900 font-sans shadow-lg bg-no-repeat bg-cover">
         <div className="bg-gray-100 h-3/4 w-3/4 my-16 px-1 flex justify-center items-center">
@@ -148,8 +170,8 @@ const Login = () => {
 
   </div>
 </div>
-
-        
+    )}
+    </>
     );
 };
 
