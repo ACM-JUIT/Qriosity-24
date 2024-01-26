@@ -28,8 +28,8 @@ function Rules() {
     ) : (
     <div className="rules bg-cover bg-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)', backgroundRepeat: 'repeat' }}>
       <LandingNavbar />
-      <div className='rulesInfo bg-gray-100 bg-opacity-80 rounded-md m-10 p-4 flex flex-col'>
-        <h1 className='text-3xl underline font-bold m-4 mx-auto'> Rules </h1>
+      <div className='rulesInfo m-4 h-full w-full bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-800 flex flex-col text-white flex flex-col'>
+        <h1 className='text-4xl font-bold m-4 mx-auto'> Rules </h1>
         <ul className='rulesData leading-9 tracking-wide text-2xl list-decimal m-12 p-4'>
             <li>Register yourself on the QRIOSITY 4.0 website to access the questions using JUIT Solan Email ID only.</li>
             <li>Each question is a list of hints directing to a certain term or company or software, everything is related to the technical world. Internet is your comrade, go crazy.</li>
