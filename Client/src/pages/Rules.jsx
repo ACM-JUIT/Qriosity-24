@@ -3,11 +3,11 @@ import LandingNavbar from '../common/components/LandingNavbar';
 
 function Rules() {
   return (
-    <div className="rules bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
+    <div className="rules bg-cover bg-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)', backgroundRepeat: 'repeat' }}>
       <LandingNavbar />
-      <div className='rulesInfo bg-gray-100 rounded-md m-10 p-4 flex flex-col'>
+      <div className='rulesInfo bg-gray-100 bg-opacity-80 rounded-md m-10 p-4 flex flex-col'>
         <h1 className='text-3xl underline font-bold m-4 mx-auto'> Rules </h1>
-        <ul className='rulesData leading-9 tracking-wide text-2xl list-decimal m-12'>
+        <ul className='rulesData leading-9 tracking-wide text-2xl list-decimal m-12 p-4'>
             <li>Register yourself on the QRIOSITY 4.0 website to access the questions using JUIT Solan Email ID only.</li>
             <li>Each question is a list of hints directing to a certain term or company or software, everything is related to the technical world. Internet is your comrade, go crazy.</li>
             <li>6 hours will be allotted (starting at 4 PM, 04/02/2024) to complete the whole quiz.</li>
