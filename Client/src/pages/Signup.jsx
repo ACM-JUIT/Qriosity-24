@@ -1,8 +1,10 @@
 import { useState } from 'react';
-
+import { motion } from 'framer-motion';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import pngimg from '../../public/logo-black.png';
+import astro4 from '../../public/sam-williams-EHFXVkVe0gM-unsplash.jpg';
 
 const passwordNotMatching = () => toast.error('Passwords do not match!!', {
     position: "top-right",
@@ -106,60 +108,84 @@ const SignUp = () => {
     };
 
     return (
-        <div className="flex items-center justify-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900">
-            <div className="bg-gray-700 text-white p-8 rounded-lg shadow-lg max-w-md transition-all duration-300">
-                <h2 className="text-3xl font-semibold mb-4">Sign Up</h2>
+        <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-950 to-gray-900 font-sans shadow-lg bg-no-repeat bg-cover">
+        <div className="bg-gray-100 h-3/4 w-3/4 my-16 px-1 flex justify-center items-center">
+
+            {/* Login Form */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.5 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.2 }}
+                className="md:w-1/2 px-4 border-3 py-0 mt-4"
+            >
+            <h2 className='text-2xl mb-4'> Qriosity </h2>
+            <img src={pngimg} className='h-32 mx-auto mt-0 md:order-2'/>
+            <h1 className="text-4xl font-semibold mb-4 mx-auto my-auto text-center text-gray-700">Welcome !</h1>
+            <h5 className='text-lg mx-auto text-center mb-12'>Please enter your details</h5>
+            <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
                 <form>
-                    <div className="mb-4">
-                        <label htmlFor="name" className="block text-gray-300">Name:</label>
+                    <div className="mb-4 px-6">
+                        <label htmlFor="name" className="block text-gray-700 text-xl font-semibold">Name:</label>
                         <input
                             type="text"
                             id="name"
                             value={name}
+                            placeholder='Enter you name'
                             onChange={(e) => setName(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-300">Email:</label>
+                    <div className="mb-4 px-6">
+                        <label htmlFor="email" className="block text-gray-700 text-xl font-semibold">Email:</label>
                         <input
                             type="email"
                             id="email"
                             value={email}
+                            placeholder='Enter you email'
                             onChange={(e) => setEmail(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="password" className="block text-gray-300">Password:</label>
+                    <div className="mb-4 px-6">
+                        <label htmlFor="password" className="block text-gray-700 text-xl font-semibold">Password:</label>
                         <input
                             type="password"
                             id="password"
                             value={password}
+                            placeholder='Enter you password'
                             onChange={(e) => setPassword(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
-                    <div className="mb-4">
-                        <label htmlFor="confirmPassword" className="block text-gray-300">Confirm Password:</label>
+                    <div className="mb-4 px-6">
+                        <label htmlFor="confirmPassword" className="block text-gray-700 text-xl font-semibold">Confirm Password:</label>
                         <input
                             type="password"
                             id="confirmPassword"
                             value={confirmPassword}
+                            placeholder='Enter you password again'
                             onChange={(e) => setConfirmPassword(e.target.value)}
                             className="w-full mt-2 p-3 border border-gray-500 rounded focus:outline-none text-black focus:border-blue-500 transition-all duration-300"
                         />
                     </div>
-                    <button
+                    <div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.9 }}              
                         type="button"
                         onClick={handleSignUp}
-                        className="bg-blue-500 hover:bg-blue-600 text-white p-3 rounded focus:outline-none focus:shadow-outline-blue transition-all duration-300"
+                        className="mx-auto my-8 w-24 bg-green-500 hover:bg-green-600 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300"
                     >
-                        Sign Up
-                    </button>
+                        <p className='text-sm font-bold'>Sign Up</p>
+                    </div>
                     <ToastContainer />
                 </form>
+                </div>
+        </motion.div>
+        {/* Image */}
+            <div className='h-1/2 w-1/2 overflow-hidden'>
+                <img src={astro4} className='object-cover w-full rounded-lg m-1 align-items justify-end' alt="Astronaut" />
             </div>
+        </div>
         </div>
     );
 };

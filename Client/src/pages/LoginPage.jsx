@@ -93,7 +93,6 @@ const Login = () => {
     <img src={pngimg} className='h-32 mx-auto mt-0 md:order-2'/>
     <h1 className="text-4xl font-semibold mb-4 mx-auto my-auto text-center text-gray-700">Welcome Back !</h1>
     <h5 className='text-lg mx-auto text-center mb-12'>Please enter your details</h5>
-    {/* <hr className='border-t border-gray-400 font-bold' /> */}
     <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
       <form>
         <div className="mb-4 px-6">
