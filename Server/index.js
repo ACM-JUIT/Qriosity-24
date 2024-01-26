@@ -5,6 +5,7 @@ const config = require('./config');
 const app = express();
 const cors = require("cors");
 const User = require('./models/user');
+const Question = require('./models/question');
 
 const cookieParser = require('cookie-parser');
 
@@ -87,6 +88,17 @@ const startServer = async () => {
         app.use(answerRoute);
 
         app.use(profileRoute);
+
+        app.get('/api/questions', async(req, res) => {
+            try {
+                const questions = await Question.find();
+                res.status(200).json({questions});
+            } catch (error) {
+                console.error('Error during fetching questions:', error);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        
+        })
 
         // app.use(verify)
         app.use(leaderboardRoute);
