@@ -73,62 +73,80 @@ const Login = () => {
         }
     };
 
+    const moveToSignUp = async () => {
+      navigate('/signup')
+    };
+
     return (
 
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-gray-800 to-gray-900 font-sans shadow-lg bg-no-repeat bg-cover"
-     style={{ backgroundImage: 'url("../../public/195750.jpg")' }}>
-        <div className="bg-gradient-to-r from-rose-100 to-teal-100 rounded-lg h-3/4 w-3/4 flex justify-center items-center">
-        <div className='h-100 w-80 overflow-hidden'>
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-r from-green-950 to-gray-900 font-sans shadow-lg bg-no-repeat bg-cover">
+        <div className="bg-gray-100 h-3/4 w-3/4 my-16 px-1 flex justify-center items-center">
 
-          <img src={astro4} className='object-cover h-full w-full rounded-lg m-1 align-items justify-end' alt="Astronaut" />
-
-          </div>
+    {/* Login Form */}
     <motion.div
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.2 }}
-      className="md:w-1/2 p-8 border-3 mx-auto my-auto"
+      className="md:w-1/2 px-4 border-3 py-0 mt-4"
                 >
+    <h2 className='text-2xl mb-4'> Qriosity </h2>
     <img src={pngimg} className='h-32 mx-auto mt-0 md:order-2'/>
-    <h1 className="text-4xl font-semibold mb-4 mx-auto my-auto">Log in</h1>
-    <h5 className='text-lg font-thin'>Enter your Email and password to proceed</h5>
-    <hr className='border-t border-gray-400 font-bold' />
-    <div className="mt-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
+    <h1 className="text-4xl font-semibold mb-4 mx-auto my-auto text-center text-gray-700">Welcome Back !</h1>
+    <h5 className='text-lg mx-auto text-center mb-12'>Please enter your details</h5>
+    {/* <hr className='border-t border-gray-400 font-bold' /> */}
+    <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
       <form>
-        <div className="mb-4 px-3">
-          <label htmlFor="email" className="block text-gray-700 text-xl">Email</label>
+        <div className="mb-4 px-6">
+          <label htmlFor="email" className="block text-gray-700 text-xl font-semibold">Email</label>
           <input
             type="email"
             id="email"
+            placeholder='Enter your email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full h-1/2 mt-1 p-2 border-gray-300 rounded-xl focus:outline-none focus:border-green-500 transition-all duration-300 text-black"
+            className="w-full h-1/2 mt-1 p-2 border border-gray-500 rounded-sm focus:outline-none focus:border-green-500 transition-all duration-300 text-black"
           />
         </div>
-        <div className="mb-4 px-3">
-          <label htmlFor="password" className="block text-gray-700 text-xl">Password</label>
+        <div className="mb-4 px-6">
+          <label htmlFor="password" className="block text-gray-700 text-xl font-semibold">Password</label>
           <input
             type="password"
             id="password"
+            placeholder='Enter your password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full h-1/2 mt-1 p-2 border border-gray-300 rounded-xl focus:outline-none text-black focus:border-green-500 transition-all duration-300"
+            className="w-full h-1/2 mt-1 p-2 border border-gray-500 rounded-sm focus:outline-none text-black focus:border-green-500 transition-all duration-300"
           />
         </div>
-        <motion.button
+        <div
          whileHover={{ scale: 1.1 }}
          whileTap={{ scale: 0.9 }}              
           type="button"
           onClick={handleLogin}
-          className=" mx-auto bg-green-500 hover:bg-green-600 text-white p-2 rounded-xl focus:outline-none focus:shadow-outline-green transition-all duration-300"
+          className="mx-auto w-24 bg-green-500 hover:bg-green-600 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300"
         >
-          <p className='text-sm'>Login</p>
-        </motion.button>
+          <p className='text-sm font-bold'>Login</p>
+        </div>
                             
         <ToastContainer />
       </form>
     </div>
+    <div className='signUpLink text-center flex flex-col items-center mt-12 mx-auto'>
+      <p className='text-xl'>Don't have an account? </p>
+      <p          
+        onClick={moveToSignUp}
+        className="text-xl font-semibold text-blue-800"
+      >
+        SignUp
+      </p>
+    </div>
     </motion.div>
+
+    {/* Login Page Image */}
+    <div className='h-1/2 w-1/2 overflow-hidden'>
+      <img src={astro4} className='object-cover w-full rounded-lg m-1 align-items justify-end' alt="Astronaut" />
+    </div>
+
   </div>
 </div>
 

@@ -5,14 +5,19 @@ $button-border-radius: 100px;
 
 .main {
   height: 100vh;
+  background-image: url("../../public/195750.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 
   .body, .mask {
-    height: 100vh;
+    height: 80vh;
     width: 100vw;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
     color: #afa18f;
     font-size: 54px;
     line-height: 66px;
