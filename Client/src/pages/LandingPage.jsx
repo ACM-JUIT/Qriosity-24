@@ -2,13 +2,21 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import backgroundVideo from '../../public/ezgif-3-def7973926.mp4';
 import styles from '../Styles/Landing.module.scss';
+import Countdown from '../common/components/Countdown';
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
 
 const LandingPage = () => {
     const navigate = useNavigate();
+
+    const [videoLoaded, setVideoLoaded] = useState(false);
+
+    const handleVideoLoad = () => {
+        setVideoLoaded(true);
+    };
 
     const [loading, setLoading] = useState(true);
     const spinner = document.getElementById("spinner");
@@ -36,7 +44,16 @@ const LandingPage = () => {
             </div>
         ) : (
         <div className={styles.main}>
-            <LandingNavbar />
+                            <LandingNavbar />
+                            <video
+                        className={styles.videoBackground}
+                        autoPlay
+                        loop
+                        muted
+                        onLoadedData={handleVideoLoad}
+                    >
+                        <source src={backgroundVideo} type="video/mp4" />
+                    </video>
             <motion.div
                 className={styles.mask}
                 animate={{
@@ -69,9 +86,7 @@ const LandingPage = () => {
             </motion.button>
             </motion.div>
             <div className={styles.body}>
-                <p className='p-4'>
-                Unlock the Power of Your Mind: Join the <span><b>Qriosity</b></span> A mind-bending event where Google is your secret weapon and intelligence is your key to success. Are you ready to outsmart the challenge?
-                </p>
+            <Countdown/>
             </div>
             </div>
         )}
