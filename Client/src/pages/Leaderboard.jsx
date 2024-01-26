@@ -67,24 +67,30 @@ function Leaderboard() {
             <Navbar />
             <AnimatePresence mode='wait'>
             <h2 className="text-3xl font-semibold text-white mb-4 mt-8">Chart</h2>
-        <div className="h-full w-full bg-white-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-100 p-4">
+        <div className="h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-gray-100 p-4">
             
             <table className="w-full border-collapse">
                 <thead>
                     <tr>
-                        <th className="text-center text-gray-300 py-2 px-4 border-b">Rank</th>
-                        <th className="text-center text-gray-300 py-2 px-4 border-b">Username</th>
-                        <th className="text-center text-gray-300 py-2 px-4 border-b">Points</th>
+                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Rank</th>
+                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Username</th>
+                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Top Positions</th>
+                        <th className="text-center text-3xl text-gray-300 py-2 border-b">Questions Solved</th>
+                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Points</th>
                     </tr>
                 </thead>
                 <tbody>
                     {leaderboard.map((user, index) => (
                         <tr key={index} className='names'>
-                            <td className="text-white py-2 px-4 border-b">
+                            <td className="text-white text-xl py-2 px-4 border-b">
                                 {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
                             </td>
-                            <td className="text-white py-2 px-4 border-b">{user.name}</td>
-                            <td className="text-white py-2 px-4 border-b">{user.points}</td>
+                            <td className="text-white text-xl py-2 px-4 border-b">{user.name}</td>
+                            <td className="text-white text-xl py-2 px-4 border-b">
+                                {index === 0 ? '🟢' : index === 1 ? '🟢' : index === 2 ? '🟢' : index === 3 ? '🟢' :index === 4 ? '🟢' :index === 5 ? '🟢' : '🔴'}
+                            </td>
+                            <td className="text-white text-xl py-2 border-b">{user.points/10}</td>
+                            <td className="text-white text-xl py-2 px-4 border-b">{user.points}</td>
                         </tr>
                     ))}
                 </tbody>

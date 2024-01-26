@@ -13,7 +13,7 @@ const Profile = () => {
 
   const currentUser = useSelector(selectCurrentUser);
 
-  console.log(currentUser.user)
+  // console.log(currentUser.user)
 
   useEffect(() => {
     dispatch(fetchProfile());
