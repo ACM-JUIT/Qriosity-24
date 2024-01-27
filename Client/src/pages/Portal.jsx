@@ -9,12 +9,13 @@ const Portal = () => {
   
   const [questionsData, setQuestionsData] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [currentAnswerIndex, setCurrentAnswerIndex] = useState(0);
   const [questionTimerSeconds, setQuestionTimerSeconds] = useState(0);
   const [lastSubmissionTimestamp, setLastSubmissionTimestamp] = useState(Date.now());
   const [countdownSeconds, setCountdownSeconds] = useState(calculateRemainingTimeInSeconds());
   const [isTimer, setIsTimer] = useState(false);
+  const userAnswerInputRef = useRef(null);
 
+  // Spinner
   const [loading, setLoading] = useState(true);
   const spinnerRef = useRef(null);
   useEffect(() => {
@@ -27,6 +28,7 @@ const Portal = () => {
     }
   }, []);
 
+  // Fetching Ques Data 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,10 +41,11 @@ const Portal = () => {
         console.error('Error fetching questions:', error);
       }
     };
-
     fetchData();
   }, []);
 
+
+  // CountDown Timer
   useEffect(() => {
     const countdownInterval = setInterval(() => {
       setCountdownSeconds(prevSeconds => {
@@ -54,19 +57,8 @@ const Portal = () => {
         }
       });
     }, 1000);
-
     return () => clearInterval(countdownInterval);
   }, []);
-
-  useEffect(() => {
-    const intervalId = setInterval(updateQuestionTimer, 1000);
-
-    return () => {
-      if (intervalId) {
-        clearInterval(intervalId);
-      }
-    };
-  }, [lastSubmissionTimestamp]);
 
   function calculateRemainingTimeInSeconds() {
     const targetDate = new Date('2024-02-04T10:00:00');
@@ -75,53 +67,48 @@ const Portal = () => {
     return Math.max(Math.floor(timeDifference / 1000), 0);
   }
 
-  const displayQuestion = () => {
-    setQuestionTimerSeconds(0);
-  
-    if (questionsData && questionsData.length > 0 && questionsData[currentQuestionIndex]) {
-      const questionStatementBox = document.getElementById('questionStatement');
-      if (questionStatementBox) {
-        questionStatementBox.textContent = questionsData[currentQuestionIndex].questionStatement;
+  // Question Timer
+  useEffect(() => {
+    const intervalId = setInterval(updateQuestionTimer, 1000);
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
       }
-    } else {
-      console.error('Invalid questionsData or questions structure.');
-    }
-  };
+    };
+  }, [lastSubmissionTimestamp]);
   
-
   const displayHint = () => {
-    let hintData = 'Hint is still locked.';
-    if (questionsData && questionsData[currentAnswerIndex].hint) {
-      hintData = questionsData[currentAnswerIndex].hint.toString();
+    const [hintData, setHintData] = useState('Hint is still locked.');
+    if (questionsData && questionsData[currentQuestionIndex].hint) {
+      const hint = questionsData[currentQuestionIndex].hint.toString();
+      setHintData(hint);
+      console.log(hintData);
     }
     // Display or use hintData as needed
   };
 
   const checkAnswer = () => {
-    const userAnswerInput = document.getElementById('userAnswer');
-    console.log(questionsData)
+    const userAnswerInput = userAnswerInputRef.current;
+
     if (userAnswerInput.value) {
       const userAnswer = userAnswerInput.value.toLowerCase();
-      const correctAnswer = questionsData[currentAnswerIndex].answer.toLowerCase();
+      const correctAnswer = questionsData[currentQuestionIndex].answer.toLowerCase();
+      
       if (userAnswer === correctAnswer) {
         showNextQuestion();
         setLastSubmissionTimestamp(Date.now());
-        setCurrentAnswerIndex(prevIndex => prevIndex + 1);
       } else {
-        // Handle incorrect answer
-        console.log('wrong answer')
+        console.log('wrong answer');
       }
     }
   };
 
   const showNextQuestion = () => {
-    if (currentQuestionIndex < questionsData.questions.length - 1) {
+    if (currentQuestionIndex < questionsData.length) {
       setQuestionTimerSeconds(0);
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
-      displayQuestion();
-      const userAnswerInput = document.getElementById('userAnswer');
-      if (userAnswerInput) {
-        userAnswerInput.value = '';
+      if (userAnswerInputRef.current) {
+        userAnswerInputRef.current.value = '';
       }
     } else {
       // Quiz is over
@@ -147,10 +134,10 @@ const Portal = () => {
     {
     loading ? (
       <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
-      <div ref={spinnerRef} id="spinner" className="relative">
+        <div ref={spinnerRef} id="spinner" className="relative">
           <l-quantum size="100" speed="2" color="white"></l-quantum>
+        </div>
       </div>
-  </div>
     ) : (
     <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")' }}>
       <Navbar />
@@ -190,7 +177,7 @@ const Portal = () => {
                 >
                   <h1 className="tracking-wider max-w-max mx-auto mb-4 text-white"> Question Numbers </h1>
                   <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
-                    {Array.from({ length: currentQuestionIndex + 1 }, (_, index) => (
+                    {Array.from({ length: currentQuestionIndex + 2 }, (_, index) => (
                       <li key={index + 1}>{index + 1}</li>
                     ))}
                   </ul>
@@ -203,7 +190,11 @@ const Portal = () => {
           <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-full w-1/2 flex justify-center ">
             <div className="questionAnswer ml-4 flex flex-col items-center">
               <div className="questions p-4 m-4 text-white">
-                <p id="questionStatement" className="text-3xl font-bold"></p>
+                <p id="questionStatement" className="text-3xl font-bold">
+                  { currentQuestionIndex < questionsData.length 
+                      ? `${questionsData[currentQuestionIndex].QuestionNumber}. ${questionsData[currentQuestionIndex].questionStatement}` 
+                      : `You have completed all the questions.`   }
+                </p>
               </div>
               <motion.div
                 layout
@@ -212,6 +203,7 @@ const Portal = () => {
                 <input
                   type="text"
                   id="userAnswer"
+                  ref={userAnswerInputRef}
                   placeholder="Enter your answer"
                   className=" p-2 mt-4 mx-auto text-black rounded-lg"
                   autoComplete="off"
@@ -246,18 +238,18 @@ const Portal = () => {
               <motion.button
                 id="hintButton"
                 onClick={displayHint}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                whileHover={{ scale: 1.1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20"
+                className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700"
               >
                 Hint
               </motion.button>
               <motion.button
                 id="submitButton"
                 onClick={checkAnswer}
-                whileHover={{ scale: 1.1, backgroundColor: 'lightblue', boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
+                whileHover={{ scale: 1.1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md"
+                className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700"
               >
                 Submit
               </motion.button>
