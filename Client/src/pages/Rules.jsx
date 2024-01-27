@@ -26,11 +26,11 @@ function Rules() {
       </div>
   </div>
     ) : (
-    <div className="rules bg-cover bg-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/background.png")', backdropFilter: 'blur(32px)', backgroundRepeat: 'repeat' }}>
+    <div className="rules bg-cover bg-center p-4 bg-gradient-to-r from-gray-800 to-gray-900 font-sans" style={{ backgroundImage: 'url("../../public/astroSpace.png")', backdropFilter: 'blur(32px)', backgroundRepeat: 'repeat' }}>
       <LandingNavbar />
-      <div className='rulesInfo m-4 h-full w-full bg-gray-100 rounded-md bg-clip-padding backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-800 flex flex-col text-white flex flex-col'>
-        <h1 className='text-4xl font-bold m-4 mx-auto'> Rules </h1>
-        <ul className='rulesData leading-9 tracking-wide text-2xl list-decimal m-12 p-4'>
+      <div className='rulesInfo m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-800 flex flex-col bg-white bg-opacity-60'>
+        <h1 className='text-3xl font-bold my-8 mx-auto underline'> Rules </h1>
+        <ul className='rulesData leading-9 tracking-wide text-xl list-decimal mx-12 p-4'>
             <li>Register yourself on the QRIOSITY 4.0 website to access the questions using JUIT Solan Email ID only.</li>
             <li>Each question is a list of hints directing to a certain term or company or software, everything is related to the technical world. Internet is your comrade, go crazy.</li>
             <li>6 hours will be allotted (starting at 4 PM, 04/02/2024) to complete the whole quiz.</li>
@@ -44,7 +44,7 @@ function Rules() {
             <li>If any kind of cheating is found, you'll be disqualified and decision of the organizers will be final.</li>
         </ul>
 
-        <h1 className='text-3xl font-bold m-4 mx-auto'> Happy Hunting!! </h1>
+        <h1 className='text-3xl font-bold mb-8 mx-auto'> Happy Hunting!! </h1>
       </div>
     </div>
     )}

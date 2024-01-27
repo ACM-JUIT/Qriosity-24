@@ -85,8 +85,7 @@ const Portal = () => {
         const response = await fetch('http://localhost:3500/api/questions');
         const data = await response.json();
         setQuestionsData(data);
-        console.log(data);
-        // displayQuestion();
+        console.log(questionsData);
       } catch (error) {
         console.error('Error fetching questions:', error);
       }
@@ -180,13 +179,6 @@ const Portal = () => {
     }
   };
 
-  const displayQuestion = () => {
-    if (questionsData && questionsData[currentQuestionIndex]) {
-      const question = questionsData.questions[currentQuestionIndex].questionStatement.toString();
-      console.log(question);
-    }
-  };
-
   const updateQuestionTimer = () => {
     if (isTimer) {
       const currentTime = Date.now();
@@ -277,7 +269,7 @@ const Portal = () => {
                   id="userAnswer"
                   ref={userAnswerInputRef}
                   placeholder="Enter your answer"
-                  className=" p-2 mt-4 mx-auto text-black rounded-lg"
+                  className=" p-2 mt-4 mx-auto text-black rounded-lg focus:outline-none"
                   autoComplete="off"
                 />
               </motion.div>
@@ -311,7 +303,6 @@ const Portal = () => {
                 id="hintButton"
                 onClick={displayHint}
                 whileHover={{ scale: 1.1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-                whileTap={{ scale: 0.9 }}
                 className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700"
               >
                 Hint
@@ -320,7 +311,6 @@ const Portal = () => {
                 id="submitButton"
                 onClick={checkAnswer}
                 whileHover={{ scale: 1.1, boxShadow: '0 0 10px rgba(0, 0, 0, 0.2)' }}
-                whileTap={{ scale: 0.9 }}
                 className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700"
               >
                 Submit
