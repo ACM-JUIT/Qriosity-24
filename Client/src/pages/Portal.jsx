@@ -4,6 +4,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import '../Styles/Home.css';
 import '../Styles/portal.css';
 import Navbar from '../common/components/Navbar';
+import { selectCurrentUser } from '../redux/slices/userSlice';
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 const Portal = () => {
   
@@ -14,6 +17,53 @@ const Portal = () => {
   const [countdownSeconds, setCountdownSeconds] = useState(calculateRemainingTimeInSeconds());
   const [isTimer, setIsTimer] = useState(false);
   const userAnswerInputRef = useRef(null);
+
+  //Toasts
+  const existentialCrisisMessages = [
+    "Your answer is so wrong, even Schroedinger's cat is disappointed in you.",
+    "Congratulations! Your answer just broke the laws of physics and common sense simultaneously.",
+    "I bet even your pet rock is questioning your life choices after that answer.",
+    "If your brain were a computer, it would be in desperate need of a software update.",
+    "Your answer is the reason why aliens won't talk to us. They've seen your responses and lost faith in humanity.",
+    "In an alternate universe, your answer might make sense. Unfortunately, we're stuck in this one.",
+    "I'd say your answer is out of this world, but even aliens wouldn't believe how wrong it is.",
+    "Were you dropped on your head as a child? It would explain a lot.",
+    "Your answer is a testament to the limitless bounds of human incompetence.",
+    "I'm genuinely impressed by how consistently wrong your answers are.",
+    "Congratulations! You've just set a new record for the most incorrect answers in a row.",
+    "The correct answer is chasing you, but you have always been faster.",
+    "After that answer, your parents shouldn't be proud of you",
+  ];
+
+  const getRandomMessage = () => {
+    const randomIndex = Math.floor(Math.random() * existentialCrisisMessages.length);
+    return existentialCrisisMessages[randomIndex];
+  };
+  
+  const wrongAnswer = () => {
+    const message = getRandomMessage();
+    toast.error(message, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
+  const correctAnswer = () => toast.success('Correct answer!!', {
+    position: "bottom-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+});
 
   // Spinner
   const [loading, setLoading] = useState(true);
@@ -35,8 +85,8 @@ const Portal = () => {
         const response = await fetch('http://localhost:3500/api/questions');
         const data = await response.json();
         setQuestionsData(data);
-        console.log(questionsData);
-        displayQuestion();
+        console.log(data);
+        // displayQuestion();
       } catch (error) {
         console.error('Error fetching questions:', error);
       }
@@ -87,19 +137,34 @@ const Portal = () => {
     // Display or use hintData as needed
   };
 
-  const checkAnswer = () => {
-    const userAnswerInput = userAnswerInputRef.current;
+  const currentUser = useSelector(selectCurrentUser);
 
-    if (userAnswerInput.value) {
-      const userAnswer = userAnswerInput.value.toLowerCase();
-      const correctAnswer = questionsData[currentQuestionIndex].answer.toLowerCase();
-      
-      if (userAnswer === correctAnswer) {
-        showNextQuestion();
-        setLastSubmissionTimestamp(Date.now());
+  const checkAnswer = async () => {
+    try {
+      const username = currentUser.user.name;
+      const questionNumber = questionsData.questions[currentQuestionIndex].questionNumber;
+      const answer = userAnswerInputRef.current.value;
+      console.log(username, questionNumber, answer)
+
+      const response = await fetch('http://localhost:3500/submit-answer', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ questionNumber, answer, username }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+          correctAnswer();
+          showNextQuestion();
       } else {
-        console.log('wrong answer');
+          wrongAnswer();
+          userAnswerInputRef.current.value = '';
       }
+    } catch (error) {
+        console.error(error);
     }
   };
 
@@ -112,6 +177,13 @@ const Portal = () => {
       }
     } else {
       // Quiz is over
+    }
+  };
+
+  const displayQuestion = () => {
+    if (questionsData && questionsData[currentQuestionIndex]) {
+      const question = questionsData.questions[currentQuestionIndex].questionStatement.toString();
+      console.log(question);
     }
   };
 
@@ -142,7 +214,7 @@ const Portal = () => {
     <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")' }}>
       <Navbar />
       <div className="quizContainer p-4 ">
-        <div id="quizTimer" className="fixed top-0 left-1/2 transform -translate-x-1/2 m-4 mb-8 z-[999]">
+        <div id="quizTimer" className="fixed top-0 left-1/2 pt-28 transform -translate-x-1/2 m-4 mb-8 z-[999]">
           {countdownSeconds > 0 ? (
             <>
               <p className="info"> Time remaining </p>
@@ -187,12 +259,12 @@ const Portal = () => {
             {!isOpen && <div className="dot bg-green-500 w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>}
           </motion.div>
 
-          <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-full w-1/2 flex justify-center ">
+          <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-full w-1/2 mt-28 flex justify-center ">
             <div className="questionAnswer ml-4 flex flex-col items-center">
               <div className="questions p-4 m-4 text-white">
                 <p id="questionStatement" className="text-3xl font-bold">
-                  { currentQuestionIndex < questionsData.length 
-                      ? `${questionsData[currentQuestionIndex].QuestionNumber}. ${questionsData[currentQuestionIndex].questionStatement}` 
+                  { currentQuestionIndex < questionsData.questions.length 
+                      ? `${questionsData.questions[currentQuestionIndex].questionStatement}` 
                       : `You have completed all the questions.`   }
                 </p>
               </div>
@@ -257,6 +329,7 @@ const Portal = () => {
           </div>
         </div>
       </div>
+          <ToastContainer />
     </div>
     )}
     </>

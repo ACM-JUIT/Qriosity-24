@@ -3,11 +3,10 @@ const User = require('../models/user')
 
 const answerSubmitController = async(req, res) => {
     try {
-        // const { questionNumber, answer, username } = req.body;
-        const questionNumber = 1;
-        const answer = 'Paris';
-        const username = 'Animesh Singh'
+        const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
+
+        console.log(questionNumber, answer, username)
 
         if (!questionNumber || !answer || !username) {
             return res.status(400).json({ error: 'Missing required data.' });
@@ -21,7 +20,7 @@ const answerSubmitController = async(req, res) => {
 
         console.log(question);
 
-        if (question.answer === answer) {
+        if (question.answer.toLowerCase === answer.toLowerCase) {
             console.log({
                 ipAddress,
                 questionNumber,

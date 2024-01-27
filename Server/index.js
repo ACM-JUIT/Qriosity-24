@@ -47,7 +47,7 @@ const startServer = async () => {
         app.use(questionsRoute);
         
         // Middleware for token verification
-        app.use(verify);
+        // app.use(verify);
         
         app.use(answerRoute);
         app.use(leaderboardRoute);
