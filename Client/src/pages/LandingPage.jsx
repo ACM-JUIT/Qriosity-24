@@ -1,8 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
-import React, { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import backgroundVideo from '../../public/ezgif-3-def7973926.mp4';
+import backgroundVideo from '../../public/bgvideo2.mp4';
 import styles from '../Styles/Landing.module.scss';
 import Countdown from '../common/components/Countdown';
 import LandingNavbar from '../common/components/LandingNavbar';
@@ -10,7 +10,7 @@ import '../index.css';
 import useMousePosition from '../utils/useMousePosition';
 
 // spiral
-import 'ldrs/quantum'
+import 'ldrs/quantum';
 
 
 const LandingPage = () => {
@@ -41,7 +41,7 @@ const LandingPage = () => {
     const { x, y } = useMousePosition();
 
     const [isHovered, setisHovered] = useState(false);
-    const size = isHovered ? 400 : 40;
+    const size = isHovered ? 500 : 40;
 
     return (
         <>
@@ -78,10 +78,27 @@ const LandingPage = () => {
                 <p
                     onMouseEnter={() => setisHovered(true)}
                     onMouseLeave={() => setisHovered(false)}
-                    className='p-4'
+                    className='mb-7 text-7xl'
                 >
-                    Embark on an intellectual journey where <span className='text-green-700'>every click is a clue</span> and every search takes you closer to victory. Think you have got what it takes? Dive into the cerebral adventure now!
+                 Our 6 hour schedule is jam-packed with a brilliant & creative questionnaire
                 </p>
+                <p
+  onMouseEnter={() => setisHovered(true)}
+  onMouseLeave={() => setisHovered(false)}
+  className="whitespace-pre-line break-words"
+>
+  <p className=" text-[#f472b6]">
+    Don’t hesitate to go insane with your thinking and answers!
+  </p>
+  <p className="text-[#f472b6]">
+    If you think you have got the skills to solve hidden clues and make sense out
+    of random hints,
+  </p>
+  <p className='text-[#f472b6]'>
+    this one is definitely for you.
+  </p>
+</p>
+
                 <motion.button
                 onMouseEnter={() => setisHovered(true)}
                 onMouseLeave={() => setisHovered(false)}

@@ -1,7 +1,7 @@
-$button-bg-color: #9f6633;
+$button-bg-color: #570f92;
 $button-text-color: #ffffff;
-$button-padding: 10px 20px;
-$button-border-radius: 100px;
+$button-padding: 3px 15px;
+$button-border-radius: 35px;
 
 .main {
   height: 100vh;
@@ -15,8 +15,9 @@ $button-border-radius: 100px;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80vw;
-    height: 80vh;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
     z-index: -1;
 }
 
@@ -28,16 +29,18 @@ $button-border-radius: 100px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: #afa18f;
-    font-size: 48px;
-    line-height: 66px;
+    color: #f5f4f4;
+    font-size: 24px;
+    line-height: 25x;
     cursor: default;
 
     span {
-      color: #ec4e;
+      color: #f472b6;
+      text-shadow: 4px 4px 4px rgba(76, 46, 212, 0.911);
+
     }
     p{
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .buttons {
@@ -52,8 +55,8 @@ $button-border-radius: 100px;
       font-size: 32px;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      line-height: 66px;
       position: relative;
-      margin-top: 3rem;
 
       &:hover {
         background-color: darken($button-bg-color, 10%);
@@ -67,10 +70,10 @@ $button-border-radius: 100px;
   .mask{
     position: absolute;
     mask-image: url("../assets/mask.svg");
-    background-color: #511281;
+    background-color: #0c0c0c;
     mask-repeat: no-repeat;
     mask-position: 0%;
-    mask-size: 40px;
+    mask-size: 100px;
 
   }
 }

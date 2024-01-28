@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import '@fortawesome/fontawesome-free/css/all.css';
 import { motion } from 'framer-motion';
+import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
-import pngimg from '../../public/logo-black.png';
-import spacebg from '../assets/spacebg.jpg'
-import '@fortawesome/fontawesome-free/css/all.css';
+import spacebg from '../assets/spacebg.jpg';
 
 const passwordNotMatching = () => toast.error('Passwords do not match!!', {
     position: "top-right",
@@ -151,15 +150,13 @@ const SignUp = () => {
                 transition={{ duration: 0.2 }}
                 className="w-1/2 px-4 border-3 py-0 mt-4"
             >
-            {/* <h2 className='text-2xl mb-4'> Qriosity </h2> */}
-            {/* <img src={pngimg} className='h-32 mx-auto mt-0 md:order-2'/> */}
             <h1 className="text-3xl font-semibold mb-4 text-gray-700">Welcome!</h1>
             {/* <h5 className='text-lg mx-auto text-center mb-12'>Please enter your details</h5> */}
             <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
                 <form>
                     <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
                         <label htmlFor="name" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i class="fas fa-user text-white"></i>
+                            <i className="fas fa-user text-white"></i>
                         </label>
                         <input
                             type="text"
@@ -172,7 +169,7 @@ const SignUp = () => {
                     </div>
                     <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
                         <label htmlFor="email" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i class="fa fa-envelope text-white"></i>
+                            <i className="fa fa-envelope text-white"></i>
                         </label>
                         <input
                             type="email"
@@ -185,7 +182,7 @@ const SignUp = () => {
                     </div>
                     <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
                         <label htmlFor="password" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i class="fa fa-lock text-white"></i>
+                            <i className="fa fa-lock text-white"></i>
                         </label>
                         <input
                             type="password"
@@ -198,7 +195,7 @@ const SignUp = () => {
                     </div>
                     <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
                         <label htmlFor="confirmPassword" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i class="fa fa-lock text-white"></i>
+                            <i className="fa fa-lock text-white"></i>
                         </label>
                         <input
                             type="password"
