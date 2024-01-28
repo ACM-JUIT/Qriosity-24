@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion';
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import bgimg from '../../../public/logo.png';
 
@@ -14,10 +13,9 @@ function LandingNavbar() {
     <div className="font-montserrat">
       <nav className="flex flex-row items-center justify-between">
         <a href="/"><img src={bgimg} alt="" className="h-20 pt-6 pl-3 h-20 pt-6 pl-3 flex-shrink-0" /></a>
-        <div className="flex flex-row text-white text-xl font-semibold mr-4 space-x-4">
+        <div className="flex flex-row text-white text-xl font-light mr-4 space-x-4">
           <NavItem to="/rules" isActive={isTabActive('/rules')} text="Rules" />
           <NavItem to="/aboutus" isActive={isTabActive('/aboutus')} text="About Us" />
-          {/* <NavItem to="/leaderboard" isActive={isTabActive('/leaderboard')} text="Leaderboard" /> */}
           <NavItem to="/signup" isActive={isTabActive('/signup')} text="Signup" />
         </div>
       </nav>

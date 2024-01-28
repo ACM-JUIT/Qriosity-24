@@ -47,7 +47,7 @@ return (
                 .toString()
                 .padStart(2, '0')}  ${timeLeft.seconds.toString().padStart(2, '0')}`}
             </div>
-            <div className='flex flex-row justify-between text-xl text-pink-600'>
+            <div className='flex flex-row justify-between text-xl text-purple-500'>
                 <p>Days</p>
                 <p>Hours</p>
                 <p>Minutes</p>

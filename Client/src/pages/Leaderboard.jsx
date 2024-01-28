@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import '../Styles/Home.css';
 import Navbar from '../common/components/Navbar';
@@ -63,20 +63,19 @@ function Leaderboard() {
             </div>
         ) : (
 
-        <div className='leaderboard-container bg-cover bg-center min-h-screen p-4' style={{backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")'}}>
+        <div className='leaderboard-container bg-cover bg-center min-h-screen p-4 bg-[#0c0c0c]'>
             <Navbar />
             <AnimatePresence mode='wait'>
-            <h2 className="text-3xl font-semibold text-white mb-4 mt-8">Chart</h2>
-        <div className="h-full w-full bg-gray-900 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-0 border border-gray-100 p-4">
+        <div className="h-full w-full bg-gray-900 rounded-md backdrop-filter backdrop-blur-md bg-opacity-0 border border-gray-100 p-4 mt-10">
             
             <table className="w-full border-collapse">
                 <thead>
                     <tr>
-                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Rank</th>
-                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Username</th>
-                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Top Positions</th>
-                        <th className="text-center text-3xl text-gray-300 py-2 border-b">Questions Solved</th>
-                        <th className="text-center text-3xl text-gray-300 py-2 px-4 border-b">Points</th>
+                        <th className="text-center text-xl text-white py-2 px-4 border-b">Rank</th>
+                        <th className="text-center text-xl text-white py-2 px-4 border-b">Username</th>
+                        <th className="text-center text-xl text-white py-2 px-4 border-b">Top Positions</th>
+                        <th className="text-center text-xl text-white py-2 border-b">Questions Solved</th>
+                        <th className="text-center text-xl text-white py-2 px-4 border-b">Points</th>
                     </tr>
                 </thead>
                 <tbody>
