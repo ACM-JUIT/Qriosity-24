@@ -14,9 +14,9 @@ const verifyToken = async (req, res, next) => {
             if (err) {
                 // console.log(err)
                 if (err.name === 'TokenExpiredError') {
-                    return res.sendStatus(403);
+                    return res.status(403).json({ error: "access token is invalid for user." });
                 } else {
-                    return res.sendStatus(400);
+                    return res.status(400).json({ error: "bad request" });
                 }
             }
             req.email = decoded.email;
