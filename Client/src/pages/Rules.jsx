@@ -1,6 +1,9 @@
+import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
+import planet from '../../public/svg/moon.svg';
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
+import '../index.css';
 
 const Rules = () => {
   const [loading, setLoading] = useState(true);
@@ -40,16 +43,30 @@ const Rules = () => {
           </div>
         </div>
       ) : (
-        <div className="rules bg-cover bg-center p-4 font-sans bg-[#0c0c0c]">
-          <LandingNavbar />
-          <div className='rulesInfo m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'>
-            <h1 className='text-5xl text-white font-bold my-8 mx-auto'> Rules </h1>
+        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+            <LandingNavbar />
+            <img
+              src={planet}
+              alt="Ast"
+              className="absolute z-9 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__rotate "
+            />
+            <div
+              className='rulesInfo m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'
+            >
+            <motion.div
+              layout
+              animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
+              transition={{ duration: 0.6, ease: 'easeInOut' }}
+              initial={{ opacity: 0, y: '0%', x: '0%' }}
+              >
+            <h1 className='text-5xl text-white font-bold my-8 flex justify-center item-center sec-heading'> Rules </h1>
             <ul className='rulesData leading-9 tracking-wide text-xl list-disc mx-12 p-4 text-white'>
               {rulesData.map((rule, index) => (
                 <li key={index}>{rule}</li>
               ))}
             </ul>
-            <h1 className='text-3xl font-bold mb-8 mx-auto text-[#f472b6]'> Happy Hunting!! </h1>
+            <h1 className='text-3xl font-bold mb-8 flex justify-center item-center text-[#FDF0D1] sec-heading'> Happy Hunting!! </h1>
+              </motion.div>
           </div>
         </div>
       )}

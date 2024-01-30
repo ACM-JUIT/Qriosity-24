@@ -1,6 +1,9 @@
+import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
+import setallite from '../../public/svg/sattelite.svg';
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
+import '../index.css';
 
 const AboutUs = () => {
   const [loading, setLoading] = useState(true);
@@ -37,19 +40,30 @@ const AboutUs = () => {
           </div>
         </div>
       ) : (
-        <div className="aboutUs bg-cover bg-center p-4 bg-[#0c0c0c] font-sans">
-          <LandingNavbar />
-          <div className=' m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'>
-            <h1 className='text-5xl font-bold my-8 mx-auto text-white'> About Us </h1>
+        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+            <LandingNavbar />
+            <img
+              src={setallite}
+              alt="Ast"
+              className="absolute z-9 top-[7vh] left-[60vw] transform -translate-x-1/2 -translate-y-1/2 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__floating"
+            />
+            <div className=' m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'>
+              <motion.div
+              layout
+              animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
+              transition={{ duration: 0.6, ease: 'easeInOut' }}
+              initial={{ opacity: 0, y: '0%', x: '0%' }}
+              >
+              <h1 className='text-5xl font-bold my-8 flex justify-center item-center text-white sec-heading'> About Us </h1>
             <ul className='aboutUsData list-disc m-8'>
               {aboutUsData.map((item, index) => (
                 <React.Fragment key={index}>
-                  <h2 className='text-3xl font-bold m-4 mx-auto text-[#f472b6]'>{item.title}</h2>
+                  <h2 className='text-3xl font-bold m-4 mx-auto text-[#FDF0D1] sec-heading'>{item.title}</h2>
                   <p className="text-xl p-1 text-white">{item.content}</p>
                   {item.link && (
                     <p className='text-xl p-1 text-white'>
                       Explore more about our initiatives and events on our{' '}
-                      <a href={item.link} target="_blank" className='font-semibold text-[#f472b6]' rel='noopener noreferrer'>
+                      <a href={item.link} target="_blank" className='font-semibold text-[#FDF0D1]' rel='noopener noreferrer'>
                         website
                       </a>
                     </p>
@@ -57,6 +71,8 @@ const AboutUs = () => {
                 </React.Fragment>
               ))}
             </ul>
+              </motion.div>
+            
           </div>
         </div>
       )}

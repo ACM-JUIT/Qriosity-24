@@ -12,7 +12,6 @@ import Countdown from "../common/components/Countdown";
 import LandingNavbar from "../common/components/LandingNavbar";
 
 
-
 function LandingPage() {
 
     const [loading, setLoading] = useState(true);
@@ -104,12 +103,10 @@ function LandingPage() {
                                         alt="Mars"
                                     />
                                 </div>
-
-
-
-
+                                
                             </div>
-                        </div>)}
+                        </div>
+                        )}
         </>
         
     );

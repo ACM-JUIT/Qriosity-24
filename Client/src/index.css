@@ -27,6 +27,12 @@ body {
 .counter{
   font-family: 'montserrat-subrayada-bold';
 }
+.rulesInfo, .aboutUsData{
+  font-family: 'neoris-regular';
+}
+.sec-heading{
+  font-family: 'montserrat-subrayada-bold';
+}
 
 h1, h2, h3 {
     font-family: 'neoris-semibold';
