@@ -21,7 +21,7 @@ const loginController = async (req, res) => {
                     },
                     process.env.ACCESS_TOKEN_SECRET,
                     {
-                        expiresIn: '15m'
+                        expiresIn: '15s'
                     }
                 );
 
@@ -44,7 +44,7 @@ const loginController = async (req, res) => {
                 existingUser.accessToken = [accessToken];
                 await existingUser.save();
 
-                res.cookie('access_token', accessToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 5 * 1000 });
+                res.cookie('access_token', accessToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 15 * 1000 });
                 res.cookie('refresh_token', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
 
                 res.status(200).json({ msg: 'Login success', user: existingUser, access_token: accessToken, refresh_token: refreshToken });
