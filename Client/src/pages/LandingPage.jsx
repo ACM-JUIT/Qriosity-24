@@ -45,7 +45,7 @@ function LandingPage() {
                                 <motion.div
                                     layout
                                     animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
-                                    transition={{ duration: 1.0, ease: 'easeInOut', delay: '1.0' }}
+                                    transition={{ duration: 1.0, ease: 'easeInOut', delay: '1.2' }}
                                     initial={{ opacity: 0, y: '0%', x: '0%' }}
                                     className={`text-[#ffff] text-xl top-1/2 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center`}
                                 >
@@ -86,10 +86,9 @@ function LandingPage() {
                                 </div>
                                 <motion.div
                                     layout
-                                    animate={{ y: ['50%', '0%'], x: ['0%', '0%'] }}
-                                    transition={{ duration: 1.0, ease: 'easeInOut' }}
-                                    viewport={{ once: true }}
-                                    initial={{ y: '0%', x: '0%' }}
+                                    animate={{ opacity: [0, 1],y: ['50%', '0%'], x: ['0%', '0%'] }}
+                                    transition={{ duration: 1.2, ease: 'easeInOut' }}
+                                    initial={{opacity: 0, y: '0%', x: '0%' }}
                                     className='z-n1 text-[16vw] h-auto text-white absolute top-[38vh] left-[18vw] flex items-center'
                                 >
                                     <span className='h-auto w-[18vw] text-white'>
