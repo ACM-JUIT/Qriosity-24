@@ -7,7 +7,6 @@ import Navbar from "../common/components/Navbar";
 import "../Styles/Home.css";
 
 function Leaderboard() {
-  // const [leaderboard, setLeaderboard] = useState([]);
 
   const [loading, setLoading] = useState(true);
   const spinnerRef = useRef(null);
@@ -22,15 +21,15 @@ function Leaderboard() {
   }, []);
 
   const dispatch = useDispatch();
-
-  const [leaderboard, isSuccess] = useLeaderboardQuery();
+  
+  const {data, isSuccess} = useLeaderboardQuery();
 
   useEffect(() => {
     if (isSuccess) {
-      dispatch(setLeaderboard(leaderboard));
+      dispatch(setLeaderboard(data));
     }
     //eslint-disable-next-line
-  }, [leaderboard]);
+  }, [data]);
 
   // const fetchData = async () => {
   //   try {
@@ -95,7 +94,7 @@ function Leaderboard() {
                   </tr>
                 </thead>
                 <tbody>
-                  {leaderboard.map((user, index) => (
+                  {data.map((user, index) => (
                     <tr key={index} className="names">
                       <td className="text-white text-xl py-2 px-4 border-b">
                         {index === 0
