@@ -41,7 +41,10 @@ export const apiSlice = createApi({
                 body: { ...credentials }
             })
         }),
+        leaderboard: builder.query({
+            query: () => "/leaderboard",
+        })
     })
 })
 
-export const { useLoginMutation } = apiSlice;
+export const { useLoginMutation, useLeaderboardQuery } = apiSlice;
