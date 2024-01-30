@@ -5,6 +5,7 @@ const initialState = {
   access_token: null,
   refresh_token: null,
   isLoggedIn: false,
+  leaderboard: []
 }
 
 const userSlice = createSlice({
@@ -20,8 +21,10 @@ const userSlice = createSlice({
     refreshUser: (state, action) => {
       state.access_token = action.payload.access_token;
     },
-    signOut: (state) => 
-    {
+    setLeaderboard: (state, action) => {
+      state.leaderboard = action.leaderboard;
+    },
+    signOut: (state) => {
       state.user = {};
       state.refresh_token = null;
       state.access_token = null;
@@ -30,7 +33,7 @@ const userSlice = createSlice({
   }
 });
 
-export const { signIn, signOut, refreshUser } = userSlice.actions;
+export const { signIn, signOut, refreshUser, setLeaderboard } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectCurrentUser = (state) => state.userSlice.user;

@@ -1,10 +1,10 @@
-import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-// import { useSelector } from "react-redux";
-import "../Styles/Home.css";
-import Navbar from "../common/components/Navbar";
-// import { selectCurrentToken } from "../redux/slices/userSlice";
 import { useLeaderboardQuery } from "../app/api/apiSlice";
+import { AnimatePresence } from "framer-motion";
+import { setLeaderboard } from "../redux/slices/userSlice";
+import { useDispatch } from "react-redux";
+import Navbar from "../common/components/Navbar";
+import "../Styles/Home.css";
 
 function Leaderboard() {
   // const [leaderboard, setLeaderboard] = useState([]);
@@ -21,13 +21,17 @@ function Leaderboard() {
     }
   }, []);
 
-  //   const accessToken = useSelector(selectCurrentToken);
+  const dispatch = useDispatch();
 
-  const [leaderboard] = useLeaderboardQuery();
+  const [leaderboard, isSuccess] = useLeaderboardQuery();
 
-  //   useEffect(() => {
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(setLeaderboard(leaderboard));
+    }
+    //eslint-disable-next-line
+  }, [leaderboard]);
 
-  // });
   // const fetchData = async () => {
   //   try {
   //     const response = await fetch("http://localhost:3500/leaderboard", {
