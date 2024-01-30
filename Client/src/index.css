@@ -6,7 +6,10 @@
   font-family: 'neoris-regular';
   src: url('./fonts/TTNeorisRegular.ttf');
 }
-
+@font-face {
+  font-family: 'montserrat-subrayada-bold';
+  src: url('./fonts/MontserratSubrayada-Bold.ttf');
+}
 @font-face {
   font-family: 'neoris-semibold';
   src: url('./fonts/TTNeorisDemiBold.ttf');
@@ -15,6 +18,14 @@
 body {
     font-family: 'neoris-regular';
     background-color: black;
+}
+
+.glow-text {
+  text-shadow: 0 0 10px rgba(168, 161, 142, 0.8);
+}
+
+.counter{
+  font-family: 'montserrat-subrayada-bold';
 }
 
 h1, h2, h3 {

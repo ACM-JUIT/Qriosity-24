@@ -28,9 +28,9 @@ const LandingNavbar = () => {
   const isTabActive = (path) => location.pathname === path;
 
   const navItems = [
-    { to: '/rules', text: 'Rules' },
-    { to: '/aboutus', text: 'About Us' },
-    { to: '/signup', text: 'Signup' },
+    { to: '/Portal', text: 'Quiz' },
+    { to: '/leaderboard', text: 'LeaderBoard' },
+    { to: '/profile', text: 'Profile' },
   ];
 
   return (

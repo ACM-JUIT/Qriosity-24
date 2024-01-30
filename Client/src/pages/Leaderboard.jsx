@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import '../Styles/Home.css';
 import Navbar from '../common/components/Navbar';
@@ -100,6 +100,6 @@ function Leaderboard() {
     )}
     </>
     );
-};
+}
 
 export default Leaderboard;

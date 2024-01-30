@@ -1,12 +1,12 @@
 /* eslint-disable prefer-const */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 import '../Styles/Home.css';
 import '../Styles/portal.css';
 import Navbar from '../common/components/Navbar';
 import { selectCurrentUser } from '../redux/slices/userSlice';
-import { useSelector } from 'react-redux';
-import { ToastContainer, toast } from 'react-toastify';
 
 const Portal = () => {
   
