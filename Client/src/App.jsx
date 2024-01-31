@@ -8,7 +8,6 @@ import Login from './pages/LoginPage';
 import Portal from './pages/Portal';
 import Profile from './pages/Profile';
 import Rules from "./pages/Rules";
-import Sign from './pages/Sign';
 import SignUp from './pages/Signup';
 
 const App = () => {
@@ -23,7 +22,6 @@ const App = () => {
             <Route path="/portal" element={<Portal />} />
             <Route path="/profile" element={<Profile />} />
           <Route path="/signup" element={<SignUp />} />
-          <Route path="/sign" element={<Sign />} />
             <Route path="/leaderboard" element={<Leaderboard />} />
             <Route path="/profile" element={<Profile />} />
             <Route path='/rules' element={<Rules/>} />
