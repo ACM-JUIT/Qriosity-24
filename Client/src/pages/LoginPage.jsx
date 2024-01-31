@@ -122,7 +122,7 @@ const Login = () => {
     >
     
                     <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
-                    <h1 className="text-3xl  sec-heading mb-4 text-[#a6c8d6]">Log In</h1>
+                    <h1 className="text-3xl sec-heading mb-4 text-[#a6c8d6]">Log In</h1>
       <form>
         <div className="mb-4 flex">
           <label htmlFor="email" className="block text-[#a6c8d6] text-xl font-semibold w-12">

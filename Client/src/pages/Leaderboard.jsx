@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from "react";
-import { useLeaderboardQuery } from "../app/api/apiSlice";
 import { AnimatePresence } from "framer-motion";
-import { setLeaderboard } from "../redux/slices/userSlice";
+import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import Navbar from "../common/components/Navbar";
 import "../Styles/Home.css";
+import { useLeaderboardQuery } from "../app/api/apiSlice";
+import Navbar from "../common/components/Navbar";
+import { setLeaderboard } from "../redux/slices/userSlice";
 
 function Leaderboard() {
 
@@ -69,26 +69,28 @@ function Leaderboard() {
           </div>
         </div>
       ) : (
-        <div className="leaderboard-container bg-cover bg-center min-h-screen p-4 bg-[#0c0c0c]">
+        <div className="main min-h-screen inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
           <Navbar />
           <AnimatePresence mode="wait">
-            <div className="h-full w-full bg-gray-900 rounded-md backdrop-filter backdrop-blur-md bg-opacity-0 border border-gray-100 p-4 mt-10">
+              <div className="stats h-screen w-screen p-4">
+                <h1 className="text-white flex justify-center item-center text-5xl sec-heading">Stats</h1>
+              <div className="h-full w-full bg-gray-900 rounded-md backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-900 p-4 mt-10">
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b">
+                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
                       Rank
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b">
+                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
                       Username
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b">
+                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
                       Top Positions
                     </th>
-                    <th className="text-center text-xl text-white py-2 border-b">
+                    <th className="text-center text-xl text-white py-2 border-b sec-heading">
                       Questions Solved
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b">
+                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
                       Points
                     </th>
                   </tr>
@@ -96,7 +98,7 @@ function Leaderboard() {
                 <tbody>
                   {data.map((user, index) => (
                     <tr key={index} className="names">
-                      <td className="text-white text-xl py-2 px-4 border-b">
+                      <td className="text-white text-xl py-2 px-4 border-b ">
                         {index === 0
                           ? "🥇"
                           : index === 1
@@ -133,6 +135,7 @@ function Leaderboard() {
                   ))}
                 </tbody>
               </table>
+            </div>
             </div>
           </AnimatePresence>
         </div>
