@@ -1,7 +1,10 @@
-/* Custom CSS */
-.animate__floating {
+.animate__planet {
     animation: floating 6s infinite;
   }
+
+.animate__bigger{
+    animation-name: bigger 2s infinite;
+}  
   
   @keyframes floating {
     0% {
@@ -28,3 +31,14 @@
       transform: rotate(360deg);
     }
   }
+
+@keyframes bigger {
+    from{
+        top: auto;
+        right: auto;
+    }
+    to{
+        top: 1/2;
+        right: 1/2;
+    }
+}
