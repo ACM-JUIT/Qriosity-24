@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import planet from '../../public/svg/moon.svg';
+import belt from '../../public/svg/belt.svg';
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
@@ -46,9 +46,9 @@ const Rules = () => {
         <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
             <LandingNavbar />
             <img
-              src={planet}
+              src={belt}
               alt="Ast"
-              className="absolute z-9 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__rotate "
+              className="absolute z-9 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__planet "
             />
             <div
               className='rulesInfo m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'
