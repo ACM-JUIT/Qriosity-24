@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import '../Styles/Home.css';
 import Navbar from '../common/components/Navbar';
 import { selectCurrentToken } from '../redux/slices/userSlice';
+import Chart from './Chart';
 
 function Leaderboard() {
     const [leaderboard, setLeaderboard] = useState([]);
@@ -96,7 +97,11 @@ function Leaderboard() {
             </table>
                 </div>
                 </AnimatePresence>
+
+            <div className='performanceGraph'>
+                <Chart />
             </div>
+        </div>
     )}
     </>
     );
