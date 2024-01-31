@@ -12,10 +12,7 @@
 
 /* Quiz Timer */
 #quizTimer {
-    font-family: 'Share Tech Mono', monospace;
     text-align: center;
-    color: var(--lg-blue);
-    text-shadow: 0 0 20px var(--blue), 0 0 20px var(--black);
 }
 .time {
     letter-spacing: 0.01em;

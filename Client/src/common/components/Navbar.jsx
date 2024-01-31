@@ -36,7 +36,7 @@ const LandingNavbar = () => {
   return (
     <div className="font-montserrat">
       <nav className="flex flex-row items-center justify-between">
-        <Link to="/">
+        <Link to="#">
           <img src={bgimg} alt="" className="h-20 pt-6 pl-3 flex-shrink-0" />
         </Link>
         <div className="flex flex-row text-white text-xl font-light mr-4 space-x-4">

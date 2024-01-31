@@ -1,10 +1,11 @@
-import Navbar from '../common/components/Navbar';
-import '../Styles/Home.css';
+import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { signOut, selectCurrentUser } from '../redux/slices/userSlice';
+import pfp from '../../public/svg/pfp.svg';
+import '../Styles/Home.css';
+import Navbar from '../common/components/Navbar';
+import { selectCurrentUser, signOut } from '../redux/slices/userSlice';
 import { fetchProfile } from '../thunks/profileThunk';
-import React, { useState, useEffect, useRef } from 'react';
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -47,36 +48,45 @@ const Profile = () => {
       </div>
   </div>
     ) : (
-    <div className="profile Container bg-cover bg-center h-screen p-4" style={{ backgroundImage: 'url("../../public/portalbgdark.jpg")'}}>
+      <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
       <Navbar />
-      <div className='userData bg-white rounded-md m-10 p-4 flex flex-col items-center'>
+      <div className="bg-[#0c0c0c] h-1/2 w-1/2 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
         {currentUser ? (
-          <>
-            <h1 className="text-2xl font-bold mb-2">Welcome {currentUser.user.name}!!</h1>
-            <p>
-              <span className="font-bold">Name:</span> {currentUser.user.name}
+          <div className='flex flex-col m-4 p-3'>
+                    <h1 className="text-3xl sec-heading mb-4 text-[#FDF0D1] mx-auto">Welcome {currentUser.user.name}</h1>
+                    <div className="flex flex-row">
+                    <img src={pfp}
+                      alt=""
+                    className='h-3/4 w-1/3 my-auto mx-auto'/>
+                      <div>
+                      <p className='text-lg sec-text mb-4 text-white'>
+              <span className="text-xl sec-text mb-4 text-[#a6c8d6]">Name:</span> {currentUser.user.name}
             </p>
-            <p>
-              <span className="font-bold">Email:</span> {currentUser.user.email}
+            <p className='text-lg sec-text mb-4 text-white'>
+              <span className="text-xl sec-text mb-4 text-[#a6c8d6]">Email:</span> {currentUser.user.email}
             </p>
-            <p>
-              <span className="font-bold">Points:</span> {currentUser.user.points}
-            </p>
-            <button
-              className='mt-4 p-2 bg-red-500 text-white rounded-md' 
+            <p className='text-lg sec-text mb-4 text-white'>
+              <span className="text-xl sec-text mb-4 text-[#a6c8d6]">Points:</span> {currentUser.user.points}
+                        </p>
+                        <button
+              className='mt-4 p-2 w-1/2 mx-auto my-auto bg-red-500 text-white font-thin rounded-md' 
               onClick={logout}>
                 Logout
             </button>
-          </>
+                      </div>
+                      
+                    </div>
+            
+          </div>
         ) : (
           <>
-            <p className="font-bold" >User data not found!!</p>
+            <p className="font-bold sec-text" >User data not found!!</p>
             <button
-              className='mt-4 p-2 bg-green-500 text-white rounded-md' 
+              className='mt-4 p-2 bg-green-500 mx-auto my-auto text-white font-thin rounded-md'
               onClick={login}>
                 Login
             </button>
-          </> 
+          </>
         )}
       </div>
   </div>

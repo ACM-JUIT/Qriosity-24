@@ -34,6 +34,10 @@ body {
   font-family: 'montserrat-subrayada-bold';
 }
 
+.sec-text{
+  font-family: 'neoris-regular'
+}
+
 h1, h2, h3 {
     font-family: 'neoris-semibold';
 }
