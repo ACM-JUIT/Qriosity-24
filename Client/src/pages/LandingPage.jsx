@@ -46,7 +46,7 @@ function LandingPage() {
                                     animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
                                     transition={{ duration: 1.0, ease: 'easeInOut', delay: '1.2' }}
                                     initial={{ opacity: 0, y: '0%', x: '0%' }}
-                                    className={`text-[#ffff] text-xl top-1/2 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center`}
+                                    className={`text-[#ffff] text-xl top-1/3 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center hidden sm:block md:block`}
                                 >
                                     Clock is Ticking!
                                 </motion.div>
@@ -78,7 +78,7 @@ function LandingPage() {
                                         animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
                                         transition={{ duration: 1.0, ease: 'easeInOut', delay: '0.5' }}
                                         initial={{ y: '0%', x: '0%' }}
-                                        className='text-[#FDF0D1] text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl absolute top-[24vh] left-[20vw] sm:top-[10vh] md:top-[20vh] sm:left-[10vw] md:left-[20vw] text-bold transform -translate-x-1/2 flex items-center glow-text'
+                                        className='text-[#FDF0D1] text-xl hidden sm:block md:block lg:text-3xl xl:text-3xl absolute top-[24vh] left-[20vw] sm:top-[10vh] md:top-[20vh] sm:left-[10vw] md:left-[20vw] text-bold transform -translate-x-1/2 flex items-center glow-text'
                                     >
                                         Our 6-hour schedule is jam-packed with a brilliant & creative questionnaire
                                     </motion.div>
