@@ -1,10 +1,14 @@
 import '@fortawesome/fontawesome-free/css/all.css';
+import 'animate.css';
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import spacebg from '../assets/spacebg.jpg';
+import Astro from "../../public/svg/Astronaut.svg";
+import Ellipse2 from "../../public/svg/Ellipse2.svg";
+import LandingNavbar from '../common/components/LandingNavbar';
+import '../index.css';
 
 const passwordNotMatching = () => toast.error('Passwords do not match!!', {
     position: "top-right",
@@ -135,28 +139,26 @@ const SignUp = () => {
 
         ) : (
 
-        <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-fuchsia-950 to-purple-600 font-sans shadow-lg bg-no-repeat bg-cover">
-        <div className="bg-gray-100 h-[3/4] w-[4/5] my-16 flex justify-center items-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
+        <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+        <LandingNavbar />
+                            <div className="bg-[#0c0c0c] h-3/4 w-3/4 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
+                            <div className="imgdiv mx-auto my-auto hidden sm:block md:block w-full h-auto relative">
+                            <img src={Ellipse2} alt="" className="absolute top-0 left-0 w-full h-auto z-0" />
+                            <img src={Astro} alt="" className="animate__planet z-10 relative" />
+                            </div>
 
-        {/* Image */}
-        <div className='h-[3/4] w-[1/2]'>
-            <img src={spacebg} className='object-cover' alt="Space" />
-        </div>
-
-            {/* Login Form */}
             <motion.div
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
-                className="w-1/2 px-4 border-3 py-0 mt-4"
+                className="w-1/2 mt-4"
             >
-            <h1 className="text-3xl font-semibold mb-4 text-gray-700">Welcome!</h1>
-            {/* <h5 className='text-lg mx-auto text-center mb-12'>Please enter your details</h5> */}
-            <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
+                <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
+                <h1 className="text-3xl  sec-heading mb-4 text-[#a6c8d6]">Sign Up</h1>
                 <form>
-                    <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
-                        <label htmlFor="name" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i className="fas fa-user text-white"></i>
+                    <div className="mb-4 flex">
+                        <label htmlFor="name" className="block text-[#a6c8d6] text-xl font-semibold w-12">
+                            <i className="fas fa-user text-white py-3 mr-3"></i>
                         </label>
                         <input
                             type="text"
@@ -164,12 +166,12 @@ const SignUp = () => {
                             value={name}
                             placeholder='Name'
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full placeholder-white h-1/2 mt-1 p-1 bg-pink-400 focus:outline-none text-white"
+                            className="w-[90vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
                         />
                     </div>
-                    <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
-                        <label htmlFor="email" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i className="fa fa-envelope text-white"></i>
+                    <div className="mb-4  flex  ">
+                        <label htmlFor="email" className="block text-[#a6c8d6] text-xl font-semibold w-12">
+                            <i className="fa fa-envelope text-white py-3 mr-3"></i>
                         </label>
                         <input
                             type="email"
@@ -177,12 +179,12 @@ const SignUp = () => {
                             value={email}
                             placeholder='Email'
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full placeholder-white h-1/2 mt-1 p-1 bg-pink-400 focus:outline-none text-white"
+                            className="w-[90vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                         />
                     </div>
-                    <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
-                        <label htmlFor="password" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i className="fa fa-lock text-white"></i>
+                    <div className="mb-4  flex  ">
+                        <label htmlFor="password" className="block text-[#a6c8d6] text-xl font-semibold w-12">
+                            <i className="fa fa-lock text-white py-3 mr-3"></i>
                         </label>
                         <input
                             type="password"
@@ -190,12 +192,12 @@ const SignUp = () => {
                             value={password}
                             placeholder='Password'
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-full placeholder-white h-1/2 mt-1 p-1 bg-pink-400 focus:outline-none text-white"
+                            className="w-[90vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                         />
                     </div>
-                    <div className="mb-4 px-6 flex bg-pink-400 rounded-full">
-                        <label htmlFor="confirmPassword" className="block text-gray-700 text-xl font-semibold w-12">
-                            <i className="fa fa-lock text-white"></i>
+                    <div className="mb-4  flex ">
+                        <label htmlFor="confirmPassword" className="block text-[#a6c8d6] text-xl font-semibold w-12">
+                            <i className="fa fa-lock text-white py-3 mr-3"></i>
                         </label>
                         <input
                             type="password"
@@ -203,10 +205,10 @@ const SignUp = () => {
                             value={confirmPassword}
                             placeholder='Confirm Password'
                             onChange={(e) => setConfirmPassword(e.target.value)}
-                            className="w-full placeholder-white h-1/2 mt-1 p-1 bg-pink-400 focus:outline-none text-white"
+                            className="w-[40vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                         />
                     </div>
-                    <div          
+                    <div
                         type="button"
                         onClick={handleSignUp}
                         className="mx-auto my-4 w-24 bg-purple-600 hover:bg-purple-700 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300"
@@ -216,11 +218,11 @@ const SignUp = () => {
                     <ToastContainer />
                 </form>
             </div>
-            <div className='signUpLink text-center flex flex-col items-center my-4 mx-auto'>
-                <p className='text-xl'> Already have an account? </p>
+            <div className='signUpLink text-center flex flex-col items-center mx-auto'>
+                <p className='text-lg font-thin text-[#a6c8d6]'> Already have an account? </p>
                 <p          
                     onClick={moveToLogin}
-                    className="text-xl font-semibold text-blue-800"
+                    className="text-md font-thin text-[#6500E5]"
                 >
                     Login
                 </p>

@@ -4,9 +4,9 @@ const User = require('../models/user');
 const refreshTokenController = async (req, res) => {
     try {
         const cookie = req.cookies.refresh_token;
-        
+
         console.log('Received refresh token request:', cookie);
-        
+
         const refreshToken = cookie;
         console.log(refreshToken);
 
@@ -39,7 +39,7 @@ const refreshTokenController = async (req, res) => {
             async (err, decoded) => {
                 console.log('Decoded:', decoded);
                 console.log('Error:', err);
-        
+
                 if (err) {
                     foundUser.refreshToken = [...newRefreshTokenArray];
                     await foundUser.save();
@@ -59,7 +59,7 @@ const refreshTokenController = async (req, res) => {
                         }
                     },
                     process.env.ACCESS_TOKEN_SECRET,
-                    { expiresIn: '15m' }
+                    { expiresIn: '15s' }
                 );
 
                 const newRefreshToken = jwt.sign(
@@ -71,7 +71,7 @@ const refreshTokenController = async (req, res) => {
                 await foundUser.save();
 
                 res.cookie('refresh_token', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
-                
+
                 console.log('New access token:', accessToken);
                 res.json({ accessToken });
             }

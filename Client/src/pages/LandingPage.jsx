@@ -46,7 +46,7 @@ function LandingPage() {
                                     animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
                                     transition={{ duration: 1.0, ease: 'easeInOut', delay: '1.2' }}
                                     initial={{ opacity: 0, y: '0%', x: '0%' }}
-                                    className={`text-[#ffff] text-xl top-1/2 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center`}
+                                    className={`text-[#ffff] text-xl top-1/3 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center hidden sm:block md:block`}
                                 >
                                     Clock is Ticking!
                                 </motion.div>
@@ -64,21 +64,21 @@ function LandingPage() {
                                     <img
                                         src={setallite}
                                         alt="Ast"
-                                        className="absolute z-9 top-[20vh] left-[60vw] transform -translate-x-1/2 -translate-y-1/2 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__floating"
+                                        className="absolute z-9 top-[20vh] left-[60vw] transform -translate-x-1/2 -translate-y-1/2 h-[45vh] w-[45vw] sm:h-[25vh] sm:w-[35vw] md:h-[20vh] md:w-[30vw] lg:h-[50vh] lg:w-[50vw] animate__planet"
                                     />
 
 
                                     <img
                                         src={astroid2}
                                         alt="Ast"
-                                        className="absolute z-n1 top-[50vh] transform -translate-x-1/2 -translate-y-1/2 h-[15vh] w-[25vw] sm:h-[12vh] sm:w-[20vw] md:h-[10vh] md:w-[15vw] lg:h-[8vh] lg:w-[12vw] animate__floating"
+                                        className="absolute z-n1 top-[50vh] transform -translate-x-1/2 -translate-y-1/2 h-[15vh] w-[25vw] sm:h-[12vh] sm:w-[20vw] md:h-[10vh] md:w-[15vw] lg:h-[8vh] lg:w-[12vw] animate__planet"
                                     />
                                     <motion.div
                                         layout
                                         animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
                                         transition={{ duration: 1.0, ease: 'easeInOut', delay: '0.5' }}
                                         initial={{ y: '0%', x: '0%' }}
-                                        className='text-[#FDF0D1] text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-3xl absolute top-[24vh] left-[20vw] sm:top-[10vh] md:top-[20vh] sm:left-[10vw] md:left-[20vw] text-bold transform -translate-x-1/2 flex items-center glow-text'
+                                        className='text-[#FDF0D1] text-xl hidden sm:block md:block lg:text-3xl xl:text-3xl absolute top-[24vh] left-[20vw] sm:top-[10vh] md:top-[20vh] sm:left-[10vw] md:left-[20vw] text-bold transform -translate-x-1/2 flex items-center glow-text'
                                     >
                                         Our 6-hour schedule is jam-packed with a brilliant & creative questionnaire
                                     </motion.div>
@@ -97,7 +97,7 @@ function LandingPage() {
                                 </motion.div>
 
 
-                                <div className='top-1/2 left-1/4 right-1/4 absolute animate__rotate z-99'>
+                                <div className='top-1/2 left-1/4 right-1/4 absolute animate__rotate animate__bigger z-99'>
                                     <img
                                         src={mars}
                                         alt="Mars"

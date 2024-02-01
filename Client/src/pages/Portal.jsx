@@ -1,6 +1,6 @@
 /* eslint-disable prefer-const */
 import { AnimatePresence, motion } from 'framer-motion';
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { ToastContainer, toast } from 'react-toastify';
 import '../Styles/Home.css';
@@ -203,14 +203,14 @@ const Portal = () => {
         </div>
       </div>
     ) : (
-    <div className=" bg-cover bg-center min-h-screen p-4" style={{ backgroundImage: 'url("../../public/cropped-1920-1200-43865.jpg")' }}>
+      <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
       <Navbar />
-      <div className="quizContainer p-4 ">
-        <div id="quizTimer" className="fixed top-0 left-1/2 pt-28 transform -translate-x-1/2 m-4 mb-8 z-[999]">
+      <div className="quizContainer p-4 text-white">
+        <div id="quizTimer" className="fixed top-0 left-1/2 transform -translate-x-1/2 m-4 mb-8 z-9 sec-heading">
           {countdownSeconds > 0 ? (
             <>
               <p className="info"> Time remaining </p>
-              <p className="time animate-pulse">
+              <p className="time">
                 {Math.floor(countdownSeconds / 3600)}h : {Math.floor((countdownSeconds % 3600) / 60)}m : {countdownSeconds % 60}s
               </p>
             </>
@@ -251,7 +251,7 @@ const Portal = () => {
             {!isOpen && <div className="dot bg-green-500 w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>}
           </motion.div>
 
-          <div className="questions-container flex-col mx-auto my-auto p-4 rounded-xl h-full w-1/2 mt-28 flex justify-center ">
+          <div className="questions-container flex-col mx-auto my-auto p-3 rounded-xl h-full w-1/2 mt-28 flex justify-center item-center">
             <div className="questionAnswer ml-4 flex flex-col items-center">
               <div className="questions p-4 m-4 text-white">
                 <p id="questionStatement" className="text-3xl font-bold">

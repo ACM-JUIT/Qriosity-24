@@ -41,15 +41,14 @@ const CountDownTimer = () => {
     }, []);
 
     return (
-        <div className='card-glass'>
-            <div className='counter'>
-                <div className='text-5xl text-center text-white fixed top-[2rem] left-1/2 transform -translate-x-1/2'>
-                    {`${timeLeft.days.toString().padStart(2, '0')} : ${timeLeft.hours.toString().padStart(2, '0')} : ${timeLeft.minutes
-                        .toString()
-                        .padStart(2, '0')} : ${timeLeft.seconds.toString().padStart(2, '0')}`}
-                </div>
-            </div>
+        <div className='counter'>
+        <div className='text-5xl text-center text-white fixed left-1/2 transform -translate-x-1/2 md:bottom-[2rem] md:top-[2rem] md:left-[37rem] md:transform-none'>
+          {`${timeLeft.days.toString().padStart(2, '0')} : ${timeLeft.hours.toString().padStart(2, '0')} : ${timeLeft.minutes
+              .toString()
+              .padStart(2, '0')} : ${timeLeft.seconds.toString().padStart(2, '0')}`}
         </div>
+      </div>
+      
     );
 }
 
