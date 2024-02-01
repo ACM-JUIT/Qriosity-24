@@ -6,6 +6,8 @@ const answerSubmitController = async(req, res) => {
         const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
 
+        const startTime = new Date('February 03, 2024 16:00:00');
+
         console.log(questionNumber, answer, username)
 
         if (!questionNumber || !answer || !username) {
@@ -21,6 +23,9 @@ const answerSubmitController = async(req, res) => {
         console.log(question);
 
         if (question.answer.toLowerCase === answer.toLowerCase) {
+            const currentTime = new Date();
+            const timeDifferenceInMinutes = Math.floor((currentTime - startTime) / (1000 * 60));
+
             console.log({
                 ipAddress,
                 questionNumber,
@@ -31,7 +36,10 @@ const answerSubmitController = async(req, res) => {
 
             await User.updateOne(
                 { name: username },
-                { $inc: { points: 10 } }
+                {
+                    $inc: { points: 10 },
+                    $push: { time: timeDifferenceInMinutes },
+                },
             );
 
             return res.status(200).json({ message: 'Correct answer!', answer: question });

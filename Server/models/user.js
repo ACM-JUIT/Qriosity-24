@@ -25,6 +25,9 @@ const userSchema = new mongoose.Schema({
     {
         type: [String],
     },
+    time: {
+        type: [String]
+    }
 });
 
 const Users = mongoose.model('Users', userSchema);
