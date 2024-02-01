@@ -1,14 +1,14 @@
 const Question = require('../models/question');
 const User = require('../models/user')
 
-const answerSubmitController = async(req, res) => {
+const answerSubmitController = async (req, res) => {
     try {
         const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
 
         const startTime = new Date('February 03, 2024 16:00:00');
 
-        console.log(questionNumber, answer, username)
+        console.log(questionNumber, answer, username, req.ip)
 
         if (!questionNumber || !answer || !username) {
             return res.status(400).json({ error: 'Missing required data.' });

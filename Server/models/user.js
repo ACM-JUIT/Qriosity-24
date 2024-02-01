@@ -16,6 +16,11 @@ const userSchema = new mongoose.Schema({
     points: {
         type: Number
     },
+    currentQuestion: {
+        type: Number,
+        default: 1,
+        required: true
+    },
     visitHistory: [{ timestamp: { type: Number } }],
     refreshToken:
     {

@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { refreshUser, signOut } from "../../redux/slices/userSlice";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { refreshUser, signOut } from "../slices/userSlice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:3500',
@@ -29,29 +29,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             api.dispatch(signOut())
         }
     }
-    if(result?.error?.status === 500) {
+    if (result?.error?.status === 500) {
         //TODO: Navigate to login
     }
     return result
 }
 
-export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({
-        login: builder.mutation({
-            query: credentials => ({
-                url: "/login",
-                method: "POST",
-                body: { ...credentials }
-            })
-        }),
-        leaderboard: builder.query({
-            query: () => "/leaderboard",
-        }),
-        questions: builder.query({
-            query: () => "/questions",
-        })
-    })
-})
-
-export const { useLoginMutation, useLeaderboardQuery, useQuestionsQuery } = apiSlice;
+export default baseQueryWithReauth;
