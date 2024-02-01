@@ -57,7 +57,7 @@ function LandingPage() {
                                     <img
                                         src={astroid1}
                                         alt="Ast"
-                                        className="absolute left-[65vw] transform -translate-x-1/2 -translate-y-1/2 h-[20vh] w-[20vh] sm:h-[15vh] sm:w-[15vh] md:h-[10vh] md:w-[10vh] lg:h-[8vh] lg:w-[8vh] rotate-15 animate__rotate"
+                                        className="absolute left-[80vw] transform -translate-x-1/2 -translate-y-1/2 h-[5vh] w-[5vh] sm:h-[15vh] sm:w-[15vh] md:h-[10vh] md:w-[10vh] lg:h-[8vh] lg:w-[8vh] rotate-15 animate__rotate"
                                     />
                     
 

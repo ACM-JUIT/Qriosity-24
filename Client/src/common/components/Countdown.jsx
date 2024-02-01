@@ -42,7 +42,7 @@ const CountDownTimer = () => {
 
     return (
         <div className='counter'>
-        <div className='text-5xl text-center text-white fixed left-1/2 transform -translate-x-1/2 md:bottom-[2rem] md:top-[2rem] md:left-[37rem] md:transform-none'>
+        <div className='text-5xl text-center text-white fixed left-1/2 transform -translate-x-1/2 md:bottom-[2vh] md:top-[3vh] md:left-[39vw] md:transform-none'>
           {`${timeLeft.days.toString().padStart(2, '0')} : ${timeLeft.hours.toString().padStart(2, '0')} : ${timeLeft.minutes
               .toString()
               .padStart(2, '0')} : ${timeLeft.seconds.toString().padStart(2, '0')}`}

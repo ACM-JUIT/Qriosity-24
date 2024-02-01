@@ -118,11 +118,11 @@ const Login = () => {
       initial={{ opacity: 0, scale: 0.5 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.2 }}
-      className="w-1/2 mt-4"
+      className="w-3/4 my-4"
     >
     
-                    <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
-                    <h1 className="text-3xl sec-heading mb-4 text-[#a6c8d6]">Log In</h1>
+                    <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-screen flex-1 transition-all duration-300 justify-center">
+                    <h1 className="text-2xl sec-heading mb-4 text-[#a6c8d6]">Log In</h1>
       <form>
         <div className="mb-4 flex">
           <label htmlFor="email" className="block text-[#a6c8d6] text-xl font-semibold w-12">
@@ -134,7 +134,7 @@ const Login = () => {
             placeholder='Email'
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-[90vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
+            className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
           />
         </div>
         <div className="mb-4 flex">
@@ -147,7 +147,7 @@ const Login = () => {
             placeholder='Password'
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-[90vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
+            className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
           />
         </div>
         <div
