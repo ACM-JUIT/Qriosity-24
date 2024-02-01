@@ -317,7 +317,7 @@ const generateRandomColor = () => {
               </motion.div>
             </div>
 
-            <div
+            {/* <div
               onClick={handleToggle}
               className="Timer flex items-center justify-center p-2 mb-4 mx-auto"
             >
@@ -338,7 +338,7 @@ const generateRandomColor = () => {
                   ⏳
                 </motion.div>
               )}
-            </div>
+            </div> */}
 
             <div className="flex items-center justify-center p-2 mb-4 mx-auto">
               <motion.button
