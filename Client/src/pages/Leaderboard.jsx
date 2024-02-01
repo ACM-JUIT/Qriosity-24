@@ -72,34 +72,34 @@ function Leaderboard() {
       ) : (
         <div className="main min-h-screen inset-0 bg-cover overflow-scroll" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
           <Navbar />
+          <div className='performanceGraph mx-auto h-4/5 md:w-3/4 mt-4 mb-16'>
+              <Chart />
+          </div>
           <AnimatePresence mode="wait">
-              <div className="stats h-screen w-screen p-4">
+              <div className="stats h-screen w-screen p-4 mx-auto h-4/5 md:w-3/4">
                 <h1 className="text-white flex justify-center item-center text-5xl sec-heading">Stats</h1>
               <div className="h-full w-full bg-gray-900 rounded-md backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-900 p-4 mt-10">
-              <div className='performanceGraph'>
-                <Chart />
-            </div>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
+                    <th className="text-center text-base text-white py-2 px-4 border-b sec-heading">
                       Rank
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
+                    <th className="text-center text-base text-white py-2 px-4 border-b sec-heading">
                       Username
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
+                    <th className="text-center text-base text-white py-2 px-4 border-b sec-heading">
                       Time Taken
                     </th>
-                    <th className="text-center text-xl text-white py-2 border-b sec-heading">
+                    <th className="text-center text-base text-white py-2 border-b sec-heading">
                       Questions Solved
                     </th>
-                    <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
+                    <th className="text-center text-base text-white py-2 px-4 border-b sec-heading">
                       Points
                     </th>
                   </tr>
                 </thead>
-                <tbody>
+                {/* <tbody>
                   {data.map((user, index) => (
                     <tr key={index} className="names">
                       <td className="text-white text-xl py-2 px-4 border-b ">
@@ -137,7 +137,7 @@ function Leaderboard() {
                       </td>
                     </tr>
                   ))}
-                </tbody>
+                </tbody> */}
             </table>
                 </div>
                 </div>
