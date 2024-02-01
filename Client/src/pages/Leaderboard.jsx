@@ -137,6 +137,7 @@ function Leaderboard() {
                 </tbody>
             </table>
                 </div>
+                </div>
                 </AnimatePresence>
 
             <div className='performanceGraph'>

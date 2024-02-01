@@ -7,6 +7,7 @@ import '../Styles/Home.css';
 import '../Styles/portal.css';
 import Navbar from '../common/components/Navbar';
 import { selectCurrentUser } from '../redux/slices/userSlice';
+import fs from 'fs';
 
 const Portal = () => {
   
@@ -65,6 +66,44 @@ const Portal = () => {
     theme: "colored",
 });
 
+
+const generateRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+const fs = require(fs);
+const path = require('path');
+
+const sentChartData = (userName, lastSubmissionTime) => {
+  const targetDate = new Date('2024-02-04T10:00:00'); 
+  const currentUser = userName;
+  const quesMinTime = Math.floor((lastSubmissionTime-targetDate) / (1000 * 60));
+
+  const filePath = path.join(__dirname, 'Client/src/data/lineChart.json');
+  const jsonData = fs.readFileSync(filePath, 'utf-8');
+  const chartData = JSON.parse(jsonData);
+
+  const existingUser = chartData.find((user) => user.name === currentUser);
+  if (existingUser) {
+    existingUser.quesTime.push(quesMinTime);
+  } else {
+    const newUser = {
+      name: currentUser,
+      quesTime: [0],
+      color: generateRandomColor(),
+    };
+    newUser.quesTime.push(quesMinTime);
+    chartData.push(newUser);
+  }
+  fs.writeFileSync(filePath, JSON.stringify(chartData, null, 2), 'utf-8');
+};
+
+
   // Spinner
   const [loading, setLoading] = useState(true);
   const spinnerRef = useRef(null);
@@ -77,6 +116,7 @@ const Portal = () => {
       return () => clearTimeout(timeoutId);
     }
   }, []);
+
 
   // Fetching Ques Data 
   useEffect(() => {
@@ -158,6 +198,8 @@ const Portal = () => {
       if (response.ok) {
           correctAnswer();
           showNextQuestion();
+          setLastSubmissionTimestamp(Date.now());
+          sentChartData(currentUser.user.name, lastSubmissionTimestamp);
       } else {
           wrongAnswer();
           userAnswerInputRef.current.value = '';
