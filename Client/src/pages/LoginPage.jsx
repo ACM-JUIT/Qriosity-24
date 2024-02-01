@@ -56,7 +56,7 @@ const Login = () => {
   const { isLoggedIn } = useSelector((state) => state.userSlice);
   useEffect(() => {
     if (isLoggedIn) {
-      navigate("/leaderboard");
+      navigate("/portal");
     }
     //eslint-disable-next-line
   }, []);
@@ -67,12 +67,14 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await login({ email, password }).unwrap();
-
+      console.log("Login", response);
       if (response) {
         succesfulLogin(); //toast
         dispatch(signIn(response));
         console.log("Checking for response", response);
-        navigate("/portal");
+        setTimeout(() => {
+          navigate("/portal");
+        }, 1500);
       } else if (
         response.status === 401 &&
         response.error === "Incorrect password"

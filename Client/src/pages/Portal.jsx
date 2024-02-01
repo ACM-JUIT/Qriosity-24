@@ -1,14 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
+import { selectCurrentUser } from "../redux/slices/userSlice";
 import {
   ToastContainer,
   //toast
 } from "react-toastify";
-import { selectCurrentUser } from "../redux/slices/userSlice";
-import {
-  useSelector,
-  //  useDispatch
-} from "react-redux";
+import { useSelector } from "react-redux";
 import {
   useQuestionsQuery,
   useSubmitAnswerMutation,
@@ -18,6 +15,8 @@ import "../Styles/Home.css";
 import "../Styles/portal.css";
 
 const Portal = () => {
+  const user = useSelector(selectCurrentUser);
+
   const [
     currentQuestionIndex,
     //setCurrentQuestionIndex
@@ -88,21 +87,6 @@ const Portal = () => {
     }
   }, []);
 
-  // Fetching Ques Data
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch('http://localhost:3500/api/questions');
-  //       const data = await response.json();
-  //       setQuestionsData(data);
-  //       console.log(questionsData);
-  //     } catch (error) {
-  //       console.error('Error fetching questions:', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
-
   const { data: questionsData } = useQuestionsQuery();
 
   //eslint-disable-next-line
@@ -113,22 +97,11 @@ const Portal = () => {
     return Math.max(Math.floor(timeDifference / 1000), 0);
   }
 
-  // const displayHint = () => {
-  //   const [hintData, setHintData] = useState("Hint is still locked.");
-  //   if (questionsData && questionsData[currentQuestionIndex].hint) {
-  //     const hint = questionsData[currentQuestionIndex].hint.toString();
-  //     setHintData(hint);
-  //     console.log(hintData);
-  //   }
-  //   // Display or use hintData as needed
-  // };
-
   const [submit] = useSubmitAnswerMutation();
-  const currentUser = useSelector(selectCurrentUser);
 
   const checkAnswer = async () => {
     try {
-      const username = currentUser.user.name;
+      const username = user.name;
       const questionNumber =
         questionsData.questions[currentQuestionIndex].questionNumber;
       const answer = userAnswerInputRef.current.value;
@@ -183,27 +156,6 @@ const Portal = () => {
         >
           <Navbar />
           <div className="quizContainer p-4 text-white">
-            {/* <div
-              id="quizTimer"
-              className="fixed top-0 left-1/2 transform -translate-x-1/2 m-4 mb-8 z-9 sec-heading"
-            >
-              {countdownSeconds > 0 ? (
-                <>
-                  <p className="info"> Time remaining </p>
-                  <p className="time">
-                    {Math.floor(countdownSeconds / 3600)}h :{" "}
-                    {Math.floor((countdownSeconds % 3600) / 60)}m :{" "}
-                    {countdownSeconds % 60}s
-                  </p>
-                </>
-              ) : (
-                <>
-                  <p className="time animate-pulse"> 00h : 00m : 00s </p>
-                  <p className="info"> Qriosity-2024 is over!!! </p>
-                </>
-              )}
-            </div> */}
-
             <div className="flex h-100 flex-col sm:flex-row">
               <motion.div
                 layout
@@ -249,9 +201,12 @@ const Portal = () => {
                   <div className="questionAnswer ml-4 flex flex-col items-center">
                     <div className="questions p-4 m-4 text-white">
                       <p id="questionStatement" className="text-3xl font-bold">
-                        {currentQuestionIndex < questionsData.questions.length
-                          ? `${questionsData.questions[currentQuestionIndex].questionStatement}`
-                          : `You have completed all the questions.`}
+                        {user.currentQuestion < questionsData.questions.length
+                          ? `${
+                              questionsData.questions[user.currentQuestion]
+                                .questionStatement
+                            }`
+                          : `Congratulations! You have successfully completed Qriosity 4.0.`}
                       </p>
                     </div>
                     <motion.div

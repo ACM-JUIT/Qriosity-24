@@ -12,13 +12,11 @@ import {
 import storage from "redux-persist/lib/storage";
 import { thunk } from "redux-thunk";
 import userReducer from "./slices/userSlice";
-import profileReducer from "./slices/profileSlice";
 
 import { apiSlice } from "./api/apiSlice";
 
 const rootReducer = combineReducers({
   userSlice: userReducer,
-  profileSlice: profileReducer,
   [apiSlice.reducerPath]: apiSlice.reducer,
 });
 
