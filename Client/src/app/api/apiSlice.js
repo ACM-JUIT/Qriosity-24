@@ -15,11 +15,12 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
-
-    if (result?.error?.originalStatus === 403) {
+    console.log(result)
+    if (result?.error?.status === 403) {
         console.log('Refreshing token...');
 
         const refreshResult = await baseQuery('/refresh', api, extraOptions)
+        console.log(refreshResult)
         if (refreshResult?.data) {
             // const user = api.getState().userSlice.user
             api.dispatch(refreshUser({ ...refreshResult.data }))
@@ -27,6 +28,9 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
         } else {
             api.dispatch(signOut())
         }
+    }
+    if(result?.error?.status === 500) {
+        //TODO: Navigate to login
     }
     return result
 }
