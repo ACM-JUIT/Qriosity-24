@@ -1,10 +1,11 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../Styles/Home.css";
 import { useLeaderboardQuery } from "../app/api/apiSlice";
 import Navbar from "../common/components/Navbar";
-import { setLeaderboard } from "../redux/slices/userSlice";
+import { setLeaderboard, selectCurrentToken} from "../redux/slices/userSlice";
+import Chart from './Chart';
 
 function Leaderboard() {
 
@@ -134,12 +135,15 @@ function Leaderboard() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+            </table>
+                </div>
+                </AnimatePresence>
+
+            <div className='performanceGraph'>
+                <Chart />
             </div>
-            </div>
-          </AnimatePresence>
         </div>
-      )}
+    )}
     </>
   );
 }
