@@ -32,34 +32,34 @@ function Leaderboard() {
     //eslint-disable-next-line
   }, [data]);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch("http://localhost:3500/leaderboard", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      });
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3500/leaderboard", {
+  //       method: "GET",
+  //       headers: {
+  //         Authorization: `Bearer ${accessToken}`,
+  //       },
+  //     });
 
-      if (!response.ok) {
-        throw new Error(
-          `Failed to fetch leaderboard. Status: ${response.status}`
-        );
-      }
+  //     if (!response.ok) {
+  //       throw new Error(
+  //         `Failed to fetch leaderboard. Status: ${response.status}`
+  //       );
+  //     }
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (Array.isArray(data)) {
-        setLeaderboard(data);
-      } else {
-        console.error("Invalid data format:", data);
-      }
-    } catch (error) {
-      console.error("Error fetching leaderboard:", error);
-    }
-  };
+  //     if (Array.isArray(data)) {
+  //       setLeaderboard(data);
+  //     } else {
+  //       console.error("Invalid data format:", data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching leaderboard:", error);
+  //   }
+  // };
 
-  fetchData();
+  // fetchData();
 
   return (
     <>
@@ -70,12 +70,15 @@ function Leaderboard() {
           </div>
         </div>
       ) : (
-        <div className="main min-h-screen inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+        <div className="main min-h-screen inset-0 bg-cover overflow-scroll" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
           <Navbar />
           <AnimatePresence mode="wait">
               <div className="stats h-screen w-screen p-4">
                 <h1 className="text-white flex justify-center item-center text-5xl sec-heading">Stats</h1>
               <div className="h-full w-full bg-gray-900 rounded-md backdrop-filter backdrop-blur-sm bg-opacity-0 border border-gray-900 p-4 mt-10">
+              <div className='performanceGraph'>
+                <Chart />
+            </div>
               <table className="w-full border-collapse">
                 <thead>
                   <tr>
@@ -86,7 +89,7 @@ function Leaderboard() {
                       Username
                     </th>
                     <th className="text-center text-xl text-white py-2 px-4 border-b sec-heading">
-                      Top Positions
+                      Time Taken
                     </th>
                     <th className="text-center text-xl text-white py-2 border-b sec-heading">
                       Questions Solved
@@ -140,9 +143,6 @@ function Leaderboard() {
                 </div>
                 </AnimatePresence>
 
-            <div className='performanceGraph'>
-                <Chart />
-            </div>
         </div>
     )}
     </>
