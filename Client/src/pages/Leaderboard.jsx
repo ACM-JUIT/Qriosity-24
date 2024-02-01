@@ -1,10 +1,11 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "../Styles/Home.css";
 import { useLeaderboardQuery } from "../app/api/apiSlice";
 import Navbar from "../common/components/Navbar";
-import { setLeaderboard } from "../redux/slices/userSlice";
+import { setLeaderboard, selectCurrentToken} from "../redux/slices/userSlice";
+import Chart from './Chart';
 
 function Leaderboard() {
 
@@ -31,34 +32,34 @@ function Leaderboard() {
     //eslint-disable-next-line
   }, [data]);
 
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3500/leaderboard", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
+  const fetchData = async () => {
+    try {
+      const response = await fetch("http://localhost:3500/leaderboard", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
 
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to fetch leaderboard. Status: ${response.status}`
-  //       );
-  //     }
+      if (!response.ok) {
+        throw new Error(
+          `Failed to fetch leaderboard. Status: ${response.status}`
+        );
+      }
 
-  //     const data = await response.json();
+      const data = await response.json();
 
-  //     if (Array.isArray(data)) {
-  //       setLeaderboard(data);
-  //     } else {
-  //       console.error("Invalid data format:", data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching leaderboard:", error);
-  //   }
-  // };
+      if (Array.isArray(data)) {
+        setLeaderboard(data);
+      } else {
+        console.error("Invalid data format:", data);
+      }
+    } catch (error) {
+      console.error("Error fetching leaderboard:", error);
+    }
+  };
 
-  // fetchData();
+  fetchData();
 
   return (
     <>
@@ -134,12 +135,16 @@ function Leaderboard() {
                     </tr>
                   ))}
                 </tbody>
-              </table>
+            </table>
+                </div>
+                </div>
+                </AnimatePresence>
+
+            <div className='performanceGraph'>
+                <Chart />
             </div>
-            </div>
-          </AnimatePresence>
         </div>
-      )}
+    )}
     </>
   );
 }
