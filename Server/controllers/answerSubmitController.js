@@ -37,18 +37,19 @@ const answerSubmitController = async (req, res) => {
             await User.updateOne(
                 { name: username },
                 {
+                    // $inc: {questionNumber: 1},
                     $inc: { points: 10 },
                     $push: { time: timeDifferenceInMinutes },
                 },
             );
 
-            return res.status(200).json({ message: 'Correct answer!', answer: question });
+            return res.status(200).json({ message: 'Correct answer!' });
         } else {
             return res.status(400).json({ error: 'Incorrect answer.' });
         }
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ error: 'Internal Server Error' });
+        return res.status(500).json({ error: 'Internal Server Error: Question response maybe wrong' });
     }
 }
 

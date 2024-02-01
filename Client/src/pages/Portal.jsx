@@ -97,8 +97,8 @@ const Portal = () => {
     return Math.max(Math.floor(timeDifference / 1000), 0);
   }
 
+  //Check for user's answer
   const [submit] = useSubmitAnswerMutation();
-
   const checkAnswer = async () => {
     try {
       const username = user.name;
@@ -116,25 +116,6 @@ const Portal = () => {
     } catch (error) {
       console.error(error);
     }
-    // const response = await fetch("http://localhost:3500/submit-answer", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(),
-    // });
-
-    // const data = await response.json();
-
-    // if (response.ok) {
-    //   correctAnswer();
-    //   showNextQuestion();
-    //   setLastSubmissionTimestamp(Date.now());
-    //   sentChartData(currentUser.user.name, lastSubmissionTimestamp);
-    // } else {
-    //   wrongAnswer();
-    //   userAnswerInputRef.current.value = "";
-    // }
   };
   const [isOpen, setIsOpen] = useState(false);
 
