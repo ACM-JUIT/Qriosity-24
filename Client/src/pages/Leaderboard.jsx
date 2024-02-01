@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import "../Styles/Home.css";
 import { useLeaderboardQuery } from "../app/api/apiSlice";
 import Navbar from "../common/components/Navbar";
-import { setLeaderboard, selectCurrentToken} from "../redux/slices/userSlice";
+import { setLeaderboard } from "../redux/slices/userSlice";
 import Chart from './Chart';
 
 function Leaderboard() {
