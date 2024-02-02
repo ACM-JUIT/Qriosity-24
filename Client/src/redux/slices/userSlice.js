@@ -19,7 +19,7 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     refreshUser: (state, action) => {
-      state.access_token = action.payload.access_token;
+      state.access_token = action.payload.accessToken;
     },
     setLeaderboard: (state, action) => {
       state.leaderboard = action.leaderboard;

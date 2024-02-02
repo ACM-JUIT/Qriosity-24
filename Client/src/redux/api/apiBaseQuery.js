@@ -24,11 +24,10 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
             method: "POST",
             body: { refresh: api.getState().refresh_token },
         },
-        api,
-        extraOptions)
+            api,
+            extraOptions)
         console.log(refreshResult)
         if (refreshResult?.data) {
-            console.log("refresh data", refreshResult.data)
             api.dispatch(refreshUser({ ...refreshResult.data }))
             result = await baseQuery(args, api, extraOptions)
         } else {
