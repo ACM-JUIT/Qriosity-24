@@ -2,11 +2,11 @@ import 'animate.css';
 import { motion } from 'framer-motion';
 import 'ldrs/quantum';
 import { useEffect, useRef, useState } from 'react';
-import Q from '../../public/svg/Q.svg';
-import mars from '../../public/svg/mars.svg';
-import astroid1 from '../../public/svg/pngwing2.svg';
-import astroid2 from '../../public/svg/pngwing4.svg';
-import setallite from '../../public/svg/sattelite.svg';
+import Q from '../../src/assets/svg/Q.svg';
+import mars from '../../src/assets/svg/mars.svg';
+import astroid1 from '../../src/assets/svg/pngwing2.svg';
+import astroid2 from '../../src/assets/svg/pngwing4.svg';
+import setallite from '../../src/assets/svg/sattelite.svg';
 import '../Styles/animations.css';
 import Countdown from "../common/components/Countdown";
 import LandingNavbar from "../common/components/LandingNavbar";
@@ -37,7 +37,7 @@ function LandingPage() {
                     </div>
                 ) :
                     (
-                        <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+                        <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
                             <LandingNavbar />
                             <div className='flex flex-col'>
                             <Countdown targetDateProp={targetDate} />
