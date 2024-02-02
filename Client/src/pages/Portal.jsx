@@ -48,31 +48,31 @@ const Portal = () => {
     return existentialCrisisMessages[randomIndex];
   };
 
-  // const wrongAnswer = () => {
-  //   const message = getRandomMessage();
-  //   toast.error(message, {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "colored",
-  //   });
-  // };
+  const wrongAnswer = () => {
+    const message = getRandomMessage();
+    toast.error(message, {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
 
-  // const correctAnswer = () =>
-  //   toast.success("Correct answer!!", {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "colored",
-  //   });
+  const correctAnswer = () =>
+    toast.success("Correct answer!!", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
 
   // Spinner
   const [loading, setLoading] = useState(true);
@@ -90,20 +90,19 @@ const Portal = () => {
   const { data: questionsData } = useQuestionsQuery();
 
   //eslint-disable-next-line
-  function calculateRemainingTimeInSeconds() {
-    const targetDate = new Date("2024-02-04T10:00:00");
-    const currentTime = new Date();
-    const timeDifference = targetDate.getTime() - currentTime.getTime();
-    return Math.max(Math.floor(timeDifference / 1000), 0);
-  }
+  // function calculateRemainingTimeInSeconds() {
+  //   const targetDate = new Date("2024-02-04T10:00:00");
+  //   const currentTime = new Date();
+  //   const timeDifference = targetDate.getTime() - currentTime.getTime();
+  //   return Math.max(Math.floor(timeDifference / 1000), 0);
+  // }
 
   //Check for user's answer
   const [submit] = useSubmitAnswerMutation();
   const checkAnswer = async () => {
     try {
       const username = user.name;
-      const questionNumber =
-        questionsData.questions[currentQuestionIndex].questionNumber;
+      const questionNumber = user.currentQuestion;
       const answer = userAnswerInputRef.current.value;
       console.log(username, questionNumber, answer);
 
@@ -112,7 +111,9 @@ const Portal = () => {
         answer,
         username,
       }).unwrap();
+
       console.log(response);
+
     } catch (error) {
       console.error(error);
     }
@@ -163,7 +164,7 @@ const Portal = () => {
                       </h1>
                       <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
                         {Array.from(
-                          { length: currentQuestionIndex + 2 },
+                          { length: user.currentQuestion + 2 },
                           (_, index) => (
                             <li key={index + 1}>{index + 1}</li>
                           )

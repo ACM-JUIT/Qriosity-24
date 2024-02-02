@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
     },
     currentQuestion: {
         type: Number,
-        default: 1,
+        default: 0,
         required: true
     },
     visitHistory: [{ timestamp: { type: Number } }],
