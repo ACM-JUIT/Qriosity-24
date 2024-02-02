@@ -1,17 +1,18 @@
-import '@fortawesome/fontawesome-free/css/all.css';
-import { motion } from 'framer-motion';
-import { useEffect, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import "@fortawesome/fontawesome-free/css/all.css";
+import { motion } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Astro from "../../public/svg/Astronaut.svg";
 import Ellipse2 from "../../public/svg/Ellipse2.svg";
-import { useLoginMutation } from '../app/api/apiSlice';
-import LandingNavbar from '../common/components/LandingNavbar';
-import { signIn } from '../redux/slices/userSlice';
+import LandingNavbar from "../common/components/LandingNavbar";
+import { useLoginMutation } from "../redux/api/apiSlice";
+import { signIn } from "../redux/slices/userSlice";
 
-const succesfulLogin = () => toast.success('Login successful!', {
+const succesfulLogin = () =>
+  toast.success("Login successful!", {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -20,9 +21,10 @@ const succesfulLogin = () => toast.success('Login successful!', {
     draggable: true,
     progress: undefined,
     theme: "colored",
-});
+  });
 
-const wrongPassword = () => toast.error('Wrong password!', {
+const wrongPassword = () =>
+  toast.error("Wrong password!", {
     position: "top-right",
     autoClose: 5000,
     hideProgressBar: false,
@@ -31,10 +33,9 @@ const wrongPassword = () => toast.error('Wrong password!', {
     draggable: true,
     progress: undefined,
     theme: "colored",
-});
+  });
 
 const Login = () => {
-
   const dispatch = useDispatch();
 
   const [loading, setLoading] = useState(true);
@@ -54,64 +55,77 @@ const Login = () => {
 
   const { isLoggedIn } = useSelector((state) => state.userSlice);
   useEffect(() => {
-      if(isLoggedIn) {
-        navigate("/leaderboard");
+    if (isLoggedIn) {
+      navigate("/portal");
+    }
+    //eslint-disable-next-line
+  }, []);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      const response = await login({ email, password }).unwrap();
+      console.log("Login", response);
+      if (response) {
+        succesfulLogin(); //toast
+        dispatch(signIn(response));
+        console.log("Checking for response", response);
+        setTimeout(() => {
+          navigate("/portal");
+        }, 1500);
+      } else if (
+        response.status === 401 &&
+        response.error === "Incorrect password"
+      ) {
+        wrongPassword(); //toast
+        console.error("Error logging in:", response.status, response.error);
+        console.log(response);
+      } else {
+        console.error("Error logging in:", response.status, response.error);
+        console.log(response);
       }
-  }, [isLoggedIn]);
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
+  };
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const moveToSignUp = async () => {
+    navigate("/signup");
+  };
 
-    const handleLogin = async () => {
-        try {
-          const response = await login({ email, password }).unwrap();
-
-            if (response) {
-
-                succesfulLogin(); //toast
-                dispatch(signIn(response))
-                console.log('Checking for response', response)
-                navigate('/portal')
-
-            } else if(response.status === 401 && response.error === "Incorrect password") {
-                wrongPassword(); //toast
-                console.error('Error logging in:', response.status, response.error);
-                console.log(response)
-            } else {
-                console.error('Error logging in:', response.status, response.error);
-                console.log(response)
-            }
-        } catch (error) {
-            console.error('Error during login:', error);
-        }
-    };
-
-    const moveToSignUp = async () => {
-      navigate('/signup')
-    };
-
-    return (
-
-      <>
-      {
-      loading ? (
+  return (
+    <>
+      {loading ? (
         <div className="fixed top-0 left-0 w-full h-full bg-black flex items-center justify-center">
-        <div ref={spinnerRef} id="spinner" className="relative">
+          <div ref={spinnerRef} id="spinner" className="relative">
             <l-quantum size="100" speed="2" color="white"></l-quantum>
+          </div>
         </div>
-    </div>
-
       ) : (
-
-              <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
-                <LandingNavbar />
-                <div className="bg-[#0c0c0c] h-3/4 w-3/4 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
-    
-    {/* Login Page Image */}
-    <div className="imgdiv mx-auto my-auto hidden sm:block md:block w-full h-auto relative">
-  <img src={Ellipse2} alt="" className="absolute top-0 left-0 w-full h-auto z-0" />
-  <img src={Astro} alt="" className="animate__planet z-10 relative" />
-</div>
+        <div
+          className="main min-h-screen fixed inset-0 bg-cover overflow-hidden"
+          style={{
+            backgroundImage:
+              'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
+          }}
+        >
+          <LandingNavbar />
+          <div className="bg-[#0c0c0c] h-3/4 w-3/4 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
+            {/* Login Page Image */}
+            <div className="imgdiv mx-auto my-auto hidden sm:block md:block w-full h-auto relative">
+              <img
+                src={Ellipse2}
+                alt=""
+                className="absolute top-0 left-0 w-full h-auto z-0"
+              />
+              <img
+                src={Astro}
+                alt=""
+                className="animate__planet z-10 relative"
+              />
+            </div>
 
     {/* Login Form */}
     <motion.div
@@ -175,7 +189,7 @@ const Login = () => {
 </div>
     )}
     </>
-    );
+  );
 };
 
 export default Login;

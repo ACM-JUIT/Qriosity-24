@@ -1,5 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { refreshUser, signOut } from "../../redux/slices/userSlice";
+import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { refreshUser, signOut } from "../slices/userSlice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'http://localhost:3500',
@@ -18,37 +18,27 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     console.log(result)
     if (result?.error?.status === 403) {
         console.log('Refreshing token...');
-
-        const refreshResult = await baseQuery('/refresh', api, extraOptions)
+        const refreshResult = await baseQuery({
+            credentials: "include",
+            url: "/refresh",
+            method: "POST",
+            body: { refresh: api.getState().refresh_token },
+        },
+        api,
+        extraOptions)
         console.log(refreshResult)
         if (refreshResult?.data) {
-            // const user = api.getState().userSlice.user
+            console.log("refresh data", refreshResult.data)
             api.dispatch(refreshUser({ ...refreshResult.data }))
             result = await baseQuery(args, api, extraOptions)
         } else {
             api.dispatch(signOut())
         }
     }
-    if(result?.error?.status === 500) {
+    if (result?.error?.status === 500) {
         //TODO: Navigate to login
     }
     return result
 }
 
-export const apiSlice = createApi({
-    baseQuery: baseQueryWithReauth,
-    endpoints: builder => ({
-        login: builder.mutation({
-            query: credentials => ({
-                url: "/login",
-                method: "POST",
-                body: { ...credentials }
-            })
-        }),
-        leaderboard: builder.query({
-            query: () => "/leaderboard",
-        })
-    })
-})
-
-export const { useLoginMutation, useLeaderboardQuery } = apiSlice;
+export default baseQueryWithReauth;
