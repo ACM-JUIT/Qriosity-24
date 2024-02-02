@@ -20,7 +20,7 @@ const Portal = () => {
   const [
     currentQuestionIndex,
     //setCurrentQuestionIndex
-  ] = useState(1);
+  ] = useState(0);
   const userAnswerInputRef = useRef(null);
 
   //Toasts
@@ -208,7 +208,7 @@ const Portal = () => {
                   <div className="flex items-center justify-center p-2 mb-4 mx-auto">
                     <motion.button
                       id="hintButton"
-                      onClick={console.log("Hello")}
+                      // onClick={console.log("Hello")}
                       whileHover={{
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",

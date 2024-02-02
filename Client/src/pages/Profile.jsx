@@ -6,6 +6,7 @@ import pfp from "../../public/svg/pfp.svg";
 import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
 import { signOut } from "../redux/slices/userSlice";
+import { toast,  ToastContainer } from "react-toastify";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -14,10 +15,27 @@ const Profile = () => {
 
   const user = useSelector(selectCurrentUser);
 
+  const signedOutToast = () => {
+    toast.success("User logged out", {
+      position: "bottom-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+    });
+  };
+
   const logout = () => {
     dispatch(signOut());
-    navigate("/login");
-    console.log("User logged out");
+    signedOutToast();
+    
+    setTimeout(() => {
+      navigate("/login");
+      console.log("User logged out");
+    }, 2000);
   };
 
   const [loading, setLoading] = useState(true);
@@ -49,6 +67,7 @@ const Profile = () => {
           }}
         >
           <Navbar />
+          <ToastContainer />
           <div className="bg-[#0c0c0c] h-1/2 w-1/2 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
             {user ? (
               <div className="flex flex-col m-4 p-3">

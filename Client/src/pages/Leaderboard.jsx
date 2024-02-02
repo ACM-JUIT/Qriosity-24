@@ -24,6 +24,24 @@ function Leaderboard() {
 
   const { data, isSuccess } = useLeaderboardQuery();
 
+  const formatTime = (minutes) => {
+
+    if (isNaN(minutes)) {
+      return "0 h 0 m";
+    }
+
+    const hours = Math.floor(minutes / 60);
+    const remainingMinutes = minutes % 60;
+  
+    if (hours === 0) {
+      return `${remainingMinutes} m`;
+    } else if (remainingMinutes === 0) {
+      return `${hours} h`;
+    } else {
+      return `${hours} h ${remainingMinutes} m`;
+    }
+  };
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(setLeaderboard(data));
@@ -106,45 +124,33 @@ function Leaderboard() {
                       </th>
                     </tr>
                   </thead>
-                  {/* <tbody>
-                  {data.map((user, index) => (
-                    <tr key={index} className="names">
-                      <td className="text-white text-xl py-2 px-4 border-b ">
-                        {index === 0
-                          ? "🥇"
-                          : index === 1
-                          ? "🥈"
-                          : index === 2
-                          ? "🥉"
-                          : index + 1}
-                      </td>
-                      <td className="text-white text-xl py-2 px-4 border-b">
-                        {user.name}
-                      </td>
-                      <td className="text-white text-xl py-2 px-4 border-b">
-                        {index === 0
-                          ? "🟢"
-                          : index === 1
-                          ? "🟢"
-                          : index === 2
-                          ? "🟢"
-                          : index === 3
-                          ? "🟢"
-                          : index === 4
-                          ? "🟢"
-                          : index === 5
-                          ? "🟢"
-                          : "🔴"}
-                      </td>
-                      <td className="text-white text-xl py-2 border-b">
-                        {user.points / 10}
-                      </td>
-                      <td className="text-white text-xl py-2 px-4 border-b">
-                        {user.points}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody> */}
+                  <tbody>
+                    {data.map((user, index) => (
+                      <tr key={index} className="names">
+                        <td className="text-white text-xl py-2 px-4 border-b ">
+                          {index === 0
+                            ? "🥇"
+                            : index === 1
+                            ? "🥈"
+                            : index === 2
+                            ? "🥉"
+                            : index + 1}
+                        </td>
+                        <td className="text-white text-xl py-2 px-4 border-b">
+                          {user.name}
+                        </td>
+                        <td className="text-white text-xl py-2 px-4 border-b">
+                          {formatTime(user.time[user.time.length-1])}
+                        </td>
+                        <td className="text-white text-xl py-2 border-b">
+                          {user.points / 10}
+                        </td>
+                        <td className="text-white text-xl py-2 px-4 border-b">
+                          {user.points}
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
                 </table>
               </div>
             </div>
