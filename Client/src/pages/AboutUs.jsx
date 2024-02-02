@@ -50,7 +50,7 @@ const AboutUs = () => {
             <div className=' m-4 mt-8 rounded-md backdrop-filter backdrop-blur-sm border border-gray-500 flex flex-col bg-opacity-50'>
               <motion.div
               layout
-              animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
+              animate={{ opacity: [0, 1], y: ['25%', '0%'], x: ['0%', '0%'] }}
               transition={{ duration: 0.6, ease: 'easeInOut' }}
               initial={{ opacity: 0, y: '0%', x: '0%' }}
               >

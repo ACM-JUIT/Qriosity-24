@@ -151,11 +151,11 @@ const SignUp = () => {
                 initial={{ opacity: 0, scale: 0.5 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.2 }}
-                className="w-1/2 mt-4"
+                className="w-3/4 my-4"
             >
-                <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-xxl flex-1 transition-all duration-300 justify-center">
-                <h1 className="text-3xl  sec-heading mb-4 text-[#a6c8d6]">Sign Up</h1>
-                <form>
+                <div className=" mx-3 text-white p-2 shadow-md max-w-screen flex-1 transition-all duration-300">
+                <h1 className="text-2xl sec-heading mb-4 text-[#a6c8d6]">Sign Up</h1>
+                <form className=''>
                     <div className="mb-4 flex">
                         <label htmlFor="name" className="block text-[#a6c8d6] text-xl font-semibold w-12">
                             <i className="fas fa-user text-white py-3 mr-3"></i>
@@ -166,7 +166,7 @@ const SignUp = () => {
                             value={name}
                             placeholder='Name'
                             onChange={(e) => setName(e.target.value)}
-                            className="w-[90vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
+                            className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
                         />
                     </div>
                     <div className="mb-4  flex  ">
@@ -179,7 +179,7 @@ const SignUp = () => {
                             value={email}
                             placeholder='Email'
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-[90vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
+                            className="w-[40vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                         />
                     </div>
                     <div className="mb-4  flex  ">
@@ -192,7 +192,7 @@ const SignUp = () => {
                             value={password}
                             placeholder='Password'
                             onChange={(e) => setPassword(e.target.value)}
-                            className="w-[90vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
+                            className="w-[40vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                         />
                     </div>
                     <div className="mb-4  flex ">
@@ -220,7 +220,7 @@ const SignUp = () => {
             </div>
             <div className='signUpLink text-center flex flex-col items-center mx-auto'>
                 <p className='text-lg font-thin text-[#a6c8d6]'> Already have an account? </p>
-                <p          
+                <p
                     onClick={moveToLogin}
                     className="text-md font-thin text-[#6500E5]"
                 >
