@@ -23,7 +23,7 @@ const Rules = () => {
     'People outside JUIT need to use their college IDs for entering the game.',
     'Register yourself on the QRIOSITY 4.0 website to access the questions using JUIT Solan Email ID only.',
     'Each question is a list of hints directing to a certain term or company or software, everything is related to the technical world. Internet is your comrade, go crazy.',
-    '6 hours will be allotted (starting at 4 PM, 04/02/2024) to complete the whole quiz.',
+    '6 hours will be allotted (starting at 4 PM, 03/02/2024) to complete the whole quiz.',
     'Answers are NOT case sensitive.',
     'Write your answer in the given box. If the answer is correct, you\'ll be allowed to move to the next question. If not correct, keep trying, infinite tries are there.',
     'If the answer contains multiple words, remove white space. For example, if the answer is “United Airlines”, submit it as “unitedairlines” only.',
@@ -55,7 +55,7 @@ const Rules = () => {
             >
             <motion.div
               layout
-              animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
+              animate={{ opacity: [0, 1], y: ['25%', '0%'], x: ['0%', '0%'] }}
               transition={{ duration: 0.6, ease: 'easeInOut' }}
               initial={{ opacity: 0, y: '0%', x: '0%' }}
               >

@@ -1,21 +1,22 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { selectCurrentUser } from "../redux/slices/userSlice";
+import { useSelector } from "react-redux";
 import {
   ToastContainer,
-  //toast
 } from "react-toastify";
-import { useSelector } from "react-redux";
+import "../Styles/Home.css";
+import "../Styles/portal.css";
+import Countdown from "../common/components/Countdown";
+import Navbar from "../common/components/Navbar";
 import {
   useQuestionsQuery,
   useSubmitAnswerMutation,
 } from "../redux/api/apiSlice";
-import Navbar from "../common/components/Navbar";
-import "../Styles/Home.css";
-import "../Styles/portal.css";
+import { selectCurrentUser } from "../redux/slices/userSlice";
 
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
+  const targetDate = new Date('2024-02-03T22:00:00Z');
 
   const [
     currentQuestionIndex,
@@ -130,13 +131,14 @@ const Portal = () => {
         </div>
       ) : (
         <div
-          className="main min-h-screen fixed inset-0 bg-cover overflow-hidden"
+          className="main min-h-screen fixed inset-0 bg-cover overflow-scroll"
           style={{
             backgroundImage:
               'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
-          <Navbar />
+            <Navbar />
+            <Countdown targetDateProp={targetDate} />
           <div className="quizContainer p-4 text-white">
             <div className="flex h-100 flex-col sm:flex-row">
               <motion.div
@@ -179,10 +181,10 @@ const Portal = () => {
               </motion.div>
 
               {questionsData && (
-                <div className="questions-container flex-col mx-auto my-auto p-3 rounded-xl h-full w-1/2 mt-28 flex justify-center item-center">
-                  <div className="questionAnswer ml-4 flex flex-col items-center">
+                <div className="questions-container flex-col mx-auto my-auto rounded-xl w-1/2 mt-28 flex justify-center item-center">
+                  <div className="questionAnswer flex flex-col items-center">
                     <div className="questions p-4 m-4 text-white">
-                      <p id="questionStatement" className="text-3xl font-bold">
+                      <p id="questionStatement" className="text-sm md:text-2xl lg:text-3xl xl:text-3xl font-bold h-auto">
                         {user.currentQuestion < questionsData.questions.length
                           ? `${
                               questionsData.questions[user.currentQuestion]
@@ -200,7 +202,7 @@ const Portal = () => {
                         id="userAnswer"
                         ref={userAnswerInputRef}
                         placeholder="Enter your answer"
-                        className=" p-2 mt-4 mx-auto text-black rounded-lg focus:outline-none"
+                        className=" p-2 mt-4 mx-auto text-black text-md rounded-lg focus:outline-none w-1/2 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto"
                         autoComplete="off"
                       />
                     </motion.div>
@@ -214,9 +216,9 @@ const Portal = () => {
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700"
+                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 w-0 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto text-sm md:text-md lg:text-xl xl:text-xl"
                     >
-                      Hint
+                     <p className="hidden sm:block">Hint</p> 
                     </motion.button>
                     <motion.button
                       id="submitButton"
@@ -225,9 +227,9 @@ const Portal = () => {
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700"
+                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700 w-0 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto text-sm md:text-md lg:text-xl xl:text-xl"
                     >
-                      Submit
+                      <p className="hidden sm:block">Submit</p>
                     </motion.button>
                   </div>
                 </div>
