@@ -37,10 +37,8 @@ const answerSubmitController = async (req, res) => {
             await User.updateOne(
                 { name: username },
                 {
-                    // $inc: {questionNumber: 1},
-                    $inc: { points: 10 },
+                    $inc: { points: 10, currentQuestion: 1 },
                     $push: { time: timeDifferenceInMinutes },
-                    $inc: { currentQuestion: 1 },
                 },
             );
 
