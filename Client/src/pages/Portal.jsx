@@ -1,7 +1,10 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectCurrentUser, setCurrentUser } from "../redux/slices/userSlice";
+import {
+  selectCurrentUser,
+  updateUserCurrentQuestion,
+} from "../redux/slices/userSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "../Styles/Home.css";
 import "../Styles/portal.css";
@@ -14,10 +17,11 @@ import {
 
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
+  console.log(user);
   const targetDate = new Date("2024-02-03T22:00:00Z");
   const dispatch = useDispatch();
 
-  const userAnswerInputRef = useRef(null);
+  const [userAnswer, setUserAnswer] = useState("");
 
   //Toasts
   const existentialCrisisMessages = [
@@ -58,15 +62,16 @@ const Portal = () => {
   }, []);
 
   const { data: questionsData } = useQuestionsQuery();
-  console.log(questionsData);
+  // console.log(questionsData);
 
   //Check for user's answer
   const [submit] = useSubmitAnswerMutation();
   const checkAnswer = async () => {
+    setUserAnswer(null);
     try {
       const username = user.name;
       const questionNumber = user.currentQuestion + 1;
-      const answer = userAnswerInputRef.current.value;
+      const answer = userAnswer;
       console.log(username, questionNumber, answer);
 
       const response = await submit({
@@ -79,8 +84,8 @@ const Portal = () => {
 
       if (response.correct == true) {
         dispatch(
-          setCurrentUser({
-            currentQuestion: response.currentQuestion,
+          updateUserCurrentQuestion({
+            currentQuestion: response.newQuestionNumber,
           })
         );
         toast.success("Correct answer!!", {
@@ -93,9 +98,6 @@ const Portal = () => {
           progress: undefined,
           theme: "colored",
         });
-        setTimeout(() => {
-          window.location.reload(true);
-        }, 1000);
       } else if (response.correct == false) {
         toast.error(getRandomMessage(), {
           position: "top-right",
@@ -181,7 +183,7 @@ const Portal = () => {
                         id="questionStatement"
                         className="text-sm md:text-2xl lg:text-3xl xl:text-3xl font-bold h-auto"
                       >
-                        {user.currentQuestion < questionsData.questions.length
+                        {user.currentQuestion < 25
                           ? `${
                               questionsData.questions[user.currentQuestion]
                                 .questionStatement
@@ -196,7 +198,7 @@ const Portal = () => {
                       <input
                         type="text"
                         id="userAnswer"
-                        ref={userAnswerInputRef}
+                        onChange={(e) => setUserAnswer(e.target.value)}
                         placeholder="Enter your answer"
                         className=" p-2 mt-4 mx-auto text-black text-md rounded-lg focus:outline-none w-1/2 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto"
                         autoComplete="off"
