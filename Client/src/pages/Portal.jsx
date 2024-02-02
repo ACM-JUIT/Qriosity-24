@@ -17,8 +17,8 @@ import {
 
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
-  console.log(user);
-  const targetDate = new Date("2024-02-03T22:00:00Z");
+  // console.log(user);
+  const targetDate = new Date("2024-02-03T16:00:00Z");
   const dispatch = useDispatch();
 
   const [userAnswer, setUserAnswer] = useState("");
@@ -40,12 +40,33 @@ const Portal = () => {
     "After that answer, your parents shouldn't be proud of you",
   ];
 
+  const hintShowingMessages = [
+    "Did you try asking the question nicely? It might reveal the answer!",
+    "Rumor has it, the hint is doing stand-up comedy. Maybe it'll tell you a joke!",
+    "Hint: The answer is not '42,' but it's close enough to make Douglas Adams smile.",
+    "Hint: If at first, you don't succeed, try ordering pizza. It won't help, but pizza!",
+    "Knock, knock. Who's there? Not the answer! Keep trying!",
+    "Hint: The secret ingredient to solving this question is not chocolate, but close!",
+    "If hints were snacks, you'd be a gourmet chef by now. Keep cooking!",
+    "Hint: Rumor has it, the question is dating the answer. Try to impress it!",
+    "Hint: If procrastination were an Olympic sport, you'd be a gold medalist. Get back to work!",
+    "Remember, even Sherlock Holmes needed Watson's help sometimes. Ask a friend!",
+  ];
+  
+
   //eslint-disable-next-line
   const getRandomMessage = () => {
     const randomIndex = Math.floor(
       Math.random() * existentialCrisisMessages.length
     );
     return existentialCrisisMessages[randomIndex];
+  };
+
+  const getRandomMessage2 = () => {
+    const randomIndex = Math.floor(
+      Math.random() * hintShowingMessages.length
+    );
+    return hintShowingMessages[randomIndex];
   };
 
   // Spinner
@@ -66,6 +87,41 @@ const Portal = () => {
 
   //Check for user's answer
   const [submit] = useSubmitAnswerMutation();
+
+  const displayHint = async () => {
+    const currentQuestion = questionsData.questions[user.currentQuestion];
+
+    if (currentQuestion && user.time[user.time.length - 1] > 20) {
+      toast.success(
+        currentQuestion.hint,
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+    } else {
+      toast.info(
+        getRandomMessage2(),
+        {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        }
+      );
+    }
+  }
+
   const checkAnswer = async () => {
     setUserAnswer(null);
     try {
@@ -209,21 +265,7 @@ const Portal = () => {
                   <div className="flex items-center justify-center p-2 mb-4 mx-auto">
                     <motion.button
                       id="hintButton"
-                      onClick={() =>
-                        toast.info(
-                          questionsData.questions[user.currentQuestion].hint,
-                          {
-                            position: "top-right",
-                            autoClose: 3000,
-                            hideProgressBar: false,
-                            closeOnClick: true,
-                            pauseOnHover: true,
-                            draggable: true,
-                            progress: undefined,
-                            theme: "colored",
-                          }
-                        )
-                      }
+                      onClick={displayHint}
                       whileHover={{
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
