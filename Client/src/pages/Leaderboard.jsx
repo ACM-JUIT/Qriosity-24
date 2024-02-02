@@ -3,8 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
-import { setLeaderboard } from "../redux/slices/userSlice";
 import { useLeaderboardQuery } from "../redux/api/apiSlice";
+import { setLeaderboard } from "../redux/slices/userSlice";
 import Chart from "./Chart";
 
 function Leaderboard() {
@@ -91,7 +91,7 @@ function Leaderboard() {
           className="main min-h-screen inset-0 bg-cover overflow-scroll"
           style={{
             backgroundImage:
-              'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
+              'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
           <Navbar />

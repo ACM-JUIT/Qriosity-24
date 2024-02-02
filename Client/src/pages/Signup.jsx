@@ -5,8 +5,8 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Astro from "../../public/svg/Astronaut.svg";
-import Ellipse2 from "../../public/svg/Ellipse2.svg";
+import Astro from "../../src/assets/svg/Astronaut.svg";
+import Ellipse2 from "../../src/assets/svg/Ellipse2.svg";
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
 
@@ -139,7 +139,7 @@ const SignUp = () => {
 
         ) : (
 
-        <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+        <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
         <LandingNavbar />
                             <div className="bg-[#0c0c0c] h-3/4 w-3/4 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
                             <div className="imgdiv mx-auto my-auto hidden sm:block md:block w-full h-auto relative">

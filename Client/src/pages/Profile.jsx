@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import pfp from "../../public/svg/pfp.svg";
+import pfp from "../../src/assets/svg/pfp.svg";
 import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
 import { selectCurrentUser, signOut } from "../redux/slices/userSlice";
@@ -62,7 +62,7 @@ const Profile = () => {
           className="main min-h-screen fixed inset-0 bg-cover overflow-hidden"
           style={{
             backgroundImage:
-              'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
+              'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
           <Navbar />

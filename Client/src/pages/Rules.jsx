@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import belt from '../../public/svg/belt.svg';
+import belt from '../../src/assets/svg/belt.svg';
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
@@ -43,7 +43,7 @@ const Rules = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
             <LandingNavbar />
             <img
               src={belt}

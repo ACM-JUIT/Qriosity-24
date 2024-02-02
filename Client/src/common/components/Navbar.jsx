@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import bgimg from '../../../public/logo.png';
+import bgimg from '../../assets/logo.png';
 
 const NavItem = ({ to, isActive, text }) => {
   const containerVariants = {

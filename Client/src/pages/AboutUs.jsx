@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import React, { useEffect, useRef, useState } from 'react';
-import setallite from '../../public/svg/sattelite.svg';
+import setallite from '../../src/assets/svg/sattelite.svg';
 import '../Styles/Home.css';
 import LandingNavbar from '../common/components/LandingNavbar';
 import '../index.css';
@@ -40,7 +40,7 @@ const AboutUs = () => {
           </div>
         </div>
       ) : (
-        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
+        <div className="min-h-screen inset-0 bg-cover overflow-hidden font-sans " style={{ backgroundImage: 'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
             <LandingNavbar />
             <img
               src={setallite}
