@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
+import { selectCurrentUser, setCurrentUser } from "../redux/slices/userSlice";
 import {
   ToastContainer,
 } from "react-toastify";
@@ -114,6 +115,14 @@ const Portal = () => {
       }).unwrap();
 
       console.log(response);
+
+      if (response && response.user) {
+        dispatch(setCurrentUser({ user: response.user, currentQuestion: response.currentQuestion }));
+
+        setTimeout(() => {
+          window.location.reload(true);
+        }, 1000);
+      }
 
     } catch (error) {
       console.error(error);
