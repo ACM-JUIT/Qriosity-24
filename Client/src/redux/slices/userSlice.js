@@ -31,7 +31,6 @@ const userSlice = createSlice({
       state.isLoggedIn = false;
     },
     setCurrentUser: (state, action) => {
-      state.user = action.payload.user;
       state.user.currentQuestion = action.payload.currentQuestion;
     },
   }

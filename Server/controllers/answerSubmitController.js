@@ -43,10 +43,10 @@ const answerSubmitController = async (req, res) => {
             );
 
             const updatedUser = await User.findOne({ name: username });
-            
-            return res.status(200).json({ message: 'Correct answer!', newQuestionNumber: updatedUser.currentQuestion });
+
+            return res.status(200).json({ correct: true, message: 'Correct answer!', newQuestionNumber: updatedUser.currentQuestion });
         } else {
-            return res.status(400).json({ error: 'Incorrect answer.' });
+            return res.status(200).json({ correct: false, error: 'Incorrect answer.' });
         }
     } catch (error) {
         console.error(error);
