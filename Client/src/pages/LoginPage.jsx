@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Astro from "../../public/svg/Astronaut.svg";
-import Ellipse2 from "../../public/svg/Ellipse2.svg";
+import Astro from "../../src/assets/svg/Astronaut.svg";
+import Ellipse2 from "../../src/assets/svg/Ellipse2.svg";
 import LandingNavbar from "../common/components/LandingNavbar";
 import { useLoginMutation } from "../redux/api/apiSlice";
 import { signIn } from "../redux/slices/userSlice";
@@ -108,7 +108,7 @@ const Login = () => {
           className="main min-h-screen fixed inset-0 bg-cover overflow-hidden"
           style={{
             backgroundImage:
-              'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
+              'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
           <LandingNavbar />

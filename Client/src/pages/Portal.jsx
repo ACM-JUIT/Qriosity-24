@@ -143,7 +143,7 @@ const Portal = () => {
           className="main min-h-screen fixed inset-0 bg-cover overflow-scroll"
           style={{
             backgroundImage:
-              'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")',
+              'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
             <Navbar />
