@@ -6,7 +6,7 @@ const answerSubmitController = async (req, res) => {
         const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
 
-        const startTime = new Date('February 02, 2024 12:00:00');
+        const startTime = new Date('February 03, 2024 16:00:00');
 
         console.log(questionNumber, answer, username, req.ip)
 

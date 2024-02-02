@@ -17,6 +17,9 @@ export const apiSlice = createApi({
         questions: builder.query({
             query: () => "/api/questions",
         }),
+        leaderboardChart: builder.query({
+            query: () => "/chart",
+        }),
         submitAnswer: builder.mutation({
             query: body => ({
                 url: '/submit-answer',
@@ -27,4 +30,4 @@ export const apiSlice = createApi({
     })
 })
 
-export const { useLoginMutation, useLeaderboardQuery, useQuestionsQuery, useSubmitAnswerMutation } = apiSlice;
+export const { useLoginMutation, useLeaderboardQuery, useQuestionsQuery, useSubmitAnswerMutation, useLeaderboardChartQuery } = apiSlice;

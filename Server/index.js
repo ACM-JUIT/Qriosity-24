@@ -19,6 +19,7 @@ const answerRoute = require('./routes/questionVerify');
 const profileRoute = require('./routes/profile');
 const signupRoute = require('./routes/signup');
 const questionsRoute = require('./routes/questions');
+const chartRoute = require('./routes/chart');
 
 app.use(cors({
     origin: 'http://localhost:5173',
@@ -45,6 +46,7 @@ const startServer = async () => {
         app.use(refreshRoute);
         app.use(profileRoute);
         app.use(questionsRoute);
+        app.use(chartRoute)
         
         // Middleware for token verification
         app.use(verify);
