@@ -71,35 +71,35 @@ const Profile = () => {
             {user ? (
               <div className="flex flex-col m-4 p-3">
                 <h1 className="text-sm md:text-sm lg:text-2xl xl:text-3xl sec-heading mb-4 text-[#FDF0D1] mx-auto">
-                  Welcome {user.name}
+                  Welcome {user ? user.name : 'Default'}
                 </h1>
                 <div className="flex flex-row">
                   <img
                     src={pfp}
                     alt=""
-                    className="h-3/4 w-1/3 my-auto mx-auto"
+                    className="h-3/4 w-1/3 my-auto mx-auto hidden md:block"
                   />
                   <div>
                     <p className="text-lg sec-text mb-4 text-white">
                       <span className="text-xl sec-text mb-4 text-[#a6c8d6]">
                         Name:
                       </span>{" "}
-                      {user.name}
+                      {user ? user.name : 'Default'}
                     </p>
                     <p className="text-lg sec-text mb-4 text-white">
                       <span className="text-xl sec-text mb-4 text-[#a6c8d6] ">
                         Email:
                       </span>{" "}
-                      {user.email}
+                      {user ? user.email : 'No Email Available'}
                     </p>
                     <p className="text-lg sec-text mb-4 text-white">
                       <span className="text-xl sec-text mb-4 text-[#a6c8d6]">
                         Points:
                       </span>{" "}
-                      {user.points}
+                      {user ? user.points : '0'}
                     </p>
                     <button
-                      className="mt-4 p-2 w-1/2 mx-auto my-auto bg-red-500 text-white font-thin rounded-md"
+                      className="mt-4 p-2 w-1/2 mx-auto my-auto bg-red-500 text-white font-thin rounded-md flex justify-center item-center"
                       onClick={logout}
                     >
                       Logout
@@ -111,7 +111,7 @@ const Profile = () => {
               <>
                 <p className="font-bold sec-text">User data not found!!</p>
                 <button
-                  className="mt-4 p-2 bg-green-500 mx-auto my-auto text-white font-thin rounded-md"
+                  className="mt-4 p-2 bg-green-500 mx-auto my-auto text-white font-thin rounded-md "
                   // onClick={login}
                 >
                   Login

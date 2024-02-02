@@ -200,7 +200,7 @@ const Portal = () => {
                         id="userAnswer"
                         onChange={(e) => setUserAnswer(e.target.value)}
                         placeholder="Enter your answer"
-                        className=" p-2 mt-4 mx-auto text-black text-md rounded-lg focus:outline-none w-1/2 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto"
+                        className="placeholder:text-center p-2 mt-4 mx-auto text-black text-md rounded-lg focus:outline-none w-2/3 md:w-2/3 lg:w-1/2 xl:w-auto 2xl:w-auto"
                         autoComplete="off"
                       />
                     </motion.div>
@@ -228,9 +228,8 @@ const Portal = () => {
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto text-sm md:text-md lg:text-xl xl:text-xl"
-                    >
-                      <p className="hidden sm:block">Hint</p>
+                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl">
+                     <p className=" text-[10px] text-bold md:text-xl flex justify-center item-center">Hint</p> 
                     </motion.button>
                     <motion.button
                       id="submitButton"
@@ -239,9 +238,8 @@ const Portal = () => {
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700 sm:w-1/3 md:w-1/3 lg:w-1/3 xl:w-auto 2xl:w-auto text-sm md:text-md lg:text-xl xl:text-xl"
-                    >
-                      <p className="hidden sm:block">Submit</p>
+                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl">
+                      <p className="text-[10px] text-bold md:text-xl flex justify-center item-center">Submit</p>
                     </motion.button>
                   </div>
                 </div>

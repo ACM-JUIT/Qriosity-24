@@ -43,7 +43,7 @@ const CountDownTimer = ({ targetDateProp }) => {
 
     return (
         <div className='counter'>
-            <div className='text-5xl text-center text-white absolute left-1/2 transform -translate-x-1/2 md:bottom-[2vh] md:top-[3vh] md:left-[39vw] md:transform-none text-xl sm:text-2xl lg:text-2xl md:text-3xl lg:text-5xl xl:text-5xl'>
+            <div className='text-5xl text-center text-white absolute left-1/2 transform -translate-x-1/2 text-xl sm:text-2xl lg:text-2xl md:text-3xl lg:text-5xl xl:text-5xl'>
                 {`${timeLeft.days.toString().padStart(2, '0')} : ${timeLeft.hours.toString().padStart(2, '0')} : ${timeLeft.minutes
                     .toString()
                     .padStart(2, '0')} : ${timeLeft.seconds.toString().padStart(2, '0')}`}

@@ -43,10 +43,10 @@ function LandingPage() {
                             <Countdown targetDateProp={targetDate} />
                                 <motion.div
                                     layout
-                                    animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
+                                    animate={{ opacity: [0, 1], y: ['50%', '-120%'], x: ['0%', '0%'] }}
                                     transition={{ duration: 1.0, ease: 'easeInOut', delay: '1.2' }}
                                     initial={{ opacity: 0, y: '0%', x: '0%' }}
-                                    className={`text-[#ffff] text-xl top-1/3 right-1/2 text-bold transform -translate-x-1/2 flex mx-auto items-center hidden sm:block md:block`}
+                                    className={`text-[#ffff] text-xl top-0 right-1/2 transform -translate-x-1/2 flex mx-auto items-center hidden sm:block md:block`}
                                 >
                                     Clock is Ticking!
                                 </motion.div>
