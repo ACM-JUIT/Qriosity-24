@@ -1,12 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { selectCurrentUser } from "../redux/slices/userSlice";
+import { ToastContainer, toast } from "react-toastify";
 import pfp from "../../public/svg/pfp.svg";
 import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
-import { signOut } from "../redux/slices/userSlice";
-import { toast,  ToastContainer } from "react-toastify";
+import { selectCurrentUser, signOut } from "../redux/slices/userSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -71,7 +70,7 @@ const Profile = () => {
           <div className="bg-[#0c0c0c] h-1/2 w-1/2 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
             {user ? (
               <div className="flex flex-col m-4 p-3">
-                <h1 className="text-3xl sec-heading mb-4 text-[#FDF0D1] mx-auto">
+                <h1 className="text-sm md:text-sm lg:text-2xl xl:text-3xl sec-heading mb-4 text-[#FDF0D1] mx-auto">
                   Welcome {user.name}
                 </h1>
                 <div className="flex flex-row">
@@ -88,7 +87,7 @@ const Profile = () => {
                       {user.name}
                     </p>
                     <p className="text-lg sec-text mb-4 text-white">
-                      <span className="text-xl sec-text mb-4 text-[#a6c8d6]">
+                      <span className="text-xl sec-text mb-4 text-[#a6c8d6] ">
                         Email:
                       </span>{" "}
                       {user.email}

@@ -13,7 +13,7 @@ import LandingNavbar from "../common/components/LandingNavbar";
 
 
 function LandingPage() {
-
+    const targetDate = new Date('2024-02-03T16:00:00Z');
     const [loading, setLoading] = useState(true);
     const spinnerRef = useRef(null);
     useEffect(() => {
@@ -40,7 +40,7 @@ function LandingPage() {
                         <div className="main min-h-screen fixed inset-0 bg-cover overflow-hidden" style={{ backgroundImage: 'url("../../public/low-angle-shot-mesmerizing-starry-sky 1.png")' }}>
                             <LandingNavbar />
                             <div className='flex flex-col'>
-                                <Countdown />
+                            <Countdown targetDateProp={targetDate} />
                                 <motion.div
                                     layout
                                     animate={{ opacity: [0, 1], y: ['50%', '0%'], x: ['0%', '0%'] }}
