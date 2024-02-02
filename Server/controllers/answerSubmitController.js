@@ -22,7 +22,7 @@ const answerSubmitController = async (req, res) => {
 
         console.log(question);
 
-        if (question.answer.toLowerCase === answer.toLowerCase) {
+        if (question.answer.toLowerCase() === answer.toLowerCase()) {
             const currentTime = new Date();
             const timeDifferenceInMinutes = Math.floor((currentTime - startTime) / (1000 * 60));
 
@@ -42,7 +42,9 @@ const answerSubmitController = async (req, res) => {
                 },
             );
 
-            return res.status(200).json({ message: 'Correct answer!' });
+            const updatedUser = await User.findOne({ name: username });
+            
+            return res.status(200).json({ message: 'Correct answer!', newQuestionNumber: updatedUser.currentQuestion });
         } else {
             return res.status(400).json({ error: 'Incorrect answer.' });
         }

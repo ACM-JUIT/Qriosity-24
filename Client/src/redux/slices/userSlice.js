@@ -29,11 +29,15 @@ const userSlice = createSlice({
       state.refresh_token = null;
       state.access_token = null;
       state.isLoggedIn = false;
-    }
+    },
+    setCurrentUser: (state, action) => {
+      state.user = action.payload.user;
+      state.user.currentQuestion = action.payload.currentQuestion;
+    },
   }
 });
 
-export const { signIn, signOut, refreshUser, setLeaderboard } = userSlice.actions;
+export const { signIn, signOut, refreshUser, setLeaderboard, setCurrentUser } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectCurrentUser = (state) => state.userSlice.user;
