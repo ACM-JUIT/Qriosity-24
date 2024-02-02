@@ -1,9 +1,11 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
-  ToastContainer,
-} from "react-toastify";
+  selectCurrentUser,
+  updateUserCurrentQuestion,
+} from "../redux/slices/userSlice";
+import { ToastContainer, toast } from "react-toastify";
 import "../Styles/Home.css";
 import "../Styles/portal.css";
 import Countdown from "../common/components/Countdown";
@@ -12,17 +14,14 @@ import {
   useQuestionsQuery,
   useSubmitAnswerMutation,
 } from "../redux/api/apiSlice";
-import { selectCurrentUser } from "../redux/slices/userSlice";
 
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
-  const targetDate = new Date('2024-02-03T22:00:00Z');
+  console.log(user);
+  const targetDate = new Date("2024-02-03T22:00:00Z");
+  const dispatch = useDispatch();
 
-  const [
-    currentQuestionIndex,
-    //setCurrentQuestionIndex
-  ] = useState(0);
-  const userAnswerInputRef = useRef(null);
+  const [userAnswer, setUserAnswer] = useState("");
 
   //Toasts
   const existentialCrisisMessages = [
@@ -49,32 +48,6 @@ const Portal = () => {
     return existentialCrisisMessages[randomIndex];
   };
 
-  // const wrongAnswer = () => {
-  //   const message = getRandomMessage();
-  //   toast.error(message, {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "colored",
-  //   });
-  // };
-
-  // const correctAnswer = () =>
-  //   toast.success("Correct answer!!", {
-  //     position: "bottom-right",
-  //     autoClose: 5000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: true,
-  //     progress: undefined,
-  //     theme: "colored",
-  //   });
-
   // Spinner
   const [loading, setLoading] = useState(true);
   const spinnerRef = useRef(null);
@@ -89,23 +62,16 @@ const Portal = () => {
   }, []);
 
   const { data: questionsData } = useQuestionsQuery();
-
-  //eslint-disable-next-line
-  function calculateRemainingTimeInSeconds() {
-    const targetDate = new Date("2024-02-04T10:00:00");
-    const currentTime = new Date();
-    const timeDifference = targetDate.getTime() - currentTime.getTime();
-    return Math.max(Math.floor(timeDifference / 1000), 0);
-  }
+  // console.log(questionsData);
 
   //Check for user's answer
   const [submit] = useSubmitAnswerMutation();
   const checkAnswer = async () => {
+    setUserAnswer(null);
     try {
       const username = user.name;
-      const questionNumber =
-        questionsData.questions[currentQuestionIndex].questionNumber;
-      const answer = userAnswerInputRef.current.value;
+      const questionNumber = user.currentQuestion + 1;
+      const answer = userAnswer;
       console.log(username, questionNumber, answer);
 
       const response = await submit({
@@ -113,7 +79,37 @@ const Portal = () => {
         answer,
         username,
       }).unwrap();
+
       console.log(response);
+
+      if (response.correct == true) {
+        dispatch(
+          updateUserCurrentQuestion({
+            currentQuestion: response.newQuestionNumber,
+          })
+        );
+        toast.success("Correct answer!!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      } else if (response.correct == false) {
+        toast.error(getRandomMessage(), {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        });
+      }
     } catch (error) {
       console.error(error);
     }
@@ -136,8 +132,8 @@ const Portal = () => {
               'url("../../src/assets/low-angle-shot-mesmerizing-starry-sky 1.png")',
           }}
         >
-            <Navbar />
-            <Countdown targetDateProp={targetDate} />
+          <Navbar />
+          <Countdown targetDateProp={targetDate} />
           <div className="quizContainer p-4 text-white">
             <div className="flex h-100 flex-col sm:flex-row">
               <motion.div
@@ -165,7 +161,7 @@ const Portal = () => {
                       </h1>
                       <ul className="displayQuestionNumbers grid grid-cols-4 gap-2">
                         {Array.from(
-                          { length: currentQuestionIndex + 2 },
+                          { length: user.currentQuestion + 2 },
                           (_, index) => (
                             <li key={index + 1}>{index + 1}</li>
                           )
@@ -183,8 +179,11 @@ const Portal = () => {
                 <div className="questions-container flex-col mx-auto my-auto rounded-xl w-1/2 mt-28 flex justify-center item-center">
                   <div className="questionAnswer flex flex-col items-center">
                     <div className="questions p-4 m-4 text-white">
-                      <p id="questionStatement" className="text-sm md:text-2xl lg:text-3xl xl:text-3xl font-bold h-auto">
-                        {user.currentQuestion < questionsData.questions.length
+                      <p
+                        id="questionStatement"
+                        className="text-sm md:text-2xl lg:text-3xl xl:text-3xl font-bold h-auto"
+                      >
+                        {user.currentQuestion < 25
                           ? `${
                               questionsData.questions[user.currentQuestion]
                                 .questionStatement
@@ -199,7 +198,7 @@ const Portal = () => {
                       <input
                         type="text"
                         id="userAnswer"
-                        ref={userAnswerInputRef}
+                        onChange={(e) => setUserAnswer(e.target.value)}
                         placeholder="Enter your answer"
                         className="placeholder:text-center p-2 mt-4 mx-auto text-black text-md rounded-lg focus:outline-none w-2/3 md:w-2/3 lg:w-1/2 xl:w-auto 2xl:w-auto"
                         autoComplete="off"
@@ -210,13 +209,26 @@ const Portal = () => {
                   <div className="flex items-center justify-center p-2 mb-4 mx-auto">
                     <motion.button
                       id="hintButton"
-                      // onClick={console.log("Hello")}
+                      onClick={() =>
+                        toast.info(
+                          questionsData.questions[user.currentQuestion].hint,
+                          {
+                            position: "top-right",
+                            autoClose: 3000,
+                            hideProgressBar: false,
+                            closeOnClick: true,
+                            pauseOnHover: true,
+                            draggable: true,
+                            progress: undefined,
+                            theme: "colored",
+                          }
+                        )
+                      }
                       whileHover={{
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl"
-                    >
+                      className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl">
                      <p className=" text-[10px] text-bold md:text-xl flex justify-center item-center">Hint</p> 
                     </motion.button>
                     <motion.button
@@ -226,8 +238,7 @@ const Portal = () => {
                         scale: 1.1,
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
-                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl"
-                    >
+                      className="bg-green-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-green-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl">
                       <p className="text-[10px] text-bold md:text-xl flex justify-center item-center">Submit</p>
                     </motion.button>
                   </div>

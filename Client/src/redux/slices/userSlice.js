@@ -19,7 +19,7 @@ const userSlice = createSlice({
       state.isLoggedIn = true;
     },
     refreshUser: (state, action) => {
-      state.access_token = action.payload.access_token;
+      state.access_token = action.payload.accessToken;
     },
     setLeaderboard: (state, action) => {
       state.leaderboard = action.leaderboard;
@@ -29,11 +29,14 @@ const userSlice = createSlice({
       state.refresh_token = null;
       state.access_token = null;
       state.isLoggedIn = false;
-    }
+    },
+    updateUserCurrentQuestion: (state, action) => {
+      state.user.currentQuestion = action.payload.currentQuestion;
+    },
   }
 });
 
-export const { signIn, signOut, refreshUser, setLeaderboard } = userSlice.actions;
+export const { signIn, signOut, refreshUser, setLeaderboard, updateUserCurrentQuestion } = userSlice.actions;
 export default userSlice.reducer;
 
 export const selectCurrentUser = (state) => state.userSlice.user;
