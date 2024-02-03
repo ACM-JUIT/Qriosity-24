@@ -5,7 +5,7 @@ import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
 import { useLeaderboardQuery } from "../redux/api/apiSlice";
 import { setLeaderboard } from "../redux/slices/userSlice";
-import Chart from "./Chart";
+import ChartLeaderboard from "./Chart";
 
 function Leaderboard() {
   const [loading, setLoading] = useState(true);
@@ -96,7 +96,7 @@ function Leaderboard() {
         >
           <Navbar />
           <div className="performanceGraph mx-auto h-4/5 md:w-3/4 mt-4 mb-16">
-            <Chart />
+            <ChartLeaderboard />
           </div>
           <AnimatePresence mode="wait">
             <div className="stats h-screen w-screen p-4 mx-auto md:w-3/4">
