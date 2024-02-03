@@ -67,11 +67,11 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await login({ email, password }).unwrap();
-      console.log("Login", response);
+      // console.log("Login", response);
       if (response) {
         succesfulLogin(); //toast
         dispatch(signIn(response));
-        console.log("Checking for response", response);
+        // console.log("Checking for response", response);
         setTimeout(() => {
           navigate("/portal");
         }, 1500);
@@ -81,10 +81,10 @@ const Login = () => {
       ) {
         wrongPassword(); //toast
         console.error("Error logging in:", response.status, response.error);
-        console.log(response);
+        // console.log(response);
       } else {
         console.error("Error logging in:", response.status, response.error);
-        console.log(response);
+        // console.log(response);
       }
     } catch (error) {
       console.error("Error during login:", error);

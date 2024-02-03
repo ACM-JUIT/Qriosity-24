@@ -1,10 +1,22 @@
+import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
+import { useState, useEffect } from "react";
 import useGetChart from "../services/useGetChart";
 
-function Chart() {
+Chart.register(...registerables);
+
+function ChartLeaderboard() {
   const { data, loading } = useGetChart();
 
   console.log(data);
+
+  const [chartData, setChartData] = useState();
+
+  useEffect(() => {
+    if (!loading) {
+      setChartData({ labels: data.labels, datasets: data });
+    }
+  }, [data, loading]);
 
   return (
     <div>
@@ -99,4 +111,4 @@ function Chart() {
   );
 }
 
-export default Chart;
+export default ChartLeaderboard;
