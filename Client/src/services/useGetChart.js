@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function useGetChart() {
     const [data, setData] = useState([]);
@@ -11,7 +11,7 @@ export default function useGetChart() {
         setError(false);
         axios({
             method: "GET",
-            url: 'http://localhost:3500/chart',
+            url: 'https://qriosity-backend.onrender.com/chart',
         })
             .then((res) => {
                 console.log(res)

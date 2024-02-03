@@ -22,7 +22,7 @@ const questionsRoute = require('./routes/questions');
 const chartRoute = require('./routes/chart');
 
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: 'https://qriosity-2024.acmjuit.in',
     credentials: true,
 }));
 

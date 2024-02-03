@@ -83,7 +83,7 @@ const SignUp = () => {
                 return;
             }
 
-            const response = await fetch('http://localhost:3500/signup', {
+            const response = await fetch('https://qriosity-backend.onrender.com/signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

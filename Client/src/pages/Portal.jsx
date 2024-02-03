@@ -1,10 +1,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  selectCurrentUser,
-  updateUserCurrentQuestion,
-} from "../redux/slices/userSlice";
+import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "../Styles/Home.css";
 import "../Styles/portal.css";
@@ -14,11 +10,16 @@ import {
   useQuestionsQuery,
   useSubmitAnswerMutation,
 } from "../redux/api/apiSlice";
+import {
+  selectCurrentUser,
+  updateUserCurrentQuestion,
+} from "../redux/slices/userSlice";
 
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
   // console.log(user);
-  const targetDate = new Date("2024-02-03T16:00:00Z");
+  const targetDate = new Date("2024-02-03T22:00:00Z");
+
   const dispatch = useDispatch();
 
   const [userAnswer, setUserAnswer] = useState("");
@@ -73,8 +74,12 @@ const Portal = () => {
   const [loading, setLoading] = useState(true);
   const spinnerRef = useRef(null);
   useEffect(() => {
-    const spinner = spinnerRef.current;
-    if (spinner) {
+    const currentDate = new Date();
+    const openDate = new Date("February 3, 2024 16:00:00 GMT+05:30");
+
+    if (currentDate < openDate) {
+      alert(`Access to the portal will be available after ${openDate.toTimeString()} on ${openDate.toDateString()}`);
+    } else {
       const timeoutId = setTimeout(() => {
         setLoading(false);
       }, 1000);
