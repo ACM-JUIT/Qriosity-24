@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { connectToMongoDB } = require("./connect");
 const config = require('./config');
 const app = express();
-import cors from "cors";
+const cors =  require("cors");
 const cookieParser = require('cookie-parser');
 const verify = require('./middleware/verifyToken');
 
