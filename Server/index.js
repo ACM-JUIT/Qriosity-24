@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const { connectToMongoDB } = require("./connect");
 const config = require('./config');
 const app = express();
-const cors = require("cors");
+import cors from "cors";
 const cookieParser = require('cookie-parser');
 const verify = require('./middleware/verifyToken');
 
@@ -21,10 +21,7 @@ const signupRoute = require('./routes/signup');
 const questionsRoute = require('./routes/questions');
 const chartRoute = require('./routes/chart');
 
-app.use(cors({
-    origin: 'https://qriosity-2024.acmjuit.in',
-    credentials: true,
-}));
+app.use(cors());
 
 app.use(cookieParser());
 
