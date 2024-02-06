@@ -3,8 +3,8 @@ import { refreshUser, signOut } from "../slices/userSlice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: 'https://qriosity-backend.onrender.com',
-    credentials: 'include',
-    prepareHeaders: (headers, { getState }) => {
+        // credentials: 'include',
+        prepareHeaders: (headers, { getState }) => {
         const token = getState().userSlice.access_token;
         if (token) {
             headers.set('Authorization', `Bearer ${token}`);
@@ -17,7 +17,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
     if (result?.error?.status === 403) {
         const refreshResult = await baseQuery({
-            credentials: "include",
+            // credentials: "include",
             url: "/refresh",
             method: "POST",
             body: { refresh: api.getState().refresh_token }
