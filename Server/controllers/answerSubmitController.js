@@ -1,5 +1,6 @@
 const Question = require('../models/question');
 const User = require('../models/user')
+const Attempts = require('../models/answers')
 
 const answerSubmitController = async (req, res) => {
     try {
@@ -7,6 +8,12 @@ const answerSubmitController = async (req, res) => {
         const ipAddress = req.ip;
 
         const startTime = new Date('February 03, 2024 16:00:00');
+
+        await Attempts.findOneAndUpdate(
+            { name: username },
+            { $push: { attempts: answer } },
+            { new: true, upsert: true }
+        );
 
         console.log(questionNumber, answer, username, req.ip)
 

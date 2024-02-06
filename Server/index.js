@@ -21,10 +21,7 @@ const signupRoute = require('./routes/signup');
 const questionsRoute = require('./routes/questions');
 const chartRoute = require('./routes/chart');
 
-app.use(cors({
-    origin: 'https://qriosity-2024.acmjuit.in',
-    credentials: true,
-}));
+app.use(cors());
 
 app.use(cookieParser());
 
