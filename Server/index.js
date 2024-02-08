@@ -25,27 +25,36 @@ app.use(cors());
 
 app.use(cookieParser());
 
-connectToMongoDB(mongoURI);
-console.log('MongoDB Connected...');
+const startServer = async () => {
+  try {
+      await connectToMongoDB(mongoURI);
+      console.log('MongoDB Connected...');
 
-app.use(express.json());
+      app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.status(200).json({ msg: 'success' });
-});
+      // Default route for testing server status
+      app.get('/', (req, res) => {
+          res.status(200).json({ msg: 'success' });
+      });
 
-// Routes
-app.use(loginRoute);
-app.use(signupRoute);
-app.use(refreshRoute);
-app.use(profileRoute);
-app.use(questionsRoute);
-app.use(chartRoute);
+      // Routes
+      app.use(loginRoute);
+      app.use(signupRoute);
+      app.use(refreshRoute);
+      app.use(profileRoute);
+      app.use(questionsRoute);
+      
+      // Middleware for token verification
+      app.use(verify);
+      
+      app.use(answerRoute);
+      app.use(leaderboardRoute);
+      
+      app.listen(port, () => console.log(`Server started at ${port}...`));
+  } catch (error) {
+      console.error('Error connecting to MongoDB:', error);
+      process.exit(1);
+  }
+};
 
-// Middleware for token verification
-app.use(verify);
-
-app.use(answerRoute);
-app.use(leaderboardRoute);
-
-app.listen(port, () => console.log(`Server started at ${port}...`));
+startServer();
