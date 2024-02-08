@@ -52,11 +52,11 @@ const loginController = async (req, res) => {
                 res.status(401).json({ error: 'Incorrect password' });
             }
         } else {
-            res.status(404).json({ error: 'User not found' });
+            res.status(404).json({ error: 'User not found or user is not allowed to play. Please check your credentials' });
         }
     } catch (error) {
         console.error('Error during login:', error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: `Internal Server Error : ${error}` });
     }
 };
 

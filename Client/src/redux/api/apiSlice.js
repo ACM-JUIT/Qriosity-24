@@ -11,6 +11,13 @@ export const apiSlice = createApi({
                 body: { ...credentials }
             })
         }),
+        signup: builder.mutation({
+            query: credentials => ({
+                url: "/signup",
+                method: "POST",
+                body: { ...credentials }
+            })
+        }),
         leaderboard: builder.query({
             query: () => "/leaderboard",
         }),
@@ -30,4 +37,4 @@ export const apiSlice = createApi({
     })
 })
 
-export const { useLoginMutation, useLeaderboardQuery, useQuestionsQuery, useSubmitAnswerMutation, useChartQuery } = apiSlice;
+export const { useLoginMutation, useSignupMutation, useLeaderboardQuery, useQuestionsQuery, useSubmitAnswerMutation, useChartQuery } = apiSlice;

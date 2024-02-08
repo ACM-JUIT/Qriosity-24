@@ -1,10 +1,11 @@
 import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { refreshUser, signOut } from "../slices/userSlice";
 
+const { VITE_API_URL } = import.meta.env;
+
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://qriosity-server.onrender.com',
-        // credentials: 'include',
-        prepareHeaders: (headers, { getState }) => {
+    baseUrl: VITE_API_URL,
+    prepareHeaders: (headers, { getState }) => {
         const token = getState().userSlice.access_token;
         if (token) {
             headers.set('Authorization', `Bearer ${token}`);
@@ -17,7 +18,6 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
     if (result?.error?.status === 403) {
         const refreshResult = await baseQuery({
-            // credentials: "include",
             url: "/refresh",
             method: "POST",
             body: { refresh: api.getState().refresh_token }
