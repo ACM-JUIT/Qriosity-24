@@ -2,7 +2,7 @@ import { fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { refreshUser, signOut } from "../slices/userSlice";
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://qriosity-backend.onrender.com',
+    baseUrl: 'https://qriosity-server.onrender.com',
         // credentials: 'include',
         prepareHeaders: (headers, { getState }) => {
         const token = getState().userSlice.access_token;

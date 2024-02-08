@@ -11,7 +11,7 @@ export default function useGetChart() {
         setError(false);
         axios({
             method: "GET",
-            url: 'https://qriosity-backend.onrender.com/chart',
+            url: 'https://qriosity-server.onrender.com/chart',
         })
             .then((res) => {
                 console.log(res)
