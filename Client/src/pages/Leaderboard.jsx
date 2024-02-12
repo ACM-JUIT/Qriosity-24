@@ -25,14 +25,13 @@ function Leaderboard() {
   // const { data, isSuccess } = useLeaderboardQuery({staleTime: 0});
 
   const formatTime = (minutes) => {
-
     if (isNaN(minutes)) {
       return "0 h 0 m";
     }
 
     const hours = Math.floor(minutes / 60);
     const remainingMinutes = minutes % 60;
-  
+
     if (hours === 0) {
       return `${remainingMinutes} m`;
     } else if (remainingMinutes === 0) {
@@ -50,15 +49,19 @@ function Leaderboard() {
   //   //eslint-disable-next-line
   // }, [data]);
 
+  const [data, setData] = useState([]);
+
   useEffect(() => {
     const fetchLeaderboardData = async () => {
       try {
-        const response = await fetch("https://qriosity-server.onrender.com/leaderboard");
+        const response = await fetch(
+          "https://qriosity-server.onrender.com/leaderboard"
+        );
         if (!response.ok) {
           throw new Error("Failed to fetch leaderboard data");
         }
         const data = await response.json();
-        setChartData(data);
+        setData(data);
       } catch (error) {
         console.error("Error fetching leaderboard data:", error);
       } finally {
@@ -68,7 +71,6 @@ function Leaderboard() {
 
     fetchLeaderboardData();
   }, []);
-
 
   return (
     <>
@@ -88,7 +90,7 @@ function Leaderboard() {
         >
           <Navbar />
           <div className="performanceGraph mx-auto h-4/5 md:w-3/4 mt-4 mb-16">
-            {/* <ChartLeaderboard /> */}
+            <ChartLeaderboard />
           </div>
           <AnimatePresence mode="wait">
             <div className="stats h-screen w-screen p-4 mx-auto md:w-3/4">
@@ -132,7 +134,7 @@ function Leaderboard() {
                           {user.name}
                         </td>
                         <td className="text-white text-xl py-2 px-4 border-b">
-                          {formatTime(user.time[user.time.length-1])}
+                          {formatTime(user.time[user.time.length - 1])}
                         </td>
                         <td className="text-white text-xl py-2 border-b">
                           {user.points / 10}
@@ -142,7 +144,7 @@ function Leaderboard() {
                         </td>
                       </tr>
                     ))}
-                </tbody>
+                  </tbody>
                 </table>
               </div>
             </div>

@@ -127,67 +127,76 @@ const Login = () => {
               />
             </div>
 
-    {/* Login Form */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.5 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ duration: 0.2 }}
-      className="w-3/4 my-4"
-    >
-    
-    <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-screen flex-1 transition-all duration-300 justify-center">
-    <h1 className="text-2xl sec-heading mb-4 text-[#a6c8d6]">Log In</h1>
-      <form>
-        <div className="mb-4 flex">
-          <label htmlFor="email" className="block text-[#a6c8d6] text-xl font-semibold w-12">
-            <i className="fa fa-envelope text-white py-3 mr-3"></i>
-          </label>
-          <input
-            type="email"
-            id="email"
-            placeholder='Email'
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
-          />
+            {/* Login Form */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.2 }}
+              className="w-3/4 my-4"
+            >
+              <div className="m-4 text-white p-2 rounded-lg shadow-md max-w-screen flex-1 transition-all duration-300 justify-center">
+                <h1 className="text-2xl sec-heading mb-4 text-[#a6c8d6]">
+                  Log In
+                </h1>
+                <form>
+                  <div className="mb-4 flex">
+                    <label
+                      htmlFor="email"
+                      className="block text-[#a6c8d6] text-xl font-semibold w-12"
+                    >
+                      <i className="fa fa-envelope text-white py-3 mr-3"></i>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
+                    />
+                  </div>
+                  <div className="mb-4 flex">
+                    <label
+                      htmlFor="password"
+                      className="block text-gray-700 text-xl font-semibold w-12"
+                    >
+                      <i className="fa fa-lock text-white py-3 mr-3"></i>
+                    </label>
+                    <input
+                      type="password"
+                      id="password"
+                      placeholder="Password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
+                    />
+                  </div>
+                  <div
+                    type="button"
+                    onClick={handleLogin}
+                    className="mx-auto bg-purple-600 hover:bg-purple-700 text-white text-center p-2 focus:outline-none border-l border-r border-b border-black"
+                  >
+                    <p className="text-sm font-bold">Login</p>
+                  </div>
+                  <ToastContainer />
+                </form>
+              </div>
+              <div className=" text-center flex flex-col items-center mt-8 mx-auto">
+                <p className="text-lg font-thin text-[#a6c8d6]">
+                  {" "}
+                  Don&apos;t have an account?{" "}
+                </p>
+                <p
+                  onClick={moveToSignUp}
+                  className="text-md font-thin text-[#6500E5]"
+                >
+                  SignUp
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
-        <div className="mb-4 flex">
-          <label htmlFor="password" className="block text-gray-700 text-xl font-semibold w-12">
-            <i className="fa fa-lock text-white py-3 mr-3"></i>
-          </label>
-          <input
-            type="password"
-            id="password"
-            placeholder='Password'
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
-          />
-        </div>
-        <div
-          type="button"
-          onClick={handleLogin}
-          className="mx-auto bg-purple-600 hover:bg-purple-700 text-white text-center p-2 focus:outline-none border-l border-r border-b border-black"
-        >
-          <p className='text-sm font-bold'>Login</p>
-        </div>
-        <ToastContainer />
-      </form>
-    </div>
-    <div className=' text-center flex flex-col items-center mt-8 mx-auto'>
-      <p className='text-lg font-thin text-[#a6c8d6]'> Don&apos;t have an account? </p>
-      <p
-        onClick={moveToSignUp}
-        className="text-md font-thin text-[#6500E5]"
-      >
-        SignUp
-      </p>
-    </div>
-    </motion.div>
-
-  </div>
-</div>
-    )}
+      )}
     </>
   );
 };

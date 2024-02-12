@@ -1,22 +1,84 @@
 import { Chart, registerables } from "chart.js";
 import { Line } from "react-chartjs-2";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
 import useGetChart from "../services/useGetChart";
 
 Chart.register(...registerables);
+
+const chartOptions = {
+  pointDotRadius: 6,
+  pointDotStrokeWidth: 2,
+  datasetStrokeWidth: 3,
+  scaleShowVerticalLines: false,
+  scaleGridLineWidth: 2,
+  scaleShowGridLines: true,
+  scaleGridLineColor: "rgba(0, 0, 0, 0.05)",
+  scaleOverride: true,
+  scaleSteps: 9,
+  scaleStepWidth: 500,
+  scaleStartValue: 0,
+  responsive: true,
+  interaction: {
+    mode: "index",
+    intersect: false,
+  },
+  scales: {
+    x: {
+      type: "linear",
+      position: "bottom",
+      ticks: {
+        stepSize: 1,
+        callback: function (value) {
+          return `${value}`;
+        },
+      },
+    },
+    y: {
+      type: "linear",
+      position: "left",
+      ticks: {
+        stepSize: 15,
+        callback: function (value) {
+          const hours = Math.floor(value / 60) + 6;
+          const minutes = value % 60;
+          return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
+        },
+      },
+    },
+  },
+  layout: {
+    padding: {
+      left: 10,
+      right: 20,
+      top: 5,
+      bottom: 15,
+    },
+  },
+  plugins: {
+    legend: {
+      display: true,
+      position: "top",
+      align: "center",
+      labels: {
+        background: "rgba(255, 255, 255, 0.8)",
+        padding: 20,
+      },
+    },
+  },
+};
 
 function ChartLeaderboard() {
   const { data, loading } = useGetChart();
 
   // console.log(data);
 
-  const [chartData, setChartData] = useState();
+  // const [chartData, setChartData] = useState();
 
-  useEffect(() => {
-    if (!loading) {
-      setChartData({ labels: data.labels, datasets: data });
-    }
-  }, [data, loading]);
+  // useEffect(() => {
+  //   if (!loading) {
+  //     setChartData({ labels: data.labels, datasets: data });
+  //   }
+  // }, [data, loading]);
 
   return (
     <div>
@@ -42,67 +104,7 @@ function ChartLeaderboard() {
                   borderWidth: 3,
                 })),
               }}
-              options={{
-                pointDotRadius: 6,
-                pointDotStrokeWidth: 2,
-                datasetStrokeWidth: 3,
-                scaleShowVerticalLines: false,
-                scaleGridLineWidth: 2,
-                scaleShowGridLines: true,
-                scaleGridLineColor: "rgba(0, 0, 0, 0.05)",
-                scaleOverride: true,
-                scaleSteps: 9,
-                scaleStepWidth: 500,
-                scaleStartValue: 0,
-                responsive: true,
-                interaction: {
-                  mode: "index",
-                  intersect: false,
-                },
-                scales: {
-                  x: {
-                    type: "linear",
-                    position: "bottom",
-                    ticks: {
-                      stepSize: 1,
-                      callback: function (value) {
-                        return `${value}`;
-                      },
-                    },
-                  },
-                  y: {
-                    type: "linear",
-                    position: "left",
-                    ticks: {
-                      stepSize: 15,
-                      callback: function (value) {
-                        const hours = Math.floor(value / 60) + 6;
-                        const minutes = value % 60;
-                        return `${hours}:${minutes < 10 ? "0" : ""}${minutes}`;
-                      },
-                    },
-                  },
-                },
-                layout: {
-                  padding: {
-                    left: 10,
-                    right: 20,
-                    top: 5,
-                    bottom: 15,
-                  },
-                },
-                plugins: {
-                  legend: {
-                    display: true,
-                    position: "top",
-                    align: "center",
-                    labels: {
-                      background: "rgba(255, 255, 255, 0.8)",
-                      padding: 20,
-                    },
-                  },
-                },
-              }}
+              options={chartOptions}
             />
           </div>
         </div>
