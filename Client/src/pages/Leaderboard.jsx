@@ -1,10 +1,10 @@
 import { AnimatePresence } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch, useSelector } from "react-redux";
 import "../Styles/Home.css";
 import Navbar from "../common/components/Navbar";
-import { useLeaderboardQuery } from "../redux/api/apiSlice";
-import { setLeaderboard } from "../redux/slices/userSlice";
+// import { useLeaderboardQuery } from "../redux/api/apiSlice";
+// import { setLeaderboard } from "../redux/slices/userSlice";
 import ChartLeaderboard from "./Chart";
 
 function Leaderboard() {
@@ -20,9 +20,9 @@ function Leaderboard() {
     }
   }, []);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const { data, isSuccess } = useLeaderboardQuery();
+  // const { data, isSuccess } = useLeaderboardQuery({staleTime: 0});
 
   const formatTime = (minutes) => {
 
@@ -42,41 +42,33 @@ function Leaderboard() {
     }
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      dispatch(setLeaderboard(data));
-    }
-    //eslint-disable-next-line
-  }, [data]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch("http://localhost:3500/leaderboard", {
-  //       method: "GET",
-  //       headers: {
-  //         Authorization: `Bearer ${accessToken}`,
-  //       },
-  //     });
-
-  //     if (!response.ok) {
-  //       throw new Error(
-  //         `Failed to fetch leaderboard. Status: ${response.status}`
-  //       );
-  //     }
-
-  //     const data = await response.json();
-
-  //     if (Array.isArray(data)) {
-  //       setLeaderboard(data);
-  //     } else {
-  //       console.error("Invalid data format:", data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching leaderboard:", error);
+  // useEffect(() => {
+  //   if (isSuccess) {
+  //     // console.log(data);
+  //     dispatch(setLeaderboard(data));
   //   }
-  // };
+  //   //eslint-disable-next-line
+  // }, [data]);
 
-  // fetchData();
+  useEffect(() => {
+    const fetchLeaderboardData = async () => {
+      try {
+        const response = await fetch("https://qriosity-server.onrender.com/leaderboard");
+        if (!response.ok) {
+          throw new Error("Failed to fetch leaderboard data");
+        }
+        const data = await response.json();
+        setChartData(data);
+      } catch (error) {
+        console.error("Error fetching leaderboard data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLeaderboardData();
+  }, []);
+
 
   return (
     <>
@@ -96,7 +88,7 @@ function Leaderboard() {
         >
           <Navbar />
           <div className="performanceGraph mx-auto h-4/5 md:w-3/4 mt-4 mb-16">
-            <ChartLeaderboard />
+            {/* <ChartLeaderboard /> */}
           </div>
           <AnimatePresence mode="wait">
             <div className="stats h-screen w-screen p-4 mx-auto md:w-3/4">

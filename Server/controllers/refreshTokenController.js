@@ -3,6 +3,7 @@ const User = require('../models/user');
 
 const refreshTokenController = async (req, res) => {
     try {
+        console.log(req.body)
         const cookie = req.cookies.refresh_token;
 
         console.log('Received refresh token request:', cookie);
@@ -59,7 +60,7 @@ const refreshTokenController = async (req, res) => {
                         }
                     },
                     process.env.ACCESS_TOKEN_SECRET,
-                    { expiresIn: '15m' }
+                    { expiresIn: '15h' }
                 );
 
                 const newRefreshToken = jwt.sign(

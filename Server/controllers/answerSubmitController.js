@@ -7,7 +7,7 @@ const answerSubmitController = async (req, res) => {
         const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
 
-        const startTime = new Date('February 03, 2024 16:00:00');
+        const startTime = new Date('February 12, 2024 16:00:00');
 
         await Attempts.findOneAndUpdate(
             { name: username },

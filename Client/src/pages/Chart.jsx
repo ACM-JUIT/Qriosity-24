@@ -8,7 +8,7 @@ Chart.register(...registerables);
 function ChartLeaderboard() {
   const { data, loading } = useGetChart();
 
-  console.log(data);
+  // console.log(data);
 
   const [chartData, setChartData] = useState();
 
