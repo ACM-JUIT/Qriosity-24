@@ -16,11 +16,13 @@ const baseQuery = fetchBaseQuery({
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
     let result = await baseQuery(args, api, extraOptions)
+    // console.log(result)
+    // console.log(api.getState())
     if (result?.error?.status === 403) {
         const refreshResult = await baseQuery({
             url: "/refresh",
             method: "POST",
-            body: { refresh: api.getState().refresh_token }
+            body: { refresh_token: api.getState().refresh_token }
         },
             api,
             extraOptions)

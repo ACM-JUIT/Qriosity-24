@@ -46,8 +46,9 @@ const startServer = async () => {
         app.use(leaderboardRoute);
 
         // Middleware for token verification
-        app.use(verify);
-
+        // app.use(verify);
+        
+        // app.use(chartRoute);
         app.use(answerRoute);
 
         app.listen(port, () => console.log(`Server started at ${port}...`));

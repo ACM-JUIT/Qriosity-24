@@ -87,6 +87,21 @@ const Portal = () => {
     }
   }, []);
 
+  const getCurrentTime  = () => {
+    const userLastSubmissionTime = user.time[user.time.length - 1];
+    const currentDate = new Date();
+
+    const startTime = new Date(currentDate);
+    startTime.setHours(16, 0, 0, 0);
+
+    const timeDifference = currentDate - startTime;
+
+    // Convert milliseconds to minutes
+    const minutesDifference = Math.floor(timeDifference / (1000 * 60));
+
+    return userLastSubmissionTime - minutesDifference;
+  }
+
   const { data: questionsData } = useQuestionsQuery();
   // console.log(questionsData);
 
@@ -96,7 +111,7 @@ const Portal = () => {
   const displayHint = async () => {
     const currentQuestion = questionsData.questions[user.currentQuestion];
 
-    if (currentQuestion && user.time[user.time.length - 1] > 20) {
+    if (currentQuestion && getCurrentTime() > 20) {
       toast.success(
         currentQuestion.hint,
         {
@@ -128,12 +143,12 @@ const Portal = () => {
   }
 
   const checkAnswer = async () => {
-    setUserAnswer(null);
+    setUserAnswer("");
     try {
       const username = user.name;
       const questionNumber = user.currentQuestion + 1;
       const answer = userAnswer;
-      console.log(username, questionNumber, answer);
+      // console.log(username, questionNumber, answer);
 
       const response = await submit({
         questionNumber,
@@ -141,7 +156,7 @@ const Portal = () => {
         username,
       }).unwrap();
 
-      console.log(response);
+      // console.log(response);
 
       if (response.correct == true) {
         dispatch(
@@ -175,7 +190,7 @@ const Portal = () => {
       console.error(error);
     }
   };
-  const [isOpen, setIsOpen] = useState(false);
+  // const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
@@ -197,7 +212,7 @@ const Portal = () => {
           <Countdown targetDateProp={targetDate} />
           <div className="quizContainer p-4 text-white">
             <div className="flex h-100 flex-col sm:flex-row">
-              <motion.div
+              {/* <motion.div
                 layout
                 initial={{ borderRadius: 10 }}
                 animate={{
@@ -234,7 +249,7 @@ const Portal = () => {
                 {!isOpen && (
                   <div className="dot bg-green-500 w-4 h-4 rounded-full absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
                 )}
-              </motion.div>
+              </motion.div> */}
 
               {questionsData && (
                 <div className="questions-container flex-col mx-auto my-auto rounded-xl w-1/2 mt-28 flex justify-center item-center">
@@ -276,7 +291,7 @@ const Portal = () => {
                         boxShadow: "0 0 10px rgba(0, 0, 0, 0.2)",
                       }}
                       className="bg-blue-500 text-white px-4 py-2 mr-2 rounded-md w-20 hover:bg-blue-700 w-auto text-sm md:text-md lg:text-xl xl:text-xl">
-                     <p className=" text-[10px] text-bold md:text-xl flex justify-center item-center">Hint</p> 
+                      <p className=" text-[10px] text-bold md:text-xl flex justify-center item-center">Hint</p> 
                     </motion.button>
                     <motion.button
                       id="submitButton"

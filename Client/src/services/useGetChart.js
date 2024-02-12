@@ -11,11 +11,11 @@ export default function useGetChart() {
         setError(false);
         axios({
             method: "GET",
-            url: 'https://qriosity-server.onrender.com/chart',
+            url: '/chart',
         })
             .then((res) => {
                 console.log(res)
-                console.log(res.data)
+                // console.log(res.data)
                 setData(res.data);
                 setLoading(false);
             })

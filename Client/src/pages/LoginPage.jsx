@@ -67,7 +67,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await login({ email, password }).unwrap();
-      // console.log("Login", response);
+      console.log("Login", response);
       if (response) {
         succesfulLogin(); //toast
         dispatch(signIn(response));
