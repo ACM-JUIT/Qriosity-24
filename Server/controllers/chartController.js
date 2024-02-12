@@ -7,10 +7,10 @@ const chartController = async (req, res) => {
             { $limit: 5 },
             {
                 $project: {
-                _id: 0,
-                name: 1,
-                points: 1,
-                time: 1,
+                    _id: 0,
+                    name: 1,
+                    points: 1,
+                    time: 1,
                 }
             }
         ]);
@@ -20,7 +20,7 @@ const chartController = async (req, res) => {
         res.status(200).json(topUsers);
     } catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'Internal Server Error' });
+        res.status(500).json({ error: `Internal Server error: ${error}` });
     }
 };
 
