@@ -150,6 +150,7 @@ const Login = () => {
                       type="email"
                       id="email"
                       placeholder="Email"
+                      required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
@@ -174,7 +175,7 @@ const Login = () => {
                   <div
                     type="button"
                     onClick={handleLogin}
-                    className="mx-auto bg-purple-600 hover:bg-purple-700 text-white text-center p-2 focus:outline-none border-l border-r border-b border-black"
+                    className="mx-auto my-4 w-24 bg-purple-600 hover:bg-purple-700 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300 cursor-pointer"
                   >
                     <p className="text-sm font-bold">Login</p>
                   </div>

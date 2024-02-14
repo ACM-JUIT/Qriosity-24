@@ -13,7 +13,7 @@ const NavItem = ({ to, isActive, text }) => {
       whileHover="whileHover"
       className={`${
         isActive ? 'border-b-2 border-white' : ''
-      } transition duration-300`}
+      } transition duration-300 `}
     >
       <Link to={to} className="p-3">
         <motion.p variants={containerVariants}>{text}</motion.p>

@@ -69,7 +69,7 @@ const Profile = () => {
           <ToastContainer />
           <div className="bg-[#0c0c0c] h-1/2 w-1/2 mx-auto my-auto flex justify-center item-center shadow-[0px_4px_16px_rgba(17,17,26,0.5),_0px_8px_24px_rgba(17,17,26,0.5),_0px_16px_56px_rgba(17,17,26,0.1)]">
             {user ? (
-              <div className="flex flex-col m-4 p-3">
+              <div className="flex flex-col m-4 p-3 justify-center ">
                 <h1 className="text-sm md:text-sm lg:text-2xl xl:text-3xl sec-heading mb-4 text-[#FDF0D1] mx-auto">
                   Welcome {user ? user.name : 'Default'}
                 </h1>

@@ -8,8 +8,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Astro from "../../src/assets/svg/Astronaut.svg";
 import Ellipse2 from "../../src/assets/svg/Ellipse2.svg";
 import LandingNavbar from "../common/components/LandingNavbar";
-import { useSignupMutation } from "../redux/api/apiSlice";
 import "../index.css";
+import { useSignupMutation } from "../redux/api/apiSlice";
 
 const passwordNotMatching = () =>
   toast.error("Passwords do not match!!", {
@@ -203,6 +203,7 @@ const SignUp = () => {
                       type="text"
                       id="name"
                       value={name}
+                      required
                       placeholder="Name"
                       onChange={(e) => setName(e.target.value)}
                       className="w-[40vw] mb-5 px-0 py-2 font-semibold border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c]"
@@ -220,6 +221,7 @@ const SignUp = () => {
                       id="email"
                       value={email}
                       placeholder="Email"
+                      required
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-[40vw] mb-5 px-0 py-2 font-semibold  border-b-2 border-[#a6c8d6] outline-none bg-[#0c0c0c] "
                     />
@@ -259,7 +261,7 @@ const SignUp = () => {
                   <div
                     type="button"
                     onClick={handleSignUp}
-                    className="mx-auto my-4 w-24 bg-purple-600 hover:bg-purple-700 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300"
+                    className="mx-auto my-4 w-24 bg-purple-600 hover:bg-purple-700 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300 cursor-pointer"
                   >
                     <p className="text-sm font-bold">Sign Up</p>
                   </div>

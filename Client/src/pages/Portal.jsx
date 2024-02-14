@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -75,7 +75,7 @@ const Portal = () => {
   const spinnerRef = useRef(null);
   useEffect(() => {
     const currentDate = new Date();
-    const openDate = new Date("2024-02-08T08:30:00Z");
+    const openDate = new Date("2024-02-17T08:30:00Z");
 
     if (currentDate < openDate) {
       alert(`Access to the portal will be available after ${openDate.toTimeString()} on ${openDate.toDateString()}`);
