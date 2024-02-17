@@ -97,7 +97,7 @@ const SignUp = () => {
         password,
       }).unwrap();
 
-      console.log(response);
+      // console.log(response);
       navigate("/login");
 
       //   const response = await fetch("/signup", {

@@ -13,7 +13,7 @@ import LandingNavbar from "../common/components/LandingNavbar";
 
 
 function LandingPage() {
-    const targetDate = new Date('2024-02-17T08:30:00Z');
+    const targetDate = new Date('2024-02-17T09:30:00Z');
     const [loading, setLoading] = useState(true);
     const spinnerRef = useRef(null);
     useEffect(() => {

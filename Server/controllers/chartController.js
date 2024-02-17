@@ -15,7 +15,7 @@ const chartController = async (req, res) => {
             }
         ]);
 
-        console.log(topUsers);
+        // console.log(topUsers);
 
         res.status(200).json(topUsers);
     } catch (error) {
