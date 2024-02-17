@@ -7,7 +7,7 @@ const answerSubmitController = async (req, res) => {
         const { questionNumber, answer, username } = req.body;
         const ipAddress = req.ip;
 
-        const startTime = new Date('February 12, 2024 16:00:00');
+        const startTime = new Date('2024-02-17T08:30:00.000Z');        
 
         await Attempts.findOneAndUpdate(
             { name: username },
@@ -15,7 +15,7 @@ const answerSubmitController = async (req, res) => {
             { new: true, upsert: true }
         );
 
-        console.log(questionNumber, answer, username, req.ip)
+        // console.log(questionNumber, answer, username, req.ip)
 
         if (!questionNumber || !answer || !username) {
             return res.status(400).json({ error: 'Missing required data.' });
@@ -27,19 +27,19 @@ const answerSubmitController = async (req, res) => {
             return res.status(400).json({ error: 'Invalid Question.' });
         }
 
-        console.log(question);
+        // console.log(question);
 
         if (question.answer.toLowerCase() === answer.toLowerCase()) {
             const currentTime = new Date();
-            const timeDifferenceInMinutes = Math.floor((currentTime - startTime) / (1000 * 60));
+            const timeDifferenceInMinutes = Math.floor((currentTime.getTime() - startTime.getTime()) / (1000 * 60));
 
-            console.log({
-                ipAddress,
-                questionNumber,
-                username,
-                answer,
-                time: new Date(),
-            });
+            // console.log({
+            //     ipAddress,
+            //     questionNumber,
+            //     username,
+            //     answer,
+            //     time: new Date(),
+            // });
 
             await User.updateOne(
                 { name: username },

@@ -33,7 +33,7 @@ const Profile = () => {
     
     setTimeout(() => {
       navigate("/login");
-      console.log("User logged out");
+      // console.log("User logged out");
     }, 2000);
   };
 
@@ -92,12 +92,12 @@ const Profile = () => {
                       </span>{" "}
                       {user ? user.email : 'No Email Available'}
                     </p>
-                    <p className="text-lg sec-text mb-4 text-white">
+                    {/* <p className="text-lg sec-text mb-4 text-white">
                       <span className="text-xl sec-text mb-4 text-[#a6c8d6]">
                         Points:
                       </span>{" "}
                       {user ? user.points : '0'}
-                    </p>
+                    </p> */}
                     <button
                       className="mt-4 p-2 w-1/2 mx-auto my-auto bg-red-500 text-white font-thin rounded-md flex justify-center item-center"
                       onClick={logout}
