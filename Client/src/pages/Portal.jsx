@@ -18,7 +18,7 @@ import {
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
   // console.log(user);
-  const targetDate = new Date("2024-02-08T14:30:00Z");
+  const targetDate = new Date("2024-02-15T15:30:00Z");
 
   const dispatch = useDispatch();
 
@@ -75,7 +75,7 @@ const Portal = () => {
   const spinnerRef = useRef(null);
   useEffect(() => {
     const currentDate = new Date();
-    const openDate = new Date("2024-02-17T08:30:00Z");
+    const openDate = new Date("2024-02-17T09:30:00Z");
 
     if (currentDate < openDate) {
       alert(`Access to the portal will be available after ${openDate.toTimeString()} on ${openDate.toDateString()}`);
@@ -143,7 +143,7 @@ const Portal = () => {
   }
 
   const checkAnswer = async () => {
-    setUserAnswer("");
+    setUserAnswer('');
     try {
       const username = user.name;
       const questionNumber = user.currentQuestion + 1;

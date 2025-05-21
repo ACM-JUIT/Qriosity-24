@@ -95,6 +95,13 @@ const Login = () => {
     navigate("/signup");
   };
 
+  const handleKeyDown = (e) => {
+    console.log('Key pressed:', e.key);
+    if (e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
     <>
       {loading ? (
@@ -173,8 +180,10 @@ const Login = () => {
                     />
                   </div>
                   <div
-                    type="button"
-                    onClick={handleLogin}
+                      type="button"
+                      tabIndex={0}
+                      onClick={handleLogin}
+                      onKeyDown={handleKeyDown}
                     className="mx-auto my-4 w-24 bg-purple-600 hover:bg-purple-700 text-white text-center p-2 rounded-md focus:outline-none focus:shadow-outline-green transition-all duration-300 cursor-pointer"
                   >
                     <p className="text-sm font-bold">Login</p>
