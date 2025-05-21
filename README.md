@@ -4,6 +4,12 @@
 
 Qrosity-24 is a web application developed for the ACM-JUIT (Association for Computing Machinery - Jaypee University of Information Technology) community. It serves as a Googling Skill Test Quiz, designed to challenge and enhance participants' ability to effectively search for information on the web.
 
+## Video demo
+
+
+https://github.com/user-attachments/assets/6bcaa1a4-e119-4e7f-a9fe-c7b24cfff337
+
+
 ## Features
 
 - **Quiz Interface**: Engaging and user-friendly interface for participants to attempt the quiz.
