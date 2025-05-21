@@ -3,24 +3,24 @@ const User = require('../models/user');
 
 const refreshTokenController = async (req, res) => {
     try {
-        console.log(req.body)
+        // console.log(req.body)
         const cookie = req.cookies.refresh_token;
 
-        console.log('Received refresh token request:', cookie);
+        // console.log('Received refresh token request:', cookie);
 
         const refreshToken = cookie;
-        console.log(refreshToken);
+        // console.log(refreshToken);
 
         const foundUser = await User.findOne({ refreshToken }).exec();
-        console.log(foundUser);
+        // console.log(foundUser);
 
         if (!foundUser.refreshToken.includes(refreshToken)) {
             jwt.verify(
                 refreshToken,
                 process.env.REFRESH_TOKEN_SECRET,
                 async (err, decoded) => {
-                    console.log('Decoded:', decoded);
-                    console.log('Error:', err);
+                    // console.log('Decoded:', decoded);
+                    // console.log('Error:', err);
                     if (err) return res.sendStatus(403); // Forbidden
                 }
             );
@@ -38,8 +38,8 @@ const refreshTokenController = async (req, res) => {
             refreshToken,
             process.env.REFRESH_TOKEN_SECRET,
             async (err, decoded) => {
-                console.log('Decoded:', decoded);
-                console.log('Error:', err);
+                // console.log('Decoded:', decoded);
+                // console.log('Error:', err);
 
                 if (err) {
                     foundUser.refreshToken = [...newRefreshTokenArray];
@@ -73,7 +73,7 @@ const refreshTokenController = async (req, res) => {
 
                 res.cookie('refresh_token', newRefreshToken, { httpOnly: true, secure: true, sameSite: 'None', maxAge: 24 * 60 * 60 * 1000 });
 
-                console.log('New access token:', accessToken);
+                // console.log('New access token:', accessToken);
                 res.json({ accessToken });
             }
         );

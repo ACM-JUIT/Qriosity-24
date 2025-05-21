@@ -18,7 +18,7 @@ import {
 const Portal = () => {
   const user = useSelector(selectCurrentUser);
   // console.log(user);
-  const targetDate = new Date("2024-02-15T15:30:00Z");
+  const targetDate = new Date("2024-02-17T15:30:00Z");
 
   const dispatch = useDispatch();
 

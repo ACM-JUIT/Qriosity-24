@@ -19,12 +19,12 @@ export default function useGetChart() {
             headers: `Bearer ${access_token}`
         })
             .then((res) => {
-                console.log(res.data)
+                // console.log(res.data)
                 setData(res.data);
                 setLoading(false);
             })
             .catch((err) => {
-                console.log(err)
+                // console.log(err)
                 setError(true);
             });
         //eslint-disable-next-line

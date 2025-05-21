@@ -5,7 +5,7 @@ const profileController = async(req, res) => {
         const userId = req.user.id;
         const user = await User.findById(userId);
 
-        console.log(user);
+        // console.log(user);
         res.status(200).json({user});
     } catch (error) {
         console.error(error);
